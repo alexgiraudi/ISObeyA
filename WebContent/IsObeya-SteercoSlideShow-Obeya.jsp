@@ -1317,14 +1317,14 @@
 					$("#FormEdit").find("#DueDateObjEdit").datepicker({dateFormat: "MM dd, yy",minDate: 'today',defaultDate: 'today',onSelect: _onSelect});
 					
 					 
-		            var jtLine = $('.myjtline').jTLine({
-		                callType: 'ajax',
-						distanceMode: 'fixDistance', // 'fixDistance' 'auto' 'predefinedDistance'
-		                eventsMinDistance: 60,       // Consider It as Distance Unit "by Pixel"
-		                fixDistanceValue: 2,         // if eventsMinDistance = 60 & fixDistanceValue= 2 then the value is: (60*2) = 120 px
-		                firstPointMargin: 1,  
-		                url: '../js/data.json'
-		            });
+// 		            var jtLine = $('.myjtline').jTLine({
+// 		                callType: 'ajax',
+// 						distanceMode: 'fixDistance', // 'fixDistance' 'auto' 'predefinedDistance'
+// 		                eventsMinDistance: 60,       // Consider It as Distance Unit "by Pixel"
+// 		                fixDistanceValue: 2,         // if eventsMinDistance = 60 & fixDistanceValue= 2 then the value is: (60*2) = 120 px
+// 		                firstPointMargin: 1,  
+// 		                url: '../js/data.json'
+// 		            });
 			     
 						
 				});
