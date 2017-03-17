@@ -1,0 +1,11 @@
+CarId;Project;Owner;Priority;Blocker;Description;DueDate;Charge;Raf;OwnerClass;Layer
+Card1.231;Obso2003;AGI;H;no;C'est une action 1;23/03/2017;4;3;list-group-item-ISOP;Backlog
+Card1.232;Obso2004;AGI;M;yes;C'est une action 2;24/03/2017;4;3;list-group-item-ISOP;WorkisProgress
+Card1.233;Obso2005;AGI;L;no;C'est une action 3;25/03/2017;4;3;list-group-item-ISOP;WorkIsDone
+Card1.234;Obso2006;JLF;H;yes;C'est une action 4;26/03/2017;4;3;list-group-item-ISOI;Rollout
+Card1.235;Obso2007;JLF;M;no;C'est une action 5;27/03/2017;4;3;list-group-item-ISOI;Close
+Card1.236;Obso2008;B.Trancart;L;yes;C'est une action 6;28/03/2017;4;3;list-group-item-GFI;Backlog
+Card1.237;Obso2009;J.Argemi;H;no;C'est une action 7;29/03/2017;4;3;list-group-item-ISOP;WorkisProgress
+Card1.238;Obso2010;J.Maurice;M;yes;C'est une action 8;30/03/2017;4;3;list-group-item-GFI;WorkIsDone
+Card1.239;Obso2011;DFG;L;no;C'est une action 9;31/03/2017;4;3;list-group-item-ISO;Rollout
+Card1.240;Obso2012;DRF;H;yes;C'est une action 10;01/04/2017;4;3;list-group-item-ISO;Close

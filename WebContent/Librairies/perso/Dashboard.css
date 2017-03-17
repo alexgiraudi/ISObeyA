@@ -1,0 +1,137 @@
+@CHARSET "UTF-8";
+
+
+	/* info (hed, dek, source, credit) */
+.rg-container {
+	font-family: 'Calibri' ;
+	font-size: 16px;
+	line-height: 1.4;
+	margin: 0;
+	padding: 1em 0.5em;
+	color: #808040;
+	height:300px;
+}
+.rg-header {
+	margin-bottom: 1em;
+	text-align: left;
+}
+
+ 
+
+/* table */
+table.zebra {
+	width: 100%;
+	margin-bottom: 0.5em;
+	font-size: 1em;
+	border-collapse: collapse;
+	border-spacing: 0;
+	
+	
+}
+table.zebra tr {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0px;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: middle;
+	text-align: left;
+	color: #333;
+	border-bottom: 1px solid #ddd;
+	color: #222;
+}
+table.zebra thead {
+	border-bottom: 3px solid #ddd;
+}
+ 
+table.zebra tr.highlight {
+	background-color: #dcf1f0 !important;
+}
+table.zebra tr:nth-child(even) {
+	background-color: #f6f6f6;
+}
+table.zebra th {
+	font-weight: bold;
+	padding: 15px;
+	font-size: 0.9em;
+}
+table.zebra td {
+	padding: 15px;
+	font-size: 0.9em;
+	vertical-align: middle;
+}
+table .highlight td {
+	font-weight: bold;
+}
+table th.number, td.number {
+	text-align: right;
+}
+
+/* media queries */
+@media screen and (max-width: 1200px) {
+.rg-container {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+table {
+	width: 100%;
+	max-height:300px;
+}
+ 
+table thead {
+	display: none;
+}
+table tbody {
+	width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+table tr, table th, table td {
+	display: block;
+	padding: 0;
+}
+table tr {
+	border-bottom: none;
+	margin: 0 0 1em 0;
+	padding: 0.5em;
+}
+table tr.highlight {
+	background-color: inherit !important;
+}
+table.zebra tr:nth-child(even) {
+	background-color: none;
+}
+table.zebra td:nth-child(even) {
+	background-color: #f6f6f6;
+}
+table tr:nth-child(even) {
+	background-color: none;
+}
+table td {
+	padding: 0.5em 0 0.25em 0;
+	border-bottom: 1px dotted #ccc;
+	text-align: right;
+}
+
+table td[data-title]:before {
+	content: attr(data-title);
+	font-weight: bold;
+	display: inline-block;
+	content: attr(data-title);
+	float: left;
+	margin-right: 0.5em;
+	font-size: 0.95em;
+}
+table td:last-child {
+	padding-right: 0;
+	border-bottom: 2px solid #ccc;
+}
+table td:empty {
+	display: none;
+}
+table .highlight td {
+	background-color: inherit;
+	font-weight: normal;
+}

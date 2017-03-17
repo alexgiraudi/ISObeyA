@@ -1,0 +1,68 @@
+
+
+.product {
+  display:inline-block;
+  color:#F5A9A9;
+  font-size:20px;
+  font-weight:200;
+  margin-top:10px;
+}
+
+IMG.Hlogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.product1 {
+  display:inline-block;
+  color:#2ECCFA;
+  font-size:30px;
+  font-weight:500;
+}
+
+.suffix {
+  display:inline-block;
+  font-size:20px;
+  font-weight:300;
+  color:#F5A9F2;
+  margin-top:10px;
+
+}
+
+.suffix1 {
+  display:inline-block;
+  font-size:30px;
+  font-weight:300;
+  color:#A9F5BC;
+  
+}
+
+.tagline {
+  display:inline-block;
+  margin-left:20px;
+  font-size:18px;
+  margin-top:10px;
+}
+
+#MainTitle {
+  text-align:center;
+  position:relative;
+  visibility:hidden;
+  
+  /*border: 7px solid black;*/
+	
+}
+}
+
+#controls {
+  margin-top:35px;
+  text-align: center;
+}
+
+.item {
+ display:inline-block;
+ margin-right:25px;
+  color:#aaa;
+}
