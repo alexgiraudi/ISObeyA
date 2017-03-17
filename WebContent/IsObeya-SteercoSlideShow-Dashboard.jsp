@@ -198,6 +198,7 @@
 	 			                });
 	 					    },
 	 					    error: function(jqXHR, textStatus, errorThrown){ 
+	 					    	alert(errorThrown);
 	 					    	Lobibox.notify('error', {
 	 			                	icon: false,
 	 			                	size: 'mini',
@@ -207,7 +208,7 @@
 	 			                    title: 'Error...',
 	 			                    pauseDelayOnHover: true,
 	 			                    continueDelayOnInactiveTab: false,
-	 			                    msg: textStatus+": "+errorThrown
+	 			                    msg: jqXHR.responseText
 	 			                });
 	 					    	
 	 					    }
@@ -303,7 +304,7 @@
 		 			                    title: 'Error...',
 		 			                    pauseDelayOnHover: true,
 		 			                    continueDelayOnInactiveTab: false,
-		 			                    msg: textStatus+": "+errorThrown
+		 			                   msg: jqXHR.responseText
 		 			                });
 		 					    	
 		 					    }

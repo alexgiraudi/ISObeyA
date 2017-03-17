@@ -506,7 +506,7 @@
 	 			                    title: 'Error...',
 	 			                    pauseDelayOnHover: true,
 	 			                    continueDelayOnInactiveTab: false,
-	 			                    msg: textStatus+": "+errorThrown
+	 			                    msg: jqXHR.responseText
 	 			                });
 	 					    	
 	 					    }
@@ -596,7 +596,7 @@
  			                    title: 'Error...',
  			                    pauseDelayOnHover: true,
  			                    continueDelayOnInactiveTab: false,
- 			                    msg: textStatus+": "+errorThrown
+ 			                    msg: jqXHR.responseText
  			                });
  					    	
  					    }
@@ -1171,7 +1171,7 @@
 		 			                    title: 'Error...',
 		 			                    pauseDelayOnHover: true,
 		 			                    continueDelayOnInactiveTab: false,
-		 			                    msg: textStatus+": "+errorThrown
+		 			                    msg: jqXHR.responseText
 		 			                });
 		 					    	
 		 					    }
