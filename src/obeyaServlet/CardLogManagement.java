@@ -54,8 +54,7 @@ public class CardLogManagement extends HttpServlet {
 				}
 				 response.getWriter().write(0);
 			} catch (Exception e) {
-				e.printStackTrace();
-		        response.getWriter().write(e.getCause().getMessage());
+				 response.getWriter().write(e.getMessage());
 			}
 	
      }

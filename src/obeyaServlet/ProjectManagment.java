@@ -74,8 +74,7 @@ public class ProjectManagment extends EncodingServlet {
 				response.getWriter().write("0");
 			} catch (Exception e) {
 		
-				e.printStackTrace();
-		        response.getWriter().write(e.getMessage());
+				 response.getWriter().write(e.getMessage());
 		       
 			}
         }

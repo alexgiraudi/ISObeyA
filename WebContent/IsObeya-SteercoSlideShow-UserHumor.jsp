@@ -1115,17 +1115,22 @@
 							 newHumor=v1;
 							}
 						 
+						 var UserName=$(this).parent().parent().parent().find("button[class='assigner__assignee']").html();
+						 var UserID=$(this).parent().parent().parent().parent().parent().attr("id");
+						 var UserClasse= $(this).parent().parent().attr("class");
 						 
 						 //Storing
 		 				    var DataCard={
 		 				    	"ProjectName":unescape($.urlParam('ProjectName')),
+		 				    	"IdUser":UserID,
 		 				    	"Owner": UserName,
+		 				    	"OwnerClasse":UserClasse,
 							    "OldHumor":oldHumor,
 							    "NewHumor":newHumor,
 							    "Photo":UserName+"jpeg"
 							  };
 							 
-		 					
+		 				  
 		 				    
 		 				   seen = []
 
@@ -1146,7 +1151,7 @@
 		 					      EventId: generateUUID(),
 		 					      SqlMode:"Update",
 		 					      EventDescription: "New humor on project",
-		 					      NewCard: serializedCard // look here!
+		 					      NewCardPeople: serializedCard // look here!
 		 					    },
 		 					    success: function(data) {
 		 					    	 Lobibox.notify('success', {

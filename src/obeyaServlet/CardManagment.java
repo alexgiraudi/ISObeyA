@@ -94,8 +94,6 @@ public class CardManagment extends EncodingServlet {
 	        	mLogObj.SaveLog(obj.getId(), EventId, EventDescription, jsonInString);
 				response.getWriter().write("0");
 			} catch (Exception e) {
-		
-				e.printStackTrace();
 		        response.getWriter().write(e.getMessage());
 		       
 			}

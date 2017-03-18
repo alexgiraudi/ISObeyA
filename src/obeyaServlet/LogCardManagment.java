@@ -58,7 +58,7 @@ public class LogCardManagment extends EncodingServlet {
 				 
 			} catch (Exception e) {
 				e.printStackTrace();
-		        response.getWriter().write("Message: " + e.getMessage() + ". "  );
+				 response.getWriter().write(e.getMessage());
 			}
 	
      }

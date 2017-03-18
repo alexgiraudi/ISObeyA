@@ -48,8 +48,8 @@ public class PeopleCardManagment extends EncodingServlet {
 				//System.out.println(request.getParameter("NewCardPeople"));
 				ObjectMapper mapper = new ObjectMapper();
 				
-				String parametre=(String)request.getParameter("NewCardPeople");
-				String jsonInString=new String(parametre.getBytes(),"UTF-8");
+				String jsonInString=(String)request.getParameter("NewCardPeople");
+				System.out.println(jsonInString);
 			 
 				String SqlMode= request.getParameter("SqlMode");
 				String EventId= request.getParameter("EventId");
@@ -67,11 +67,7 @@ public class PeopleCardManagment extends EncodingServlet {
 	        	mLogObj.SaveLog(obj.getOwner(), EventId, EventDescription, jsonInString);
 				response.getWriter().write("0");
 			} catch (Exception e) {
-				System.out.println(e.getLocalizedMessage());
-				System.out.println(e.getMessage());
-				System.out.println(e.getCause());
-				System.out.println(e.getStackTrace());
-		        response.getWriter().write("Message: " + e.getMessage() + ". "  );
+				 response.getWriter().write(e.getMessage());
 		       
 			}
         }
