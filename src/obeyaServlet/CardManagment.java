@@ -73,7 +73,7 @@ public class CardManagment extends EncodingServlet {
 				cardInformation obj =  mapper.readValue(jsonInString, cardInformation.class);
 				MySqlStatmentCard sqlDatabase = new MySqlStatmentCard();
 				//JSON from String to Object
-				System.out.println("jsonString: " + jsonInString);
+				//System.out.println("jsonString: " + jsonInString);
 				if (!SqlMode.equalsIgnoreCase("delete")){
 					  //obj = mapper.readValue(jsonInString, cardInformation.class);
 					  
@@ -113,14 +113,14 @@ public class CardManagment extends EncodingServlet {
 	
 		private static void SetEncoding(){
 			String defaultCharacterEncoding = System.getProperty("file.encoding");
-	        System.out.println("defaultCharacterEncoding by property: " + defaultCharacterEncoding);
-	        System.out.println("defaultCharacterEncoding by code: " + getDefaultCharEncoding());
-	        System.out.println("defaultCharacterEncoding by charSet: " + Charset.defaultCharset());
-	        System.setProperty("file.encoding", "UTF-8");
-	        System.out.println("defaultCharacterEncoding by property after updating file.encoding : " + System.getProperty("file.encoding"));
-	        System.out.println("defaultCharacterEncoding by code after updating file.encoding : " + getDefaultCharEncoding());
-	        System.out.println("defaultCharacterEncoding by java.nio.Charset after updating file.encoding : " + Charset.defaultCharset());
-	
+//	        System.out.println("defaultCharacterEncoding by property: " + defaultCharacterEncoding);
+//	        System.out.println("defaultCharacterEncoding by code: " + getDefaultCharEncoding());
+//	        System.out.println("defaultCharacterEncoding by charSet: " + Charset.defaultCharset());
+//	        System.setProperty("file.encoding", "UTF-8");
+//	        System.out.println("defaultCharacterEncoding by property after updating file.encoding : " + System.getProperty("file.encoding"));
+//	        System.out.println("defaultCharacterEncoding by code after updating file.encoding : " + getDefaultCharEncoding());
+//	        System.out.println("defaultCharacterEncoding by java.nio.Charset after updating file.encoding : " + Charset.defaultCharset());
+//	
 	 
 	
 		}

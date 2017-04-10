@@ -30,47 +30,21 @@
 <!-- <script src="./Librairies/jqueryMonitor/jquery.observeWithEvents.js"></script> -->
 
 
-<script>
-/* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
-	function openNav() {
-		 if($("#ProjectName").html()!="" && $("#ProjectName").html()!="0" && $("#ProjectName").html()!="null"){
-			 document.getElementById("mySidenav").style.width = "280px";
-			 document.getElementById("TailSteerco").style.marginLeft = "280px";
-		 }
-		 else{
-			 Lobibox.notify('error', {
-                	icon: false,
-                	size: 'mini',
-                    rounded: false,
-                    delayIndicator: true,
-                    position: 'right bottom',
-                    title: 'Error...',
-                    pauseDelayOnHover: true,
-                    continueDelayOnInactiveTab: false,
-                    msg: 'Please Select project before...'
-                });
-		 }
-	    
-	}
-	
-	/* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-	function closeNav() {
-	    document.getElementById("mySidenav").style.width = "0";
-	    document.getElementById("TailSteerco").style.marginLeft = "0";
-	}
-</script>
+
+
+
 
 </head>
 
 
-<body data-spy="scroll" data-twttr-rendered="true">
+<body data-spy="scroll" data-twttr-rendered="true" >
 
+	 
 	 
 	<jsp:useBean id="myBeanProjects" class="database.MySqlStatmentProjects" scope="application"/>
 	<jsp:useBean id="myBeanPeople" class="database.MySqlStatmentPeople" scope="application"/>
 	<jsp:useBean id="myBeanCardLog" class="database.MySqlStatmentCardLog" scope="application"/>
 	<jsp:useBean id="myBeanCard" class="database.MySqlStatmentCard" scope="application"/>
-	<jsp:useBean id="myBeanPeopleCard" class="database.MySqlStatmentPeopleCard" scope="application"/>
 	
 
 	<!-- Navbar ================================================== -->
@@ -91,15 +65,13 @@
 				aria-haspopup="true" aria-expanded="false">Projects</a>
 				<div class="dropdown-menu"
 					aria-labelledby="responsiveNavbarDropdown">
-					
 					<%
 							java.util.List<String> listProjects = new java.util.ArrayList<String>() ;
-							listProjects=myBeanProjects.GetProjects("User");
+							listProjects=myBeanProjects.GetProjects("Kanban");
 							for (int i=0;i<listProjects.size();i++){
 								out.println(listProjects.get(i).toString());
 							}
 						%> 
-					
 				</div></li>
 		</ul>
 		<ul class="form-inline float-lg-right">
@@ -116,93 +88,51 @@
 	<!-- End Sticky Bar ================================================== -->
 
 	<!-- Contents ================================================== -->
-	<div id="mySidenav" class="sidenav">
-		  <a href="javascript:void(0)" class="Slideclosebtn" onclick="closeNav()"><i class="glyphicon glyphicon-off"></i></a>
-		  <br></br>
-							<%
-								if (request.getParameter("ProjectName")!=null){
-									
-									java.util.List<String> listCards = new java.util.ArrayList<String>() ;
-									listCards=myBeanCard.GetCard("backlogcolumn",request.getParameter("ProjectName"));
-									for (int i=0;i<listCards.size();i++){
-										out.println(listCards.get(i).toString());
-									}
+
+	<div id="TailSteercoWip" >
+			
+		<div class="board__columnsBacklog-scrollable-wrapper">
+			<div class="column top-to-bottom" id="C1">
+				<div class="column__header" id="Hearder1">
+					<h2 style="display: inline;" class="column__header-label">BACKLOG</h2>
+					<a id="OpenAddForm"
+						style="display: inline; float: right; margin-right: 5px;" href=""
+						data-toggle="modal"><i class="glyphicon glyphicon-pencil"></i></a>
+				</div>
+				<div id="backlogcolumn" class="column__items-wrapper "
+					ondrop="drop(event)" ondragover="allowDrop(event)">
+					<%
+							java.util.List<String> listCards = new java.util.ArrayList<String>() ;
+							if (request.getParameter("ProjectName")!=null){
+								
+								listCards=myBeanCard.GetCard("backlogcolumn",request.getParameter("ProjectName"));
+								for (int i=0;i<listCards.size();i++){
+									out.println(listCards.get(i).toString());
 								}
-							%> 
-	
-	
-	</div>
-	<div id="TailSteerco">
-		
-					<div id="lineContainer" class="board__lines-scrollable-wrapper">
-					
-						<div class="lineHeader  " id="C1">
-								<div class="column__header" id="Hearder1">
-								<a id="AddUSer" style="display: inline; float: left; margin-right: 5px;"
-										href="" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i></a>
-									<h2 style="display: inline;" class="column__header-label">Users</h2>
-									<a onclick="openNav()" id="OpenNav" style="display: inline; float: right; margin-right: 5px;"
-										href="" data-toggle="modal"><i class="glyphicon glyphicon-pencil"></i></a>
-								</div>
-						</div>
-						
-						<%
-						if (request.getParameter("ProjectName")!=null){
-							java.util.List<String> listPeopleAndCards = new java.util.ArrayList<String>() ;
-							listPeopleAndCards=myBeanPeopleCard.GetPeopleCard(request.getParameter("ProjectName"));
-							for (int i=0;i<listPeopleAndCards.size();i++){
-								out.println(listPeopleAndCards.get(i).toString());
 							}
-						}
-						%> 
-						
+							%> 
 					
-						
-
-						
+					
+					
 					</div>
-					
-					<!-- Form Add User -->
-					<div class="modal fade" id="FormAddUser" tabindex="-1" role="dialog"
-						aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
-									<h4 class="modal-title" id="myModalLabel">Add User</h4>
-								</div>
-								<div class="modal-body">
-									<div class="form-group" id="CardContainerTemplate">
-										<div class="assigner">
-											<button class="assigner__assignee" data-toggle="dropdown" title="Owner"  id="OwnerLabel">AGI</button>
-										</div>
-									</div>
-					
-									<!-- Indicates a successful or positive action -->
-									<button id="SubmitAddUser" style="display: inline;" type="button" class="btn btn-sm btn-success">Add User</button>
-									
-									<div style="margin: auto; width: 80%;" class="form-group">
-										<div class="input-group-btn ">
-											<div class="dropdown-menu" id="SelectOwnerLabel">
-												<%
-													java.util.List<String> listPeople = new java.util.ArrayList<String>() ;
-													listPeople=myBeanPeople.GetPeople();
-													for (int i=0;i<listPeople.size();i++){
-														out.println(listPeople.get(i).toString());
-													}
-												%> 
+			</div>
+		</div>
+		
+		<div class="board__columns-scrollable-wrapper">
 
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- /.modal-content -->
-						</div>
-						<!-- /.modal-dialog -->
-					</div>
-					<!--  /.modal -->
+						 	<%
+						 	java.util.ArrayList<String> layerAndCards = new java.util.ArrayList<String>() ;
+							if (request.getParameter("ProjectName")!=null){
+								layerAndCards=myBeanCard.getWeekAndCard(request.getParameter("ProjectName"));
+								for (int i=0;i<layerAndCards.size();i++){
+									out.println(layerAndCards.get(i).toString());
+								}
+							}
+							%> 
+							
+						
+					
+				 
 
 					
 					<!-- Form Log Card -->
@@ -217,7 +147,7 @@
 								<div class="modal-body">
 									<div id="modal-loader" style="display: none; text-align: center;">
 							           <!-- ajax loader -->
-							            <img src="./Librairies/images/ajax-loader.gif"/>
+							           <img src="./Librairies/images/ajax-loader.gif"/>
 							        </div>
 							        <div >
 										<div class="form-group">
@@ -229,7 +159,7 @@
 														<th>EventId</th>
 														<th>DateEvent</th>
 														<th>DescriptionEvent</th>
-														
+													
 													</tr>
 												</thead>
 												<tbody id="dynamic-content">
@@ -244,9 +174,133 @@
 						</div>
 					</div>
 
-					
-					
-						
+					<!-- Form Add Card -->
+					<div class="modal fade" id="FormAdd" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">Create Task</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-group" id="CardContainerTemplate">
+										<div draggable="true" class="cardEdit" id="cardTemplate" tabindex="0" draggable="true" ondragstart="drag(event)">
+											<div class="card__header">
+												<div class="estimator">
+													<button class="estimator__estimate-button Medium"
+														type="button" title="Priority">M</button>
+												</div>
+												<img src="./Librairies/iobeya/none.png.jpg" class="avatar" />
+												<div class="assigner">
+													<button class="assigner__assignee" data-toggle="dropdown" title="Owner"  id="OwnerTemplate">AGI</button>
+												</div>
+												<span class="blocking-indicator__indicator blocker"
+													id="blokerTemplate" title="BlockerValue">Blocked</span>
+												<div class="card__actions">
+													<button title="Blocker">
+														<i class="glyphicon glyphicon-thumbs-down"></i>
+													</button>
+													<button id="logTemplate" href="" data-toggle="modal"
+														title="Log">
+														<i class="glyphicon glyphicon-pushpin"></i>
+													</button>
+													<button title="Edit">
+														<i class="glyphicon glyphicon-edit"></i>
+													</button>
+													<button id="deleteTemplate" title="Delete">
+														<i class="glyphicon glyphicon-off"></i>
+													</button>
+												</div>
+											</div>
+		
+											<div class="card__body story" id="CardBodyTemplateAddCard">
+												<div class="card__body-content">
+													<div class="card__body-title" title="ContentCard" id="CardBodyValueTemplate">
+														<textarea id="textareaEdit" class="form-control">Here is the description of the task !</textarea>
+													</div>
+		
+													<div class="card__body-meta">
+														
+															<div class="TagDueDateOK" id="DueDateDivTemplate">
+																<span class="DueDateFieldValue" title="DueDateValue">No Due Date</span>													 
+															</div>														 
+														
+														
+														<div class="card__body-counts">
+															<span style="color:grey;" id="ChargeTemplate" title="Charge (j)">0</span>
+															<span style="color:grey;" id="ProgressTemplate" title="Raf">0</span>
+														</div>
+													</div>
+												</div>
+											</div>
+		
+										</div>
+									</div>
+									
+									<div class="form-group">
+										 
+											<input class="DueDateInputClasse" id="DueDateObjTemplate" type="text" data-datepicker='{ "dateFormat": "MM dd, yy"}'/>
+										 
+									</div>
+								
+									<div class="form-group">
+									  <label for="example-number-input" >Charge in Day</label>
+									  <div id="slider">
+										  <div id="custom-handle" class="ui-slider-handle"></div>
+										    <script>
+											  $( function() {
+											    var handle = $( "#custom-handle" );
+											    
+											    $( "#slider" ).slider({
+											      create: function() {
+											        handle.text( $( this ).slider( "value" ) );
+											      },
+											      slide: function( event, ui ) {
+											        handle.text( ui.value );
+											        $( "#ChargeTemplate" ).html(ui.value)
+											      }
+											    });
+											  } );
+											  </script>
+									  </div>
+									</div>
+									<!-- Indicates a successful or positive action -->
+									<button id="SubmitAddCard" style="display: inline;" type="button" class="btn btn-sm btn-success">Add Card</button>
+									
+									
+									<div style="margin: auto; width: 80%;" class="form-group">
+										<div class="input-group-btn ">
+											
+										
+
+											<div class="dropdown-menu" id="SelectOwnerAddForm">
+												<%
+													java.util.List<String> listPeople = new java.util.ArrayList<String>() ;
+													listPeople=myBeanPeople.GetPeople();
+													for (int i=0;i<listPeople.size();i++){
+														out.println(listPeople.get(i).toString());
+													}
+												%> 
+
+											</div>
+										</div>
+
+									</div>
+									
+									
+									
+									
+
+
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!--  /.modal -->
 					
 					<!-- Form Edit Card -->
 					<div class="modal fade" id="FormEdit" tabindex="-1" role="dialog"
@@ -370,7 +424,7 @@
 
 											<div class="dropdown-menu" id="SelectOwnerEditForm">
 												<%
-													//listPeople = new java.util.ArrayList<String>() ;
+													listPeople = new java.util.ArrayList<String>() ;
 													//listPeople=myBeanPeople.GetPeople();
 													for (int i=0;i<listPeople.size();i++){
 														out.println(listPeople.get(i).toString());
@@ -394,6 +448,8 @@
 						<!-- /.modal-dialog -->
 					</div>
 					<!--  /.modal -->
+					
+								
 				</div>
 			
 
@@ -431,27 +487,9 @@
 				    ev.preventDefault();
 				    //
 				    var data = ev.dataTransfer.getData("text");
-				    //data est l'iD de la carte
-				   // alert(data);
-				    var DroppedCard = $('#'+data);
-				    var Destination = ev.target;
-				    var destinationUser = $(Destination).find("div[class='cardUser']").find("button[class='assigner__assignee']").html();
-				    var DestinationClass= $(Destination).find("div[class='cardUser']").find("div[title='CardBodyTheme']").attr("class");
-				   // alert(DestinationClass);
-				    
-				    var ClassListofCard = $(DroppedCard).find("div[title='ContentCard']").parent().parent().prop("classList");
-				    //alert(ClassListofCard);
-				    $.each(  $(ClassListofCard), function( key, element ) {
-				    	 $(DroppedCard).find("div[title='ContentCard']").parent().parent().removeClass(element);
-			    	});
-				
-				    $(DroppedCard).find("button[class='assigner__assignee']").html(destinationUser);
-				    $(DroppedCard).find("div[title='ContentCard']").parent().parent().addClass("card__body");
-				    $(DroppedCard).find("div[title='ContentCard']").parent().parent().addClass(DestinationClass);
-				  
 				    ev.target.appendChild(document.getElementById(data));
 				    
-				    updateExistingCard(data,"RolloutWip", "Card attributed to " +destinationUser );
+				    updateExistingCard(data,ev.target.id,"Move card in " + ev.target.id);
 				    //alert(ev.target.id);
 				    
 				};
@@ -514,7 +552,7 @@
 	 					}); 
 				};
 				
-				function updateExistingCard(pId, Layer,UpdateDescription){
+				function updateExistingCard(pId, Layer, UpdateDescription){
 					 
                      var card = $("#"+pId)
                      
@@ -531,6 +569,7 @@
                      var Charge= $(card).find("span[title='Charge (d)']").html();
                      var Progress= $(card).find("span[title='Raf']").html();
                       
+                     //alert (ContentCardClass);
                      
 					
 					
@@ -608,11 +647,9 @@
 				
 				 
 				
-				
-				
-				$( "#AddUSer").click(function() {
-					if($("#ProjectName").html()!="" && $("#ProjectName").html()!="0" && $("#ProjectName").html()!="null"){
-						$("#FormAddUser").modal();
+				$( "#OpenAddForm" ).click(function() {
+					 if($("#ProjectName").html()!="" && $("#ProjectName").html()!="0" && $("#ProjectName").html()!="null"){
+						 $("#FormAdd").modal();
 					 }
 					 else{
 						 Lobibox.notify('error', {
@@ -624,98 +661,9 @@
 			                    title: 'Error...',
 			                    pauseDelayOnHover: true,
 			                    continueDelayOnInactiveTab: false,
-			                    msg: 'Please select project before...'
+			                    msg: 'Please Select project before...'
 			                });
 					 }
-		 			
-		 			
-				});
-				
-			
-				
-				$( "#SubmitAddUser" ).click(function() {
-					var NewUserCardTemplate = "<div class='line top-to-bottom' id='IDUser'><div id='Line-IDUser' class='line__items-wrapper ' ondrop='drop(event)' ondragover='allowDrop(event)'><div draggable='true' class='cardUser' id='card-IDUser' draggable='false'  tabindex='0'><div class='card__header'><img src='./Librairies/iobeya/none.png.jpg' class='avatar' /><div class='assigner'><button class='assigner__assignee'>NewUser</button></div><img style='float:right;margin-right:5px; 'src='./Librairies/iobeya/unknown.png' width='25px' height='25px'/><button id='delete-IDUser' style='margin-left:10px;' title='Delete'><i class='glyphicon glyphicon-off BtcGrey'></i></button></div><div class='UserClasse' title='CardBodyTheme' ><center><img src='./Librairies/images/kanban/happy.png' width='40px' height='40px'/><img src='./Librairies/images/kanban/arrow.png' width='40px' height='40px'/><img class='Humor' src='./Librairies/images/kanban/happy.png' width='40px' height='40px'/></center></div><div class='userIndicator'><span class='badge badgebacklog' title='Backlog Items' id='BacklogItem-IDUser'>0</span><span class='badge badgeinprogress' title='Items in Progress' id='InProgressItem-IDUser'>0</span><span class='badge badgedone' title='Close Items' id='CloseItem-IDUser'>0</span></div></div></div></div>";
-					var NewUserCard = NewUserCardTemplate;
-					
-					var UserName= $("#OwnerLabel").html();
-					NewUserCard=NewUserCard.replace("NewUser",UserName);
-					var UserClasse = $("#OwnerLabel").attr('Class').replace("assigner__assignee","");
-					
-					var IdUser=generateUUID();
-					NewUserCard=NewUserCard.replaceAll("IDUser",IdUser);
-					NewUserCard=NewUserCard.replace("UserClasse",UserClasse);
-					
-					 //Storing
- 				    var DataCard={
- 				    	"ProjectName":unescape($.urlParam('ProjectName')),
- 				    	"IdUser":IdUser,
- 				    	"Owner": UserName,
- 				    	"OwnerClasse":UserClasse,
-					    "OldHumor":"./Librairies/images/kanban/happy.png",
-					    "NewHumor":"./Librairies/images/kanban/happy.png",
-					    "Photo":UserName+"jpeg"
-					  };
-					 
- 					
- 				    
- 				   seen = []
-
- 				  var serializedCard  = JSON.stringify(DataCard, function(key, val) {
- 				     if (typeof val == "object") {
- 				          if (seen.indexOf(val) >= 0)
- 				              return
- 				          seen.push(val)
- 				      }
- 				      return val
- 				  })
-					
-					$.ajax({
- 					    type: 'get', // it's easier to read GET request parameters
- 					    url: 'PeopleCardManagment',
- 					    dataType: 'JSON',
- 					    data: { 
- 					      EventId: generateUUID(),
- 					      SqlMode:"Insert",
- 					      EventDescription: "New User on project",
- 					      NewCardPeople: serializedCard // look here!
- 					    },
- 					    success: function(data) {
- 					    	 $("#lineContainer").append(NewUserCard);
- 					    	 
- 							  
- 							
- 					    	 Lobibox.notify('success', {
- 			                	icon: false,
- 			                	size: 'mini',
- 			                    rounded: false,
- 			                    delayIndicator: true,
- 			                    position: 'right bottom',
- 			                    title: 'Success...',
- 			                    pauseDelayOnHover: true,
- 			                    continueDelayOnInactiveTab: false,
- 			                    msg: 'New Card updated...'
- 			                });
- 					    },
- 					    error: function(jqXHR, textStatus, errorThrown){ 
- 					    	Lobibox.notify('error', {
- 			                	icon: false,
- 			                	size: 'mini',
- 			                    rounded: false,
- 			                    delayIndicator: true,
- 			                    position: 'right bottom',
- 			                    title: 'Error...',
- 			                    pauseDelayOnHover: true,
- 			                    continueDelayOnInactiveTab: false,
- 			                    msg: jqXHR.responseText
- 			                });
- 					    	
- 					    }
- 					}); 
-					
-					
-					
-					$("#FormAddUser .close").click()
-					
 					
 				});
 				
@@ -774,7 +722,145 @@
    				 card=null;
 				});
 				
-				
+				$( "#SubmitAddCard" ).click(function() {
+					
+					var ReferenceCard ="<div draggable='true' class='cardEdit' id='cardTemplate' tabindex='0' draggable='true' ondragstart='drag(event)'><div class='card__header'><div class='estimator'><button class='%Priority%' type='button' title='Priority'>ValPriority</button></div><img src='./Librairies/iobeya/none.png.jpg' class='avatar' /><div class='assigner'><button class='assigner__assignee' data-toggle='dropdown' title='Owner'  id='OwnerTemplate'>ValUser</button></div><span class='blocking-indicator__indicator blocker' style='%BlockedStyle%' id='blokerTemplate' title='BlockerValue'>Blocked</span><div class='card__actions'> <button title='Blocker'><i class='glyphicon glyphicon-thumbs-down'></i></button><button id='logTemplate' href='' data-toggle='modal' title='Log'> <i class='glyphicon glyphicon-pushpin'></i> </button> <button title='Edit'> <i class='glyphicon glyphicon-edit'></i> </button> <button id='deleteTemplate' title='Delete'><i class='glyphicon glyphicon-off'></i></button></div></div><div class='%ClassContent%' id='CardBodyTemplateAddCard'><div class='card__body-content'><div class='card__body-title' title='ContentCard' id='CardBodyValueTemplate'>ValAction</div> <div class='card__body-meta'><div class='TagDueDateOK' id='DueDateDivTemplate'><span class='DueDateFieldValue' title='DueDateValue'>ValDate</span></div><div class='card__body-counts'><span style='color:grey;' id='ChargeTemplate' title='Charge (d)'>ValCharge</span><span style='color:grey;' id='ProgressTemplate' title='Raf'>ValRaf</span></div></div></div></div></div>";
+					var checksuccess=true;
+		
+					 var ddate=$("#FormAdd").find("span[title='DueDateValue']");
+					 
+					 if ($(ddate).html().indexOf("No Due Date")!==-1){
+						 Lobibox.notify('error', {
+			                	icon: false,
+			                	size: 'mini',
+			                    rounded: false,
+			                    delayIndicator: true,
+			                    position: 'right bottom',
+			                    title: 'Error...',
+			                    pauseDelayOnHover: true,
+			                    continueDelayOnInactiveTab: false,
+			                    msg: 'A due date is mandatory...'
+			                });
+						 	checksuccess=false;
+					 }
+					 
+					 
+					 
+					 if (checksuccess) {
+					
+						var NewCard = ReferenceCard;
+						
+						var actiontext =$("#cardTemplate").find($("textarea[id='textareaEdit']")).val();
+						NewCard=NewCard.replace("ValAction",actiontext);
+												
+						var UID = generateUUID();
+						NewCard=NewCard.replaceAll("Template", UID);						
+					     
+	 				   NewCard=NewCard.replace("ValDate",$(ddate).html());	
+	 				   var v1 = $("#FormAdd").find("button[title='Priority']").html();
+	 				   var ClassePriority = $("#FormAdd").find("button[title='Priority']").attr("class");
+	 				   NewCard=NewCard.replace("%Priority%",ClassePriority);	 
+	 				   NewCard= NewCard.replace("ValPriority",v1);
+	 				   var v2 = $("#FormAdd").find("button[title='Owner']").html();
+	 				   NewCard= NewCard.replace("ValUser",v2);
+	 				   
+	 				   
+	 				   var contentClass= $("#FormAdd").find("div[id='CardBodyTemplateAddCard']").attr('class');
+	 				   NewCard=NewCard.replace("%ClassContent%", contentClass);
+	 				   
+	 				   
+	 				   var v3=$("#FormAdd").find("span[title='BlockerValue']").css("display");
+	 				  
+	 				   NewCard= NewCard.replace("%BlockedStyle%","display:"+v3+";");
+	 				   
+	 				   
+	 				   var v4 =actiontext;
+	 				   var v5 = $("#FormAdd").find("span[title='Charge (j)']").html();
+	 				   NewCard= NewCard.replace("ValCharge",v5);
+	 				   var v6 = $("#FormAdd").find("span[title='Raf']").html();
+	 				   NewCard= NewCard.replace("ValRaf",v5);
+	 				   //alert(ClassePriority);
+	 				   $("#backlogcolumn").append(NewCard);
+	 				    //alert(NewCard);
+	 				    //Storing
+	 				    var DataCard={
+	 				    	"ProjectName":unescape($.urlParam('ProjectName')),
+	 				    	"Id": 'card'+UID,
+						    "Priority":v1,
+						    "PriorityClass":ClassePriority,
+						    "Owner":v2,
+						    "Blocked":v3,
+						    "BlockedStyle":v3,
+						    "Description": v4,
+						    "DueDate": $(ddate).html(),
+						    "Duration":v5,
+						    "Raf":v5,
+						    "OwnerClass":contentClass,
+						    "Layer": 'backlogcolumn'
+						  };
+	 				    
+	 				   seen = []
+
+	 				  var serializedCard  = JSON.stringify(DataCard, function(key, val) {
+	 				     if (typeof val == "object") {
+	 				          if (seen.indexOf(val) >= 0)
+	 				              return
+	 				          seen.push(val)
+	 				      }
+	 				      return val
+	 				  })
+
+	 				  //////alert(serializedCard);
+   
+	 				  $.ajax({
+	 					    type: 'get', // it's easier to read GET request parameters
+	 					    url: 'CardManagment',
+	 					    dataType: 'JSON',
+	 					    data: { 
+	 					      EventId: generateUUID(),
+	 					      SqlMode:"Insert",
+	 					      EventDescription: "New card created on project !",
+	 					      NewCard: serializedCard // look here!
+	 					    },
+	 					    success: function(data) {
+	 					    	 Lobibox.notify('success', {
+	 			                	icon: false,
+	 			                	size: 'mini',
+	 			                    rounded: false,
+	 			                    delayIndicator: true,
+	 			                    position: 'right bottom',
+	 			                    title: 'Success...',
+	 			                    pauseDelayOnHover: true,
+	 			                    continueDelayOnInactiveTab: false,
+	 			                    msg: 'New Card created...'
+	 			                });
+	 					    },
+	 					    error: function(jqXHR, textStatus, errorThrown){ 
+	 					    	Lobibox.notify('error', {
+	 			                	icon: false,
+	 			                	size: 'mini',
+	 			                    rounded: false,
+	 			                    delayIndicator: true,
+	 			                    position: 'right bottom',
+	 			                    title: 'Error...',
+	 			                    pauseDelayOnHover: true,
+	 			                    continueDelayOnInactiveTab: false,
+	 			                    msg: jqXHR.responseText
+	 			                });
+	 					    	
+	 					    }
+	 					}); 
+	 				  
+	 				  
+	 				  
+	 				  
+	 				   NewCard=null;
+	 				   
+	 				   $("#FormAdd .close").click()
+	 				 
+					 }
+				  
+				});
 				
 				
 				
@@ -858,9 +944,7 @@
                         $(carEdit).find($("textarea[id='textareaEdit']")).val(ContentCard);
                         myClassList =$("#CardBodyEdit").prop("classList");
                         $.each( $(myClassList), function( key, element ) {
-					    
 					    		$("#CardBodyEdit").removeClass(element);
-					    	
 					    });
                         
                         $.each( $(ContentCardClass), function( key, element ) {
@@ -878,10 +962,9 @@
 					});
 					
 					
-						
-				//-- Manage New Card Delete ================================================== -->	
+					
+					//-- Manage New Card Delete ================================================== -->	
 					$( "body" ).on( "click","button[title='Delete']", function(e) {
-						
 						var card = $(this).parent().parent().parent();
 						 /* Test if Card is CardUser ***/
 						  
@@ -1087,103 +1170,6 @@
 	                      
 					});
 			
-		 
-			 		
-			 		
-			 		 
-				
-					$( "body" ).on( "click","img[class='Humor']", function(e) {
-						
-						var v1 = "./Librairies/images/kanban/nope.png";
-						var v2 = "./Librairies/images/kanban/happy.png";
-						var v3 = "./Librairies/images/kanban/unhappy.png";
-						
-						var oldHumor, newHumor;
-						
-						 if ($(this).attr("src")== v1){
-							 $(this).attr("src",v2)
-							 oldHumor=v1;
-							 newHumor=v2;
-						}
-						 else if ($(this).attr("src")== v2){
-							 $(this).attr("src",v3)
-							 oldHumor=v2;
-							 newHumor=v3;
-							}
-						 else if ($(this).attr("src")== v3){
-							 $(this).attr("src",v1)
-							 oldHumor=v3;
-							 newHumor=v1;
-							}
-						 
-						 var UserName=$(this).parent().parent().parent().find("button[class='assigner__assignee']").html();
-						 var UserID=$(this).parent().parent().parent().parent().parent().attr("id");
-						 var UserClasse= $(this).parent().parent().attr("class");
-						 
-						 //Storing
-		 				    var DataCard={
-		 				    	"ProjectName":unescape($.urlParam('ProjectName')),
-		 				    	"IdUser":UserID,
-		 				    	"Owner": UserName,
-		 				    	"OwnerClasse":UserClasse,
-							    "OldHumor":oldHumor,
-							    "NewHumor":newHumor,
-							    "Photo":UserName+"jpeg"
-							  };
-							 
-		 				  
-		 				    
-		 				   seen = []
-
-		 				  var serializedCard  = JSON.stringify(DataCard, function(key, val) {
-		 				     if (typeof val == "object") {
-		 				          if (seen.indexOf(val) >= 0)
-		 				              return
-		 				          seen.push(val)
-		 				      }
-		 				      return val
-		 				  })
-							
-							$.ajax({
-		 					    type: 'get', // it's easier to read GET request parameters
-		 					    url: 'PeopleCardManagment',
-		 					    dataType: 'JSON',
-		 					    data: { 
-		 					      EventId: generateUUID(),
-		 					      SqlMode:"Update",
-		 					      EventDescription: "New humor on project",
-		 					      NewCardPeople: serializedCard // look here!
-		 					    },
-		 					    success: function(data) {
-		 					    	 Lobibox.notify('success', {
-		 			                	icon: false,
-		 			                	size: 'mini',
-		 			                    rounded: false,
-		 			                    delayIndicator: true,
-		 			                    position: 'right bottom',
-		 			                    title: 'Success...',
-		 			                    pauseDelayOnHover: true,
-		 			                    continueDelayOnInactiveTab: false,
-		 			                    msg: 'New Card updated...'
-		 			                });
-		 					    },
-		 					    error: function(jqXHR, textStatus, errorThrown){ 
-		 					    	Lobibox.notify('error', {
-		 			                	icon: false,
-		 			                	size: 'mini',
-		 			                    rounded: false,
-		 			                    delayIndicator: true,
-		 			                    position: 'right bottom',
-		 			                    title: 'Error...',
-		 			                    pauseDelayOnHover: true,
-		 			                    continueDelayOnInactiveTab: false,
-		 			                    msg: jqXHR.responseText
-		 			                });
-		 					    	
-		 					    }
-		 					}); 
-						 
-						});
 					
 					$( "body" ).on( "click","button[title='Priority']", function(e) {
 						var card = $(this).parent().parent().parent();
@@ -1208,7 +1194,6 @@
 							 	updateExistingCard($(card).attr("id"),"N/A", "Card priority updated ! ");
 							 
 							}
-						
 							
 						});
 					
@@ -1314,6 +1299,7 @@
 					
 					
 				
+			
 					
 				
 				

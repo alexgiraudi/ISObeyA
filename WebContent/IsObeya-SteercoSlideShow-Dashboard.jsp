@@ -198,7 +198,7 @@
 	 			                });
 	 					    },
 	 					    error: function(jqXHR, textStatus, errorThrown){ 
-	 					    	alert(errorThrown);
+	 					    	//alert(errorThrown);
 	 					    	Lobibox.notify('error', {
 	 			                	icon: false,
 	 			                	size: 'mini',

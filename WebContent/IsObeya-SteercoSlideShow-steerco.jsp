@@ -33,57 +33,7 @@
 
 
 
-<script type="text/javascript">
- 
-				window.onload = function () {
-					
-			
-					var chart = new CanvasJS.Chart("chartContainer", {
-						title: {
-							text: "KPI OBSO 2003",
-							fontSize: 14,
-							fontFamily: "Calibri",
-							
-						},
-						animationEnabled: true,
-						theme: "theme1",
-						data: [
-						{
-							type: "doughnut",
-							indexLabelFontFamily: "Calibri",
-							indexLabelFontSize: 14,
-							startAngle: 0,
-							indexLabelFontColor: "dimgrey",
-							indexLabelLineColor: "darkgrey",
-							toolTipContent: "{y} %",
-		
-							dataPoints: [
-							{ y: 51.04, indexLabel: "Android {y}%", exploded: true},
-							{ y: 40.83, indexLabel: "iOS {y}%" },
-							{ y: 3.20, indexLabel: "Java ME {y}%" , exploded: true},
-							{ y: 1.11, indexLabel: "BlackBerry {y}%" },
-							{ y: 2.29, indexLabel: "Windows {y}%" , exploded: true},
-							{ y: 1.53, indexLabel: "Others {y}%" }
-		
-							]
-						}
-						]
-					});
-					
-					chart.render();
-					
-					 $(function() {
-						$("#today").progressbar({
-							value: 0.1
-						});
-						$("#today > .ui-progressbar-value").animate({
-							width: "68%"
-						}, 2000);
-					  });
-				}
-				
-				
-			</script>
+
 
 </head>
 
@@ -137,30 +87,30 @@
 					<!--************************************************************************* -->
 
 					<div id="ProjectName">
-						<h4>N&deg;17 - Internet on Desktop</h4>
+						<h4>Security For Business</h4>
 					</div>
 
 					<div class="Steerco">
 						<!--*****************Steerco Left***** -->
-						<div id="SteercoLeft">
-							<div id="ProjectDescription">
-								<H4>Project Description</H4>
-								<p class="pLeftDesc">
-									<b>Note: </b>When aligning using the float property, a
-									<P id="Service">ISOP</P>
-								</p>
+						<div style="margin-top: 30px;" id="SteercoLeft">
+							<div id="ProjectDescription" >
+								<h4>Project Description</h4>
+								 
+									<b>Securing business networks of Thales Alenia Space [JV]</b>
+									 
+								 
 							</div>
 
 							<div id="KeyPoints">
 								<H4>Key Points</H4>
-								<p class="pMiddle">
-									<b>Note: 1</b>property, a
+								<p id="KeyPoint1" class="pMiddle">
+									<b>Key Point 1 - </b>JV architecture workshop in progress
 								</p>
-								<p class="pMiddle">
-									<b>Note: 2</b>property, a
+								<p id="KeyPoint2" class="pMiddle">
+									<b>Key Point 2 - </b>Building archtitecture from existing Italian secure functional blocks [Internet]
 								</p>
-								<p class="pMiddle">
-									<b>Note: 3</b>property, a
+								<p id="KeyPoint3" class="pMiddle">
+									<b>Key Point 3 - </b>Purchasing organization in progress : PVET 1
 								</p>
 							</div>
 
@@ -191,35 +141,37 @@
 											</td>
 										</tr>
 										<tr>
-											<td class="PhaseProject" target="green">
-												<p>78%</p>
+											<!-- A remplacer par la recuperation des infos Dashboard -->
+											<td class="PhaseProject" target="red">
+												 
 											</td>
 											<td></td>
 											<td class="PhaseProject" target="green">
-												<p>0%</p>
-											</td>
-											<td></td>
-											<td class="PhaseProject" target="green">
-												<p>0%</p>
-											</td>
-											<td></td>
-											<td class="PhaseProject" target="blue">
-												<p>0%</p>
+												 
 											</td>
 											<td></td>
 											<td class="PhaseProject" target="red">
-												<p>0%</p>
+												 
+											</td>
+											<td></td>
+											<td class="PhaseProject" target="blue">
+												 
+											</td>
+											<td></td>
+											<td class="PhaseProject" target="blue">
+												 
 											</td>
 										</tr>
 										<tr>
+										    <!-- A remplacer par la recuperation des infos Dashboard -->
+											<td class="Tendance"><center> <img
+													src="./Librairies/perso/fblue.png" /></center></td>
+											<td></td>
 											<td class="Tendance"><center> <img
 													src="./Librairies/perso/fgreen.png" /></center></td>
 											<td></td>
 											<td class="Tendance"><center> <img
-													src="./Librairies/perso/fred.png" /></center></td>
-											<td></td>
-											<td class="Tendance"><center> <img
-													src="./Librairies/perso/fblue.png" /></center></td>
+													src="./Librairies/perso/fgreen.png" /></center></td>
 											<td></td>
 											<td class="Tendance"><center> <img
 													src="./Librairies/perso/fblue.png" /></center></td>
@@ -230,14 +182,15 @@
 									</table>
 
 								</div>
-								<p class="pMiddle">
-									<b>Note: 1</b>property, a
+								<p id="Remark1" class="pMiddle">
+									<b>Note: </b>The Gate 2 will be postponed due to purchaising organization & PVET 1 planification
 								</p>
-								<p class="pMiddle">
-									<b>Note: 2</b>property, a
+								<p id="Remark2"class="pMiddle">
+									<b>Note: </b>Awaiting PVET date.
 								</p>
-								<p class="pMiddle">
-									<b>Note: 3</b>property, a
+								<p  id="Remark3" class="pMiddle">
+									<b>Note: </b>Purchaising workpackages : 1 WP COTS Soft - 1 WP COTS hard - 1 WP Investigate Services - 1 WP Services
+									
 								</p>
 
 
@@ -245,11 +198,11 @@
 
 							<div id="NextStep">
 								<H4>Next Step</H4>
-								<p class="pMiddle">
-									<b>Note: </b>When aligning using the float property, a
+								<p id="NextStep1" class="pMiddle">
+									<b>Step 1 : </b>PVET 1
 								</p>
-								<p class="pMiddle">
-									<b>Note: </b>When aligning using the float property, a
+								<p id="NextStep2" class="pMiddle">
+									<b>Step 2: </b>Gate 2 with JV architecture validated
 								</p>
 
 							</div>
@@ -292,13 +245,13 @@
 									</tr>
 									<tr class="OrchestrationTableDate">
 
-										<td class="OrchestrationTableDate">01-02-2016</td>
-										<td class="OrchestrationTableDate">01-02-2016</td>
-										<td class="OrchestrationTableDate">01-02-2016</td>
-										<td class="OrchestrationTableDate">01-02-2016</td>
-										<td class="OrchestrationTableDate">01-02-2016</td>
-										<td class="OrchestrationTableDate">01-02-2016</td>
-										<td class="OrchestrationTableDate">01-02-2016</td>
+										<td id="NextMilestoneDesign"  class="OrchestrationTableDate">30-04-2017</td>
+										<td id="NextMilestoneRFP" class="OrchestrationTableDate">02-05-2017</td>
+										<td id="NextMilestonePurchasing" class="OrchestrationTableDate">tbd</td>
+										<td id="NextMilestoneProvisioning" class="OrchestrationTableDate">tbd</td>
+										<td id="NextMilestoneBuild" class="OrchestrationTableDate">tbd</td>
+										<td id="NextMilestoneRollout" class="OrchestrationTableDate">tbd</td>
+										<td id="NextMilestoneGoLive" class="OrchestrationTableDate">tbd</td>
 
 									</tr>
 								</table>
@@ -308,7 +261,8 @@
 
 
 						<!--*****************Steerco Right***** -->
-						<div id="SteercoRight">
+						
+						<div  style="margin-top: 30px;" id="SteercoRight">
 							<div style="align: center;" id="Budget">
 								<H4>Budget [k&euro;]</H4>
 
@@ -322,11 +276,11 @@
 									</tr>
 									<tr />
 									<tr class="ClassBudgetMiddle">
-										<td class="ClassBudgetMiddle" colspan="5">1 300</td>
+										<td id="GlobalBudget" class="ClassBudgetMiddle" colspan="5">6 000</td>
 										<td class="tdwhite">-------------</td>
-										<td class="ClassBudgetMiddle" colspan="5">1 000</td>
+										<td id="CapexBudget" class="ClassBudgetMiddle" colspan="5">6 000</td>
 										<td class="tdwhite">-------------</td>
-										<td class="ClassBudgetMiddle" colspan="5">1 300</td>
+										<td id="OpexBudget" class="ClassBudgetMiddle" colspan="5">0</td>
 
 
 									</tr>
@@ -352,23 +306,23 @@
 
 									</tr>
 									<tr class="ClassBudgetLow">
-										<td class="ClassBudgetLow">1 100</td>
+										<td id="GlobalOfficial" class="ClassBudgetLow">6 000</td>
 										<td class="tdwhite">---</td>
-										<td class="ClassBudgetLow">+150</td>
+										<td id="GlobalOutlook" class="ClassBudgetLow">6 000</td>
 										<td class="tdwhite">---</td>
-										<td class="ClassBudgetLow">1 794</td>
+										<td id="GlobalOrdered" class="ClassBudgetLow">215</td>
 										<td class="tdwhite">-------------</td>
-										<td class="ClassBudgetLow">3 100</td>
+										<td id="CapexOfficial" class="ClassBudgetLow">6 000</td>
 										<td class="tdwhite">---</td>
-										<td class="ClassBudgetLow">+170</td>
+										<td id="CapexOutlook" class="ClassBudgetLow">6 000</td>
 										<td class="tdwhite">---</td>
-										<td class="ClassBudgetLow">1 794</td>
+										<td id="CapexOrdered" class="ClassBudgetLow">215</td>
 										<td class="tdwhite">-------------</td>
-										<td class="ClassBudgetLow">1 100</td>
+										<td id="OpexOfficial" class="ClassBudgetLow">0</td>
 										<td class="tdwhite">---</td>
-										<td class="ClassBudgetLow">+150</td>
+										<td id="OpexOutlook" class="ClassBudgetLow">0</td>
 										<td class="tdwhite">---</td>
-										<td class="ClassBudgetLow">1 794</td>
+										<td id="OpexOrdered" class="ClassBudgetLow">0</td>
 									</tr>
 								</table>
 
@@ -397,6 +351,10 @@
 									</tr>
 									<tr class="TeamProject">
 										<td class="TeamProject">
+											<p>Project Sponsor</p>
+										</td>
+										<td class="tdwhite">---</td>
+										<td class="TeamProject">
 											<p>Project Leader</p>
 										</td>
 										<td class="tdwhite">---</td>
@@ -405,15 +363,11 @@
 										</td>
 										<td class="tdwhite">---</td>
 										<td class="TeamProject">
-											<p>Architect</p>
+											<p>Purchase TAS</p>
 										</td>
 										<td class="tdwhite">---</td>
 										<td class="TeamProject">
-											<p>Integrator</p>
-										</td>
-										<td class="tdwhite">---</td>
-										<td class="TeamProject">
-											<p>Rollout</p>
+											<p>Purchase TGS</p>
 										</td>
 									</tr>
 									<tr class="tdwhite">
@@ -421,23 +375,23 @@
 									</tr>
 									<tr>
 										<td class="People">
-											<p>J.Argemi</p>
+											<p id="TeamCDP">B.Wiart</p>
 										</td>
 										<td class="tdwhite">---</td>
 										<td class="People">
-											<p>E.Mancini</p>
+											<p id="TeamDA">A.Giraudi</p>
 										</td>
 										<td class="tdwhite">---</td>
 										<td class="People">
-											<p>M.Foraita</p>
+											<p id="TeamArchi">JV D.A</p>
 										</td>
 										<td class="tdwhite">---</td>
 										<td class="People">
-											<p>APX</p>
+											<p id="TeamIntegrator">T.Lorenzi</p>
 										</td>
 										<td class="tdwhite">---</td>
 										<td class="People">
-											<p>G.F.I</p>
+											<p id="TeamRollout">S.Sereys</p>
 										</td>
 									</tr>
 								</table>
@@ -445,9 +399,9 @@
 
 							</div>
 							<div style="align: center;" id="KPI">
-								<H4>KPI</H4>
-
-								<div id="chartContainer" />
+								<h4>KPI</h4>
+									<P>The KPI will be defined when the orchestration at the JV Level will be identified.</P>
+<!-- 								<div style="display: middle;" id="chartContainer" /> -->
 
 
 							</div>
@@ -455,7 +409,55 @@
 					</div>
 				</div>
 	<!-- Tab Navigation Contents ================================================== -->	
-	
+	<script type="text/javascript">
+// 	 dataPoints: [
+// 	              {  y: 27.3, indexLabel:"label1", exploded: true },
+// 	              {  y: 16.8, indexLabel:"label2" },
+ 
+			window.onload = function () {
+						var dataPoints = [];
+					    $.getJSON("http://canvasjs.com/services/data/datapoints.php?xstart=1&ystart=10&length=100&type=json", function(data) {  
+						$.each(data, function(key, value){
+							dataPoints.push({x: value[0], y: parseInt(value[1])});
+						});
+						var chart = new CanvasJS.Chart("chartContainer",{
+							title: {
+									text: "KPI OBSO 2003",
+									fontSize: 14,
+									fontFamily: "Calibri",
+								
+								},
+								animationEnabled: true,
+								theme: "theme1",
+								data: [
+								{
+									type: "doughnut",
+									indexLabelFontFamily: "Calibri",
+									indexLabelFontSize: 14,
+									startAngle: 0,
+									indexLabelFontColor: "dimgrey",
+									indexLabelLineColor: "darkgrey",
+								dataPoints : dataPoints,
+							}]
+						});
+						chart.render();
+					});
+			
+					$(function() {
+							$("#today").progressbar({
+								value: 0.1
+							});
+							$("#today > .ui-progressbar-value").animate({
+								width: "10%"
+							}, 2000);
+						  });
+			}
+ 
+ 
+ 
+				
+				
+	</script>
 	
 </body>
 </html>

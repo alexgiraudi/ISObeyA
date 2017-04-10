@@ -5,6 +5,7 @@ package database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class MySqlStatmentCardLog extends MySqlGenericStatment{
 	public static final int MYSQL_DUPLICATE_PK = 1062;
 	public MySqlStatmentCardLog() throws Exception{
 		super();
+		System.out.println("--------> MySqlStatmentCardLog Class intance On");
 	}
 	
 	public boolean SaveLog(String pNewCardID, String pEventID, String pDescriptionEvent, String pCardInfo) throws Exception {
@@ -26,7 +28,7 @@ public class MySqlStatmentCardLog extends MySqlGenericStatment{
 	 		
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Date todayDate = new Date();
-	 
+		Statement stmtCardLog =GetStatement();
 		boolean success= true;		
 		int rs ;
 		try {
@@ -35,12 +37,12 @@ public class MySqlStatmentCardLog extends MySqlGenericStatment{
 				sqlUpdate= sqlUpdate.replaceAll("%EventId: %",pEventID);
 				sqlUpdate= sqlUpdate.replaceAll("%DescriptionEvent: %",pDescriptionEvent);
 				sqlUpdate= sqlUpdate.replaceAll("%RawCard: %",pCardInfo);
-				System.out.println(sqlUpdate);
+				   System.out.println("********* " + sqlUpdate);
 		
 				stmtCardLog.executeUpdate("SET SQL_SAFE_UPDATES = 0;");
 			rs = stmtCardLog.executeUpdate(sqlUpdate);
 			
-			System.out.println(rs);
+//			System.out.println(rs);
 		} catch (SQLException e) {
 			if(e.getErrorCode() == MYSQL_DUPLICATE_PK ){
 		        throw new Exception("Error : Duplicate user entry !", e);
@@ -65,12 +67,12 @@ public ArrayList<String> GetLog(String pNewCardID) throws Exception {
 		ArrayList<String> tabResult = new ArrayList<String>();	
 		String JspReferenceCard ="<tr><td>%CardId%</td><td>%EventId%</td><td>%DateEvent%</td><td>%DescriptionEvent%</td></tr><tr><th style='font-size:x-small;color: #0000AA;' colspan='4'>%RawCard%</th></tr>";
 												
-
+		Statement stmtCardLog =GetStatement();
 		ResultSet rs=null ;
 		try {
 				
 				sqlUpdate= sqlUpdate.replaceAll("%CardId: %",pNewCardID);
-				System.out.println(sqlUpdate);
+				System.out.println("********* " + sqlUpdate);
 				rs = stmtCardLog.executeQuery(sqlUpdate);
 				
 				while (rs.next()) {

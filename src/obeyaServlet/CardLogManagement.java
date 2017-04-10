@@ -2,6 +2,10 @@ package obeyaServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +28,8 @@ public class CardLogManagement extends HttpServlet {
      */
     public CardLogManagement() {
         super();
-        // TODO Auto-generated constructor stub
+       
+        
     }
 
 	/**

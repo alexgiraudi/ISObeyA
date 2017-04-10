@@ -6,9 +6,11 @@ package database;
 import java.rmi.server.UID;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -24,6 +26,7 @@ public class MySqlStatmentCard extends MySqlGenericStatment{
 	
 	public MySqlStatmentCard() throws Exception{
 		super();
+		System.out.println("--------> MySqlStatmentCard Class intance On");
 	}
 	
 	public boolean SaveCard(cardInformation pNewCard) throws Exception {
@@ -32,7 +35,7 @@ public class MySqlStatmentCard extends MySqlGenericStatment{
 				+ "VALUES ('%CardId: %','%Project: %','%Owner: %','%Priority: %','%Blocker: %','%Description: %','%DueDate: %',%Charge: %,%Raf: %,'%OwnerClass: %','%Layer: %','%BlockedStyle: %','%PriorityClass: %');";
 				
 		boolean success= true;		
-		 
+		Statement stmtCard =GetStatement(); 
 		try {
 			if (pNewCard==null){
 				success= false;
@@ -50,9 +53,9 @@ public class MySqlStatmentCard extends MySqlGenericStatment{
 				sqlUpdate= sqlUpdate.replaceAll("%Layer: %",pNewCard.getLawer());
 				sqlUpdate= sqlUpdate.replaceAll("%BlockedStyle: %",pNewCard.getBlockedStyle());
 				sqlUpdate= sqlUpdate.replaceAll("%PriorityClass: %",pNewCard.getPriorityClass());
-				System.out.println(sqlUpdate);
+				System.out.println("********* " + sqlUpdate);
 			}
-			
+			  
 			  stmtCard.executeUpdate(sqlUpdate);
 			
 			
@@ -65,9 +68,8 @@ public class MySqlStatmentCard extends MySqlGenericStatment{
 			} catch (Exception e) {
 				 throw new Exception("Message: " + e.getMessage() + ". " , e);
 			} finally {
-				
-//				try { if (stmtCard != null) stmtCard.close(); } catch (SQLException e) { e.printStackTrace(); }
-//				try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+				try { if (stmtCard != null) stmtCard.close(); } catch (SQLException e) { e.printStackTrace(); }
+			
 			}
 		return success;
 	}
@@ -78,7 +80,7 @@ public boolean updateCard(cardInformation pNewCard) throws Exception {
 		String sqlUpdateWithoutLayer = "update ISObeyaDB.cards SET Project='%Project: %',Owner='%Owner: %',Priority='%Priority: %',Blocker='%Blocker: %',Description='%Description: %',DueDate='%DueDate: %',Charge=%Charge: %,Raf=%Raf: %,OwnerClass='%OwnerClass: %',BlockedStyle='%BlockedStyle: %',PriorityClass='%PriorityClass: %' where CardId='%CardId: %';" ;
 		String sqlUpdate;
 		boolean success= true;	
-		
+		Statement stmtCard =GetStatement();
 		if (pNewCard.getLawer().equalsIgnoreCase( "N/A")){
 			sqlUpdate=sqlUpdateWithoutLayer;
 		}else{
@@ -101,10 +103,10 @@ public boolean updateCard(cardInformation pNewCard) throws Exception {
 			sqlUpdate= sqlUpdate.replaceAll("%Layer: %",pNewCard.getLawer());
 			sqlUpdate= sqlUpdate.replaceAll("%BlockedStyle: %",pNewCard.getBlockedStyle());
 			sqlUpdate= sqlUpdate.replaceAll("%PriorityClass: %",pNewCard.getPriorityClass());
-			System.out.println(sqlUpdate);
+			System.out.println("********* " + sqlUpdate);
 			
 			rs = stmtCard.executeUpdate(sqlUpdate);
-			System.out.println(rs);
+			
 			
 		} catch (SQLException e) {
 			if(e.getErrorCode() == MYSQL_DUPLICATE_PK ){
@@ -113,14 +115,10 @@ public boolean updateCard(cardInformation pNewCard) throws Exception {
 			else
 				throw new Exception("Message: " + e.getMessage() + ". " +  e.getErrorCode(), e);
 		} catch (Exception e) {
-			e.printStackTrace();
 			 throw new Exception("Message: " + e.getMessage() + ". "  , e);
-
-		
 		} finally {
+			try { if (stmtCard != null) stmtCard.close(); } catch (SQLException e) { e.printStackTrace(); }
 			
-//			try { if (stmtCard != null) stmtCard.close(); } catch (SQLException e) { e.printStackTrace(); }
-//			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
 		}
 		return success;
 	}
@@ -134,11 +132,12 @@ public boolean updateCard(cardInformation pNewCard) throws Exception {
 		
 		ResultSet rs = null;
 					
-		
+		Statement stmtCard =GetStatement();
 		ArrayList<String> tabResult = new ArrayList<String>();
 		
 		try {
 			rs = stmtCard.executeQuery(SqlSelect);
+			System.out.println("********* " + SqlSelect);
 			while (rs.next()) {
 								
 				String CardId = rs.getString("CardId");
@@ -173,7 +172,6 @@ public boolean updateCard(cardInformation pNewCard) throws Exception {
 				UID nUID= new UID();
 				NewLine=NewLine.replaceAll("Template", nUID.toString());
 				tabResult.add(NewLine);
-				System.out.println(NewLine);
 			}
 		} catch (SQLException e) {
 			if(e.getErrorCode() == MYSQL_DUPLICATE_PK ){
@@ -187,11 +185,113 @@ public boolean updateCard(cardInformation pNewCard) throws Exception {
 		
 		} finally {
 		try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-			//try { if (stmtCard != null) stmtCard.close(); } catch (SQLException e) { e.printStackTrace(); }
-			//try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (stmtCard != null) stmtCard.close(); } catch (SQLException e) { e.printStackTrace(); }
+			
 		}
 		return tabResult;
+	}
+	
+private ArrayList<String> GetCardBetweenDate(int pWeek,String pProject)throws Exception {
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy");
+		Calendar cal = Calendar.getInstance();
+	
+		String SqlSelect ="SELECT * FROM ISObeyaDB.cards where STR_TO_DATE(DueDate, ‘%M %d,%Y') >=  %StartDate%  and STR_TO_DATE(DueDate, ‘%M %d,%Y') <=  %EndDate% and Layer='%ColumnLayer%' and Project='%ProjectName%';";
+		SqlSelect=SqlSelect.replaceAll("%ProjectName%", pProject);
+		
+		cal.set(Calendar.WEEK_OF_YEAR, pWeek);        
+		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		SqlSelect.replaceAll("%StartDate%", sdf.format(cal.getTime()));
+		cal.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+		SqlSelect.replaceAll("%EndDate%", sdf.format(cal.getTime())); 
+		
+		ResultSet rs = null;
+					
+		Statement stmtCard =GetStatement();
+		ArrayList<String> tabResult = new ArrayList<String>();
+		
+		try {
+			rs = stmtCard.executeQuery(SqlSelect);
+			System.out.println("********* " + SqlSelect);
+			while (rs.next()) {
+								
+				String CardId = rs.getString("CardId");
+				//String Project = rs.getString("Project");
+				String Owner = rs.getString("Owner");
+				String Priority = rs.getString("Priority");
+				//String Blocker = rs.getString("Blocker");
+				String Description = rs.getString("Description");
+				String DueDate = rs.getString("DueDate");
+				String Charge = rs.getString("Charge");
+				String Raf = rs.getString("Raf");
+				String OwnerClass = rs.getString("OwnerClass");
+				//String Layer = rs.getString("Layer");
+				String PriorityClass = rs.getString("PriorityClass");
+				String BlockedStyle = rs.getString("BlockedStyle");
+				
+				
+
+				String NewLine = JspReferenceCard;
+				NewLine=NewLine.replaceAll("cardTemplate", CardId);
+				NewLine=NewLine.replaceAll("%Priority%", PriorityClass);
+				NewLine=NewLine.replaceAll("ValPriority", Priority);
+				NewLine=NewLine.replaceAll("ValUser", Owner);
+				NewLine=NewLine.replaceAll("%BlockedStyle%", "display:"+BlockedStyle+";");
+				NewLine=NewLine.replaceAll("%ClassContent%", OwnerClass);
+				NewLine=NewLine.replaceAll("ValAction", Description);
+				NewLine=NewLine.replaceAll("ValDate", DueDate);
+				NewLine=NewLine.replaceAll("ValCharge", Charge);
+				NewLine=NewLine.replaceAll("ValRaf", Raf);
+				NewLine=NewLine.replaceAll("%ClassTagDueDate%", GetClasseForDueDate(DueDate));
+				
+				UID nUID= new UID();
+				NewLine=NewLine.replaceAll("Template", nUID.toString());
+				tabResult.add(NewLine);
+			}
+		} catch (SQLException e) {
+			if(e.getErrorCode() == MYSQL_DUPLICATE_PK ){
+		        throw new Exception("Error : Duplicate user entry !", e);
+			}  
+			else
+				throw new Exception("Message: " + e.getMessage() + ". " +  e.getErrorCode(), e);
+		} catch (Exception e) {
+			 throw new Exception("Message: " + e.getMessage() + ". "  , e);
+
+		
+		} finally {
+		try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (stmtCard != null) stmtCard.close(); } catch (SQLException e) { e.printStackTrace(); }
+			
+		}
+		return tabResult;
+	}
+
+	public ArrayList<String> getWeekAndCard(String pProject) throws Exception {
+		
+		String jspString ="";
+		
+		ArrayList<String> layerAndCards = new ArrayList<String> ();
+		for (int week=1;week<=52;week++){
+			jspString+="<div class='column top-to-bottom' id='Wip" + week+ "'>";
+			jspString+="<div class='column__header'>";
+			jspString+="<h2 class='column__header-label'>WIP - #" + week + "</h2>";
+			jspString+="</div>";
+			jspString+="<div id='Week" + week + "' class='column__items-wrapper' ondrop='drop(event)' ondragover='allowDrop(event)'>";
+			
+			/*  Get Card */
+			ArrayList<String> cards = GetCardBetweenDate(week,pProject);
+			for (int i=1; i<=cards.size();i++){
+				jspString+= cards.get(i);
+			}		
+			jspString+="</div>";
+			
+			layerAndCards.add(jspString);
+			jspString ="";
+		}
+		
+		 
+	 return layerAndCards;
+			
 		
 	}
 	
@@ -203,14 +303,12 @@ public boolean updateCard(cardInformation pNewCard) throws Exception {
 		
 		
 		ResultSet rs = null;
-		
-		
-			
-		
+		Statement stmtCard =GetStatement();
 		ArrayList<String> tabResult = new ArrayList<String>();
 		
 		try {
 			rs = stmtCard.executeQuery(SqlSelect);
+			System.out.println("********* " + SqlSelect);
 			while (rs.next()) {
 								
 				String CardId = rs.getString("CardId");
@@ -259,8 +357,8 @@ public boolean updateCard(cardInformation pNewCard) throws Exception {
 		
 		} finally {
 			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-//			try { if (stmtCard != null) stmtCard.close(); } catch (SQLException e) { e.printStackTrace(); }
-//			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (stmtCard != null) stmtCard.close(); } catch (SQLException e) { e.printStackTrace(); }
+			
 		}
 		return tabResult;
 		
@@ -273,15 +371,16 @@ public int GetCardCountByUser(String pProject, String pOwner)throws Exception {
 		SqlSelect=SqlSelect.replaceAll("%Owner%", pOwner);
 		SqlSelect=SqlSelect.replaceAll("%ProjectName%", pProject);
 		
-		
+		Statement stmtCard =GetStatement();
 		ResultSet rs = null;
 		int Nb=0;
 				 
 		
 		try {
+			
 			rs = stmtCard.executeQuery(SqlSelect);rs.next();
 			Nb=rs.getInt("count");								
-				 
+			System.out.println("********* " + SqlSelect);	 
 		} catch (SQLException e) {
 			if(e.getErrorCode() == MYSQL_DUPLICATE_PK ){
 		        throw new Exception("Error : Duplicate user entry !", e);
@@ -292,7 +391,11 @@ public int GetCardCountByUser(String pProject, String pOwner)throws Exception {
 			 throw new Exception("Message: " + e.getMessage() + ". "  , e);
 
 		
-		} 
+		} finally {
+			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (stmtCard != null) stmtCard.close(); } catch (SQLException e) { e.printStackTrace(); }
+			
+		}
 		return Nb;
 		
 		
@@ -302,12 +405,11 @@ public int GetCardCountByUser(String pProject, String pOwner)throws Exception {
 		String SqlSelect ="DELETE FROM ISObeyaDB.cards where CardId='%pCardId%';";
 		SqlSelect=SqlSelect.replaceAll("%pCardId%", pCardId);
 		 
- 
-		
+		Statement stmtCard =GetStatement();
 		try {
-			   java.sql.PreparedStatement preparedStmt = conn.prepareStatement(SqlSelect);
-			   preparedStmt.execute();
-			   preparedStmt.close();
+			   
+			  int rs= stmtCard.executeUpdate(SqlSelect);
+			   System.out.println("********* " + SqlSelect);
 			 
 		} catch (SQLException e) {
 			if(e.getErrorCode() == MYSQL_DUPLICATE_PK ){
@@ -317,7 +419,12 @@ public int GetCardCountByUser(String pProject, String pOwner)throws Exception {
 				throw new Exception("Message: " + e.getMessage() + ". " +  e.getErrorCode(), e);
 		} catch (Exception e) {
 			 throw new Exception("Message: " + e.getMessage()  , e);
-		}  
+		 
+		} finally {
+				
+			try { if (stmtCard != null) stmtCard.close(); } catch (SQLException e) { e.printStackTrace(); }
+			
+		}
 		
 	}  
 
@@ -334,8 +441,8 @@ public int GetCardCountByUser(String pProject, String pOwner)throws Exception {
 		               Date d1=null;
 		            String today=   getToday("MMM-dd-yyyy hh:mm:ss a");
 		            try {
-		                System.out.println("expdate>> "+pDueDate);
-		                System.out.println("today>> "+today+"\n\n");
+//		                System.out.println("expdate>> "+pDueDate);
+//		                System.out.println("today>> "+today+"\n\n");
 		                d = sdf.parse(pDueDate);
 		                d1 = sdfToday.parse(today);
 		                if(d1.compareTo(d) <0){// not expired

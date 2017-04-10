@@ -2,19 +2,21 @@ package database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class MySqlStatmentRelease extends MySqlGenericStatment{
 
 	public MySqlStatmentRelease() throws Exception {
 		super();
+		System.out.println("--------> MySqlStatmentRelease Class intance On");
 	}
 	
 	public ArrayList<String> ReadReleaseInfo()throws Exception {
 		ResultSet rs = null;
 		ArrayList<String> tabResult = new ArrayList<String>();
 		String TemplateJSP = "<li data-role='list-divider'>#Releasee<span style='color:green' class='ui-li-count'>#Date</span></li><li><a href=''><h3 style='color:blue'>#Description</h3></a></li>";
-		
+		Statement stmtRelease =GetStatement();
 		try {
 			rs = stmtRelease.executeQuery("select * from Releases;");
 			while (rs.next()) {
@@ -23,7 +25,7 @@ public class MySqlStatmentRelease extends MySqlGenericStatment{
 				String Description = rs.getString("Description");
 				
 				
-				System.out.println("Date: " + Date + ", release: " + Release + ", Description: " + Description);
+				//System.out.println("Date: " + Date + ", release: " + Release + ", Description: " + Description);
 				String NewLine = TemplateJSP;
 				NewLine=NewLine.replaceAll("#Date", Date);
 				NewLine=NewLine.replaceAll("#Release", Release);

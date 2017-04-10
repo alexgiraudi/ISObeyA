@@ -9,12 +9,9 @@ import java.sql.Statement;
 public class MySqlGenericStatment {
 	
 	protected Connection conn = null;
-	protected Statement stmtCard = null;
-	protected Statement stmtCardLog = null;
-	protected Statement stmtPeople = null;
-	protected Statement stmtPeopleCard = null;
-	protected Statement stmtProject = null;
-	protected Statement stmtRelease = null;
+	private String connectionUrl = "jdbc:mysql://localhost:3306/ISObeyaDB?useUnicode=true&characterEncoding=UTF-8";
+	private String connectionUser = "root";
+	private String connectionPassword = "admin";
 	/* 
 	 * CREATE USER 'isobeyauser'@'%' IDENTIFIED BY 'isobeya';
 	GRANT ALL PRIVILEGES ON ISObeyaDB.* TO 'isobeyauser'@'%' WITH GRANT OPTION;
@@ -24,21 +21,34 @@ public class MySqlGenericStatment {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-			String connectionUrl = "jdbc:mysql://localhost:3306/ISObeyaDB?useUnicode=true&characterEncoding=UTF-8";
-			String connectionUser = "root";
-			String connectionPassword = "heavydrinker";
 			conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
-			stmtCard = conn.createStatement();
-			stmtCardLog = conn.createStatement();
-			stmtPeople = conn.createStatement();
-			stmtPeopleCard = conn.createStatement();
-			stmtProject = conn.createStatement();
-			stmtRelease = conn.createStatement();
+			System.out.println("=====================================> Connexion creation !");
+			
 					
 		} catch (Exception e) {
 			throw new Exception("Message: " + e.getMessage() + ". "  , e);
 		
 		}
+	}
+	
+	protected Statement GetStatement() throws Exception {
+		Statement newStatement=null; 
+		try {
+			if (conn!=null){
+				newStatement= conn.createStatement();
+				System.out.println("=====================================> Statement creation !");
+			}
+			else{
+				conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
+				System.out.println("=====================================> Connexion re-creation !");
+				System.out.println("=====================================> Statement re-creation !");
+				newStatement= conn.createStatement();
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return newStatement;
 	}
 
 }

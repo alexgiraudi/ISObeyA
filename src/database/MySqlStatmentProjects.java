@@ -3,13 +3,22 @@ package database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mysql.jdbc.ResultSetMetaData;
+
+import beanjson.cardInformation;
 import beanjson.projectInformation;
 
 
@@ -18,6 +27,7 @@ public class MySqlStatmentProjects extends MySqlGenericStatment{
 	
 	public MySqlStatmentProjects() throws Exception{
 		super();
+		System.out.println("--------> MySqlStatmentProjects Class intance On");
 	}
 	
 	
@@ -26,7 +36,7 @@ public class MySqlStatmentProjects extends MySqlGenericStatment{
 
 public ArrayList<String> GetProjectsDashboard() throws Exception {
 		
-		
+		Statement stmtProject =GetStatement();
 		ResultSet rs = null;
 		String TemplateJSP = "<tr>"
 				+ "<td style='width:20px;' valign='middle'>"
@@ -93,7 +103,7 @@ public ArrayList<String> GetProjectsDashboard() throws Exception {
 				NewLine=NewLine.replaceAll("%Tendance%", String.valueOf(Tendance));
 				NewLine=NewLine.replaceAll("%DueDate%", KPIGolive);
 				
-				System.out.println(NewLine);
+				//System.out.println(NewLine);
 			
 				tabResult.add(NewLine);
 			}
@@ -112,7 +122,7 @@ public ArrayList<String> GetProjectsDashboard() throws Exception {
 	}
 	public ArrayList<String> GetProjects(String pView) throws Exception {
 		
-		
+		Statement stmtProject =GetStatement();
 		ResultSet rs = null;
 		String TemplateJSP = null;
 		if (pView=="User"){
@@ -129,11 +139,11 @@ public ArrayList<String> GetProjectsDashboard() throws Exception {
 				String ProjectName = rs.getString("Name");
 				
 				
-				System.out.println("ID: " + id + ", Project Name: " + ProjectName);
+				//System.out.println("ID: " + id + ", Project Name: " + ProjectName);
 				String NewLine = TemplateJSP;
 				NewLine=NewLine.replaceAll("#Id", id);
 				NewLine=NewLine.replaceAll("#ProjectName", ProjectName);
-				System.out.println(NewLine);
+				//System.out.println(NewLine);
 			
 				tabResult.add(NewLine);
 			}
@@ -164,7 +174,7 @@ public int GetProjectsCount(String Status) throws Exception {
 		
 		ResultSet rs = null;
 		int Nb = 0;
-		  
+		Statement stmtProject =GetStatement();  
 		try {
 			
 			
@@ -178,7 +188,10 @@ public int GetProjectsCount(String Status) throws Exception {
 		
 		} catch (Exception e) {
 			 throw new Exception("Message: " + e.getMessage() + ". "  , e); 
-		} 
+		
+		}finally {
+			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+		}
 		return Nb;
 	}
 
@@ -188,8 +201,7 @@ public int GetProjectsCount(String Status) throws Exception {
 	
 		boolean success= true;	
 		
-		
-
+		Statement stmtProject =GetStatement();
 		int rs ;
 		try {
 			sqlUpdate= sqlUpdate.replaceAll("%Name%",pProject.getProjectName());
@@ -207,10 +219,10 @@ public int GetProjectsCount(String Status) throws Exception {
 			sqlUpdate= sqlUpdate.replaceAll("%Tendance%",pProject.getTendance());
 			sqlUpdate= sqlUpdate.replaceAll("%KPIGolive%",pProject.getKPIGolive());
 			sqlUpdate= sqlUpdate.replaceAll("%IdProjet%",String.valueOf(pProject.getId()));
-			System.out.println(sqlUpdate);
+			System.out.println("********* " + sqlUpdate);
 			
 			rs = stmtProject.executeUpdate(sqlUpdate);
-			System.out.println(rs);
+			//System.out.println(rs);
 			
 		} catch (SQLException e) {
 				throw new Exception("Message: " + e.getMessage() + ". " +  e.getErrorCode(), e);
@@ -232,9 +244,7 @@ public int GetProjectsCount(String Status) throws Exception {
 
 		
 		boolean success= true;	
-		
-		
-
+		Statement stmtProject =GetStatement();
 		int rs ;
 		try {
 			sqlUpdate= sqlUpdate.replaceAll("%ProjectName%",Project);
@@ -242,10 +252,10 @@ public int GetProjectsCount(String Status) throws Exception {
 			sqlUpdate= sqlUpdate.replaceAll("%KPI%",String.valueOf(Value));
 			sqlUpdate= sqlUpdate.replaceAll("%Remark%",Event);
 			
-			System.out.println(sqlUpdate);
+			System.out.println("********* " + sqlUpdate);
 			
 			rs = stmtProject.executeUpdate(sqlUpdate);
-			System.out.println(rs);
+			//System.out.println(rs);
 			
 		} catch (SQLException e) {
 				throw new Exception("Message: " + e.getMessage() + ". " +  e.getErrorCode(), e);
@@ -274,7 +284,7 @@ public int GetProjectsCount(String Status) throws Exception {
 	}
 	
 	public ArrayList<String> getKPI(String Project)throws Exception {
-		
+		Statement stmtProject =GetStatement();
 		ResultSet rs = null;
 		String TemplateJSP = null;
 			TemplateJSP = "<li><a href='#0' data-date='%Date%' class=''>%Week%</a></li>";
@@ -296,7 +306,7 @@ public int GetProjectsCount(String Status) throws Exception {
 				if (rs.isLast()){
 					NewLine=NewLine.replaceAll("class=''", "class='selected'");
 				}
-				System.out.println(NewLine);
+				//System.out.println(NewLine);
 			
 				tabResult.add(NewLine);
 			}
@@ -316,7 +326,7 @@ public int GetProjectsCount(String Status) throws Exception {
 	}
 	
 public ArrayList<String> getSubKPI(String Project)throws Exception {
-		
+		Statement stmtProject =GetStatement();
 		ResultSet rs = null;
 		String TemplateJSP = null;
 			TemplateJSP = "<li class='' data-date='%Week%'>"
@@ -341,7 +351,7 @@ public ArrayList<String> getSubKPI(String Project)throws Exception {
 				if (rs.isLast()){
 					NewLine=NewLine.replaceAll("class=''", "class='selected'");
 				}
-				System.out.println(NewLine);
+				//System.out.println(NewLine);
 			
 				tabResult.add(NewLine);
 			}
@@ -358,4 +368,52 @@ public ArrayList<String> getSubKPI(String Project)throws Exception {
 		}
 		return tabResult;
 	}
+
+
+	public JSONArray GetProjectInformation(String pProjectName) throws Exception {
+		
+		Statement stmtProject =GetStatement();
+		ResultSet rs = null;
+		JSONArray obj = new JSONArray();
+		try {
+			rs = stmtProject.executeQuery("select * from projects where Project=%pProjectName%;".replaceAll("%pProjectName%", pProjectName));
+			obj=convertToJSON(rs);
+			
+		} catch (SQLException e) {
+			 
+	        throw new Exception("Message: " + e.getMessage() + ". " +  e.getErrorCode(), e);
+		
+		} catch (Exception e) {
+			 throw new Exception("Message: " + e.getMessage() + ". "  , e); 
+		}finally {
+			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+		}
+		return obj;
+	}
+	
+	private projectInformation SetBeanProject(ResultSet resultSet){
+		
+//		projectInformation theProject = new projectInformation();
+//		theProject.set
+		
+		
+		
+		return null;
+		
+	}
+	
+	 private JSONArray convertToJSON(ResultSet resultSet)
+	            throws Exception {
+	        JSONArray jsonArray = new JSONArray();
+	        while (resultSet.next()) {
+	            int total_rows = resultSet.getMetaData().getColumnCount();
+	            for (int i = 0; i < total_rows; i++) {
+	                JSONObject obj = new JSONObject();
+	                obj.put(resultSet.getMetaData().getColumnLabel(i + 1)
+	                        .toLowerCase(), resultSet.getObject(i + 1));
+	                jsonArray.add(obj);
+	            }
+	        }
+	        return jsonArray;
+	 }
 }

@@ -60,7 +60,7 @@ public class KPIManagment extends EncodingServlet {
 			KPIInformation obj =  mapper.readValue(jsonInString, KPIInformation.class);
 			MySqlStatmentProjects sqlDatabase = new MySqlStatmentProjects();
 			//JSON from String to Object
-			System.out.println("jsonString: " + jsonInString);
+			//System.out.println("jsonString: " + jsonInString);
 			if (!SqlMode.equalsIgnoreCase("delete")){
 				if (SqlMode.equalsIgnoreCase("insert")){
 					sqlDatabase.AddKPIValue(obj.getKPI(), obj.getPojectName(), obj.getEvent());
@@ -77,7 +77,7 @@ public class KPIManagment extends EncodingServlet {
 		} catch (Exception e) {
 	
 			//e.printStackTrace();
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 	        response.getWriter().write(e.getMessage());
 	       
 		}
@@ -97,15 +97,15 @@ public class KPIManagment extends EncodingServlet {
 
 	private static void SetEncoding(){
 		String defaultCharacterEncoding = System.getProperty("file.encoding");
-        System.out.println("defaultCharacterEncoding by property: " + defaultCharacterEncoding);
-        System.out.println("defaultCharacterEncoding by code: " + getDefaultCharEncoding());
-        System.out.println("defaultCharacterEncoding by charSet: " + Charset.defaultCharset());
-        System.setProperty("file.encoding", "UTF-8");
-        System.out.println("defaultCharacterEncoding by property after updating file.encoding : " + System.getProperty("file.encoding"));
-        System.out.println("defaultCharacterEncoding by code after updating file.encoding : " + getDefaultCharEncoding());
-        System.out.println("defaultCharacterEncoding by java.nio.Charset after updating file.encoding : " + Charset.defaultCharset());
-
- 
+//        System.out.println("defaultCharacterEncoding by property: " + defaultCharacterEncoding);
+//        System.out.println("defaultCharacterEncoding by code: " + getDefaultCharEncoding());
+//        System.out.println("defaultCharacterEncoding by charSet: " + Charset.defaultCharset());
+//        System.setProperty("file.encoding", "UTF-8");
+//        System.out.println("defaultCharacterEncoding by property after updating file.encoding : " + System.getProperty("file.encoding"));
+//        System.out.println("defaultCharacterEncoding by code after updating file.encoding : " + getDefaultCharEncoding());
+//        System.out.println("defaultCharacterEncoding by java.nio.Charset after updating file.encoding : " + Charset.defaultCharset());
+//
+// 
 
 	}
 }

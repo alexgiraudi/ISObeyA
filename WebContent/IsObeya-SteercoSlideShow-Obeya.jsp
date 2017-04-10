@@ -16,8 +16,7 @@
 <link type="text/css" href="./Librairies/lobibox/dist/css/lobibox.css"	rel="stylesheet" />
 <link type="text/css" href="./Librairies/perso/isobeya.css"	rel="Stylesheet" />
 <link type="text/css" href="./Librairies/iobeya/Obeya.css"	rel="stylesheet" />
-<link type="text/css" href="./Librairies/horizontal-timeline/css/reset.css"	rel="stylesheet" />
-<link type="text/css" href="./Librairies/horizontal-timeline/css/style.css"	rel="stylesheet" />
+
 
 <!-- Script -->
 <script src="./Librairies/jquery/assets/js/jquery-3.1.0.min.js"></script>
@@ -27,7 +26,8 @@
 <script src="./Librairies/jquery/assets/js/docs.js"	type="text/javascript"></script>
 <script src="./Librairies/lobibox/js/lobibox.js"></script>
 <script src="./Librairies/lobibox/js/actions.js"></script>
-<script src="./Librairies/horizontal-timeline/js/modernizr.js"></script> 
+<!-- <script src="./Librairies/jqueryMonitor/jquery.observeWithCallbacks.js"></script> -->
+<!-- <script src="./Librairies/jqueryMonitor/jquery.observeWithEvents.js"></script> -->
 
 
 
@@ -42,9 +42,10 @@
 	 
 	<jsp:useBean id="myBeanProjects" class="database.MySqlStatmentProjects" scope="application"/>
 	<jsp:useBean id="myBeanPeople" class="database.MySqlStatmentPeople" scope="application"/>
-	<jsp:useBean id="myBeanCardLog" class="database.MySqlStatmentCardLog" scope="session"/>
+	<jsp:useBean id="myBeanCardLog" class="database.MySqlStatmentCardLog" scope="application"/>
 	<jsp:useBean id="myBeanCard" class="database.MySqlStatmentCard" scope="application"/>
 	
+
 	<!-- Navbar ================================================== -->
 	<nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
 	<button class="navbar-toggler hidden-lg-up" type="button"
@@ -56,6 +57,7 @@
 		<ul class="nav navbar-nav">
 				<li class="nav-item active "><a id="openProjectByUser" class="nav-link"  href="./IsObeya-SteercoSlideShow-UserHumor.jsp?ProjectName=<%=request.getParameter("ProjectName")%>">Obeya [User]</a></li>
 				<li class="nav-item active "><a id="openProjectByUser" class="nav-link"  href="./IsObeya-SteercoSlideShow-Obeya.jsp?ProjectName=<%=request.getParameter("ProjectName")%>">Obeya [Kanban]</a></li>
+				<li class="nav-item active "><a id="openProjectByUser" class="nav-link"  href="./IsObeya-SteercoSlideShow-ObeyaWip.jsp?ProjectName=<%=request.getParameter("ProjectName")%>">Obeya [Plan]</a></li>
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" href=""
 				id="responsiveNavbarDropdown" data-toggle="dropdown"
@@ -191,7 +193,7 @@
 
 					
 					<!-- Form Log Card -->
-					<div class="modal fade" id="FormLog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" title="empty">
+					<div class="modal fade" id="FormLog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -508,47 +510,6 @@
 				</div>
 			
 
-	<section class="cd-horizontal-timeline"  >
-	<div class="timeline">
-		<div class="events-wrapper">
-			<div class="events">
-				<ol>
-				
-					<%
-							java.util.List<String> listKPI = new java.util.ArrayList<String>() ;
-							listKPI=myBeanProjects.getKPI(request.getParameter("ProjectName"));
-							for (int i=0;i<listKPI.size();i++){
-								out.println(listKPI.get(i).toString());
-							}
-						%> 
-				</ol>
-
-				<span class="filling-line" aria-hidden="true"></span>
-			</div> <!-- .events -->
-		</div> <!-- .events-wrapper -->
-			
-		<ul class="cd-timeline-navigation">
-			<li><a href="#0" class="prev inactive">Prev</a></li>
-			<li><a href="#0" class="next">Next</a></li>
-		</ul> <!-- .cd-timeline-navigation -->
-	</div> <!-- .timeline -->
-
-	<div class="events-content">
-		<ol>
-					<%
-							java.util.List<String> listsubKPI = new java.util.ArrayList<String>() ;
-							listsubKPI=myBeanProjects.getSubKPI(request.getParameter("ProjectName"));
-							for (int i=0;i<listsubKPI.size();i++){
-								out.println(listsubKPI.get(i).toString());
-							}
-						%> 
-
-			
-		</ol>
-	</div> <!-- .events-content -->
-	</section>
-
-	
 	<!-- Tab Navigation Contents ================================================== -->	
 	<script type="text/javascript">
  				
@@ -798,6 +759,8 @@
                     	$(card).find("div[class='card__body-content']").parent().addClass(element);
 			    	});
                     
+                    
+                                       
                      $(card).find("button[title='Priority']").attr('Style',$(carEdit).find("button[title='Priority']").attr('Style'));
                      var StyleBlocker = $(carEdit).find("span[title='BlockerValue']").css("display");
                      $(card).find("span[title='BlockerValue']").css("display", StyleBlocker);
@@ -1005,7 +968,6 @@
                        
                        var ContentCard =      $(card).find("div[title='ContentCard']").html();
                        var ContentCardClass = $(card).find("div[class='card__body-content']").parent().prop("classList");
-                       //alert (ContentCardClass);
                        var Date= $(card).find("span[title='DueDateValue']").html();
                        var DateClass = $(card).find("span[title='DueDateValue']").parent().attr('class');
                        var charge= $(card).find("span[title='Charge (d)']").html();
@@ -1038,7 +1000,6 @@
                        
                         $(carEdit).find($("textarea[id='textareaEdit']")).val(ContentCard);
                         myClassList =$("#CardBodyEdit").prop("classList");
-                        //alert (myClassList);
                         $.each( $(myClassList), function( key, element ) {
 					    		$("#CardBodyEdit").removeClass(element);
 					    });
@@ -1046,7 +1007,7 @@
                         $.each( $(ContentCardClass), function( key, element ) {
 					    		$("#CardBodyEdit").addClass(element);
 					    });
-                        //$(carEdit).find("div[title='ContentCard']").parent().parent().removeClass(myClassList).addClass(ContentCardClass);
+                        
                         $(carEdit).find("span[title='DueDateValue']").html(Date);
                         $(carEdit).find("span[title='DueDateValue']").parent().removeClass().addClass(DateClass);
                         $(carEdit).find("span[title='Charge (d)']").html(charge);
@@ -1062,113 +1023,185 @@
 					//-- Manage New Card Delete ================================================== -->	
 					$( "body" ).on( "click","button[title='Delete']", function(e) {
 						var card = $(this).parent().parent().parent();
-						//alert($(card).attr("id"));
-						if($(card).attr("id")!="cardTemplate"){
+						 /* Test if Card is CardUser ***/
 						  
-							
-	                        var RAF = $(card).find("span[title='Raf']").html();
-	                        //alert(RAF);
-	                      	if (RAF > 0){
-	                    	  Lobibox.alert('warning', {
-		                    	  msg: 'Some action are availble because the task is not terminated !',
-		                    	  //buttons: ['ok', 'cancel', 'yes', 'no'],
-		                    	  //Or more powerfull way
-		                    	  buttons: {
-			                    	      ok: {
-			                    	          'class': 'btn btn-warning',
-			                    	          text: 'Go to Backlog Layer',
-			                    	          closeOnClick: true
-			                    	      },
-			                    	      cancel: {
-			                    	          'class': 'btn btn-info',
-			                    	          text: 'Cancel',
-			                    	          closeOnClick: true
-			                    	      },
-			                    	      yes: {
-			                    	          'class': 'btn btn-error',
-			                    	          text: 'Force to delete',
-			                    	          closeOnClick: true
-			                    	      }
-			                    	  },
-		                    	  callback: function(lobibox, type){
-		                    	      var btnType;
-		                    	      if (type === 'ok'){
-		                    	    	  Lobibox.notify("warning", {
-		                    	    	        size: 'mini',
-		                    	    	        msg: 'This card is moved in backlogcolumn Layer ! '
-		                    	    	    });
-		                    	    	  //alert(RAF);
-		                    	    	  updateExistingCard($(card).attr("id"),"backlogcolumn", "Card deleting : returns in Backlog layer because RAF >0 !");
-		                    	    	  $("#backlogcolumn").append($(card).clone());
-		                    	    	  $(card).remove();
-		                    	      }else if (type === 'yes'){
-		                    	    	  Lobibox.notify("warning", {
-		                    	    	        size: 'mini',
-		                    	    	        msg: 'This obsolete card is deleted ! '
-		                    	    	    });
-		                    	    	  $(card).remove();
-		                    	    	  deleteCard($(card).attr("id"));
-		                    	    	  //faire ici le detele en base
-		                    	      }
-		                    	  }
-		                    	  }); 
-		                      }
-		                      else{
-		                    	  Lobibox.alert('warning', {
-			                    	  msg: 'Some action are availble because the task is terminated !',
-			                    	  //buttons: ['ok', 'cancel', 'yes', 'no'],
-			                    	  //Or more powerfull way
-			                    	  buttons: {
-			                    	      ok: {
-			                    	          'class': 'btn btn-warning',
-			                    	          text: 'Go to RolloutDone Layer',
-			                    	          closeOnClick: true
-			                    	      },
-			                    	      cancel: {
-			                    	          'class': 'btn btn-info',
-			                    	          text: 'Cancel',
-			                    	          closeOnClick: true
-			                    	      },
-			                    	      yes: {
-			                    	          'class': 'btn btn-error',
-			                    	          text: 'Force to delete',
-			                    	          closeOnClick: true
-			                    	      }
-			                    	  },
-			                    	  callback: function(lobibox, type){
-			                    	      var btnType;
-			                    	      
-			                    	      if (type === 'ok'){
-			                    	    	  updateExistingCard($(card).attr("id"),"RolloutDone", "Card Moving to RolloutDone Layer !");
-			                    	    	  $("#RolloutDone").append($(card).clone());
-			                    	    	  $(card).remove();
-			                    	    	  Lobibox.notify("warning", {
-			                    	    	        size: 'mini',
-			                    	    	        msg: 'This card is moved in RolloutDone Layer ! '
-			                    	    	    });
-			                    	      }else if (type === 'yes'){
-			                    	    	  Lobibox.notify("warning", {
-			                    	    	        size: 'mini',
-			                    	    	        msg: 'This obsolete card is deleted ! '
-			                    	    	    });
-			                    	    	  $(card).remove();
-			                    	    	  deleteCard($(card).attr("id"));
-			                    	      }
-			                    	  }
-			                    	});
-		                      	}
-						}
+						  if ($(this).parent().parent().attr('Class').indexOf('cardUser')>=0){
+							  //alert($(this).parent().parent().find("button[Class='assigner__assignee']").html());
+							  var DataCard={
+				 				    	"ProjectName":unescape($.urlParam('ProjectName')),
+				 				    	"IdUser":"",
+				 				    	"Owner": $(this).parent().parent().find("button[Class='assigner__assignee']").html(),
+				 				    	"OwnerClasse":"",
+									    "OldHumor":"",
+									    "NewHumor":"",
+									    "Photo":""
+									  };
+									 
+				 					
+				 				    
+				 				   seen = []
+
+				 				  var serializedCard  = JSON.stringify(DataCard, function(key, val) {
+				 				     if (typeof val == "object") {
+				 				          if (seen.indexOf(val) >= 0)
+				 				              return
+				 				          seen.push(val)
+				 				      }
+				 				      return val
+				 				  })
+									
+									$.ajax({
+				 					    type: 'get', // it's easier to read GET request parameters
+				 					    url: 'PeopleCardManagment',
+				 					    dataType: 'JSON',
+				 					    data: { 
+				 					      EventId: generateUUID(),
+				 					      SqlMode:"Delete",
+				 					      EventDescription: "Delete User on project",
+				 					      NewCardPeople: serializedCard // look here!
+				 					    },
+				 					    success: function(data) {
+				 					    	$(card).remove();
+				 					    	 Lobibox.notify('success', {
+				 			                	icon: false,
+				 			                	size: 'mini',
+				 			                    rounded: false,
+				 			                    delayIndicator: true,
+				 			                    position: 'right bottom',
+				 			                    title: 'Success...',
+				 			                    pauseDelayOnHover: true,
+				 			                    continueDelayOnInactiveTab: false,
+				 			                    msg: 'User deleted...'
+				 			                });
+				 					    },
+				 					    error: function(jqXHR, textStatus, errorThrown){ 
+				 					    	Lobibox.notify('error', {
+				 			                	icon: false,
+				 			                	size: 'mini',
+				 			                    rounded: false,
+				 			                    delayIndicator: true,
+				 			                    position: 'right bottom',
+				 			                    title: 'Error...',
+				 			                    pauseDelayOnHover: true,
+				 			                    continueDelayOnInactiveTab: false,
+				 			                    msg: jqXHR.responseText
+				 			                });
+				 					    	
+				 					    }
+				 					}); 
+						  }else{
+						
+								//var card = $(this).parent().parent().parent();
+								//alert($(card).attr("id"));
+								if($(card).attr("id")!="cardTemplate"){
+								  
+									
+			                        var RAF = $(card).find("span[title='Raf']").html();
+			                        //alert(RAF);
+			                      	if (RAF > 0){
+			                    	  Lobibox.alert('warning', {
+				                    	  msg: 'Some action are availble because the task is not terminated !',
+				                    	  //buttons: ['ok', 'cancel', 'yes', 'no'],
+				                    	  //Or more powerfull way
+				                    	  buttons: {
+					                    	      ok: {
+					                    	          'class': 'btn btn-warning',
+					                    	          text: 'Go to Backlog Layer',
+					                    	          closeOnClick: true
+					                    	      },
+					                    	      cancel: {
+					                    	          'class': 'btn btn-info',
+					                    	          text: 'Cancel',
+					                    	          closeOnClick: true
+					                    	      },
+					                    	      yes: {
+					                    	          'class': 'btn btn-error',
+					                    	          text: 'Force to delete',
+					                    	          closeOnClick: true
+					                    	      }
+					                    	  },
+				                    	  callback: function(lobibox, type){
+				                    	      var btnType;
+				                    	      if (type === 'ok'){
+				                    	    	  Lobibox.notify("warning", {
+				                    	    	        size: 'mini',
+				                    	    	        msg: 'This card is moved in backlogcolumn Layer ! '
+				                    	    	    });
+				                    	    	  //alert(RAF);
+				                    	    	  updateExistingCard($(card).attr("id"),"backlogcolumn", "Card deleting : returns in Backlog layer because RAF >0 !");
+				                    	    	  $("#backlogcolumn").append($(card).clone());
+				                    	    	  $(card).remove();
+				                    	      }else if (type === 'yes'){
+				                    	    	  Lobibox.notify("warning", {
+				                    	    	        size: 'mini',
+				                    	    	        msg: 'This obsolete card is deleted ! '
+				                    	    	    });
+				                    	    	  $(card).remove();
+				                    	    	  deleteCard($(card).attr("id"));
+				                    	    	  //faire ici le detele en base
+				                    	      }
+				                    	  }
+				                    	  }); 
+				                      }
+				                      else{
+				                    	  Lobibox.alert('warning', {
+					                    	  msg: 'Some action are availble because the task is terminated !',
+					                    	  //buttons: ['ok', 'cancel', 'yes', 'no'],
+					                    	  //Or more powerfull way
+					                    	  buttons: {
+					                    	      ok: {
+					                    	          'class': 'btn btn-warning',
+					                    	          text: 'Go to RolloutDone Layer',
+					                    	          closeOnClick: true
+					                    	      },
+					                    	      cancel: {
+					                    	          'class': 'btn btn-info',
+					                    	          text: 'Cancel',
+					                    	          closeOnClick: true
+					                    	      },
+					                    	      yes: {
+					                    	          'class': 'btn btn-error',
+					                    	          text: 'Force to delete',
+					                    	          closeOnClick: true
+					                    	      }
+					                    	  },
+					                    	  callback: function(lobibox, type){
+					                    	      var btnType;
+					                    	      
+					                    	      if (type === 'ok'){
+					                    	    	  updateExistingCard($(card).attr("id"),"RolloutDone", "Card Moving to RolloutDone Layer !");
+					                    	    	  $("#RolloutDone").append($(card).clone());
+					                    	    	  $(card).remove();
+					                    	    	  Lobibox.notify("warning", {
+					                    	    	        size: 'mini',
+					                    	    	        msg: 'This card is moved in RolloutDone Layer ! '
+					                    	    	    });
+					                    	      }else if (type === 'yes'){
+					                    	    	  Lobibox.notify("warning", {
+					                    	    	        size: 'mini',
+					                    	    	        msg: 'This obsolete card is deleted ! '
+					                    	    	    });
+					                    	    	  $(card).remove();
+					                    	    	  deleteCard($(card).attr("id"));
+					                    	      }
+					                    	  }
+					                    	});
+				                      	}
+								}
+						  }
 	                     
 						 
 					});
-					
-					//-- Manage New Card Log ================================================== -->	
+				
+							  
+							  
+							  
 					$( "body" ).on( "click","button[title='Log']", function(e) {
 						var card = $(this).parent().parent().parent();
 						if($(card).attr("id")!="cardTemplate"){
 							$(this).attr("href","#FormLog");
 						
-							
+							//var card = $(this).parent().parent().parent();
 							$('#dynamic-content').html(''); // leave this div blank
 						    $('#modal-loader').show();      // load ajax loader on button click
 						    $.ajax({
@@ -1198,24 +1231,25 @@
 					$( "body" ).on( "click","button[title='Priority']", function(e) {
 						var card = $(this).parent().parent().parent();
 						
-						 var myClass = $(this).attr("class");
-						 if (myClass.indexOf("Medium") !== -1){
-							 $(this).removeClass( "Medium" );
-							 $(this).addClass( "High" );
-							 $(this).html("H");
-						 }
-						 else if (myClass.indexOf("High") !== -1){
-							 $(this).removeClass( "High" );
-							 $(this).addClass( "Low" );
-							 $(this).html("L");
-						 }
-						 else if (myClass.indexOf("Low") !== -1){
-							 $(this).removeClass( "Low" );
-							 $(this).addClass( "Medium" );
-							 $(this).html("M");
-						 }
-						 if($(card).attr("id")!="cardTemplate"){
-							 updateExistingCard($(card).attr("id"),"N/A", "Card priority updated ! ");
+							 var myClass = $(this).attr("class");
+							 if (myClass.indexOf("Medium") !== -1){
+								 $(this).removeClass( "Medium" );
+								 $(this).addClass( "High" );
+								 $(this).html("H");
+							 }
+							 else if (myClass.indexOf("High") !== -1){
+								 $(this).removeClass( "High" );
+								 $(this).addClass( "Low" );
+								 $(this).html("L");
+							 }
+							 else if (myClass.indexOf("Low") !== -1){
+								 $(this).removeClass( "Low" );
+								 $(this).addClass( "Medium" );
+								 $(this).html("M");
+							 }
+							 if($(card).attr("id")!="cardTemplate"){
+							 	updateExistingCard($(card).attr("id"),"N/A", "Card priority updated ! ");
+							 
 							}
 							
 						});
@@ -1316,17 +1350,8 @@
 					$("#FormAdd").find("#DueDateObjTemplate").datepicker({dateFormat: "MM dd, yy",minDate: 'today',defaultDate: 'today',onSelect: _onSelect});
 					$("#FormEdit").find("#DueDateObjEdit").datepicker({dateFormat: "MM dd, yy",minDate: 'today',defaultDate: 'today',onSelect: _onSelect});
 					
-					 
-// 		            var jtLine = $('.myjtline').jTLine({
-// 		                callType: 'ajax',
-// 						distanceMode: 'fixDistance', // 'fixDistance' 'auto' 'predefinedDistance'
-// 		                eventsMinDistance: 60,       // Consider It as Distance Unit "by Pixel"
-// 		                fixDistanceValue: 2,         // if eventsMinDistance = 60 & fixDistanceValue= 2 then the value is: (60*2) = 120 px
-// 		                firstPointMargin: 1,  
-// 		                url: '../js/data.json'
-// 		            });
-			     
-						
+
+					
 				});
 					
 					
@@ -1336,6 +1361,5 @@
 				
 				
 			</script>
-			<script src="./Librairies/horizontal-timeline/js/main.js"></script> 
 </body>
 </html>

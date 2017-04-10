@@ -3,7 +3,11 @@ package database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+
+
+
 
 
 
@@ -15,6 +19,7 @@ public class MySqlStatmentPeopleCard extends MySqlGenericStatment{
 	public static final int MYSQL_DUPLICATE_PK = 1062;
 	public MySqlStatmentPeopleCard() throws Exception{
 		super();
+		System.out.println("--------> MySqlStatmentPeopleCard Class intance On");
 	}
 	 
 	public boolean updatePeopleCard(peopleProjectInformation pNewCard, String sqlMode) throws Exception {
@@ -27,7 +32,7 @@ public class MySqlStatmentPeopleCard extends MySqlGenericStatment{
 		String sqlUpdateB = "UPDATE ISObeyaDB.PeopleProject SET OwnerClasse='%OwnerClasse: %',Owner='%Owner: %',OldHumor='%OldHumor: %',NewHumor='%NewHumor: %',Photo='%Photo: %' where Project='%Project: %' and IdUser='%IdUser: %';";
 		String sqlUpdateC = "DELETE FROM ISObeyaDB.PeopleProject where Owner='%Owner: %' and Project='%Project: %' ;";
 		
-		 
+		Statement stmtPeopleCard =GetStatement();
 		String sqlUpdate="";
 		
 		if (sqlMode.equalsIgnoreCase("Insert"))
@@ -59,12 +64,12 @@ public class MySqlStatmentPeopleCard extends MySqlGenericStatment{
 				sqlUpdate= sqlUpdate.replaceAll("%Photo: %",pNewCard.getPhoto());
 				sqlUpdate= sqlUpdate.replaceAll("%IdUser: %",pNewCard.getIdUser());
 				sqlUpdate= sqlUpdate.replaceAll("%OwnerClasse: %",pNewCard.getOwnerClasse());
-				System.out.println(sqlUpdate);
+				System.out.println("********* " + sqlUpdate);
 			}
 			
 			rs = stmtPeopleCard.executeUpdate(sqlUpdate);
 			
-			System.out.println(rs);
+//			System.out.println(rs);
 		} catch (SQLException e) {
 			if(e.getErrorCode() == MYSQL_DUPLICATE_PK ){
 		        throw new Exception("Error : Duplicate user entry !", e);
@@ -88,7 +93,7 @@ public class MySqlStatmentPeopleCard extends MySqlGenericStatment{
 		
 		String JspReferenceCardUser ="<div class='line top-to-bottom' id='IDUser'><div id='Line-IDUser' class='line__items-wrapper ' ondrop='drop(event)' ondragover='allowDrop(event)'><div draggable='true' class='cardUser' id='card-IDUser' draggable='false'  tabindex='0'><div class='card__header'><img src='./Librairies/iobeya/none.png.jpg' class='avatar' /><div class='assigner'><button class='assigner__assignee'>NewUser</button></div><img style='float:right;margin-right:5px; 'src='./Librairies/iobeya/unknown.png' width='25px' height='25px'/><button id='delete-IDUser' style='margin-left:10px;' title='Delete'><i class='glyphicon glyphicon-off BtcGrey'></i></button></div><div class='UserClasse' title='CardBodyTheme' ><center><img src='OldHumor' width='40px' height='40px'/><img src='./Librairies/images/kanban/arrow.png' width='40px' height='40px'><img class='Humor' src='NewHumor' width='40px' height='40px'/></center></div><div class='userIndicator'><span class='badge badgebacklog' title='Backlog Items' id='BacklogItem-IDUser'>CardOpenNB</span><span class='badge badgeinprogress' title='Items in Progress' id='InProgressItem-IDUser'>CardInProgressNB</span><span class='badge badgedone' title='Close Items' id='CloseItem-IDUser'>CardCloseNB</span></div></div>%Cards%</div></div>";;
 		 
-			
+		Statement stmtPeopleCard =GetStatement();	
 		ArrayList<String> tabResult = new ArrayList<String>();
 		
 		ResultSet rs = null;

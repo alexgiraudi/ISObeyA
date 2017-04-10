@@ -49,7 +49,7 @@ public class PeopleCardManagment extends EncodingServlet {
 				ObjectMapper mapper = new ObjectMapper();
 				
 				String jsonInString=(String)request.getParameter("NewCardPeople");
-				System.out.println(jsonInString);
+				//System.out.println(jsonInString);
 			 
 				String SqlMode= request.getParameter("SqlMode");
 				String EventId= request.getParameter("EventId");

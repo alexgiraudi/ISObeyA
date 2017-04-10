@@ -55,7 +55,7 @@ public class ProjectManagment extends EncodingServlet {
         	request.setCharacterEncoding("UTF-8");
             response.setCharacterEncoding("UTF-8");
         	try {
-				System.out.println(request.getParameter("NewProject"));
+				//System.out.println(request.getParameter("NewProject"));
 				ObjectMapper mapper = new ObjectMapper();
 			 
 				
