@@ -56,6 +56,7 @@
 	<div class="collapse navbar-toggleable-md" id="navbarResponsive">
 		<a class="navbar-brand" href="./IsObeya-MainPageContent.jsp">IsObeya</a>
 		<ul class="nav navbar-nav">
+				<li class="nav-item active "><a id="openProjectByUser" class="nav-link"  href="./IsObeya-SteercoSlideShow-steerco.jsp?ProjectName=<%=request.getParameter("ProjectName")%>">Dashboard</a></li>
 				<li class="nav-item active "><a id="openProjectByUser" class="nav-link"  href="./IsObeya-SteercoSlideShow-UserHumor.jsp?ProjectName=<%=request.getParameter("ProjectName")%>">Obeya [User]</a></li>
 				<li class="nav-item active "><a id="openProjectByUser" class="nav-link"  href="./IsObeya-SteercoSlideShow-Obeya.jsp?ProjectName=<%=request.getParameter("ProjectName")%>">Obeya [Kanban]</a></li>
 				<li class="nav-item active "><a id="openProjectByUser" class="nav-link"  href="./IsObeya-SteercoSlideShow-ObeyaWip.jsp?ProjectName=<%=request.getParameter("ProjectName")%>">Obeya [Plan]</a></li>
@@ -114,7 +115,7 @@
 					
 					
 					
-					</div>
+				</div>
 			</div>
 		</div>
 		
@@ -129,9 +130,10 @@
 								}
 							}
 							%> 
+		</div>
 							
 						
-					
+			
 				 
 
 					
@@ -206,12 +208,12 @@
 														title="Log">
 														<i class="glyphicon glyphicon-pushpin"></i>
 													</button>
-													<button title="Edit">
-														<i class="glyphicon glyphicon-edit"></i>
-													</button>
-													<button id="deleteTemplate" title="Delete">
-														<i class="glyphicon glyphicon-off"></i>
-													</button>
+<!-- 													<button title="Edit"> -->
+<!-- 														<i class="glyphicon glyphicon-edit"></i> -->
+<!-- 													</button> -->
+<!-- 													<button id="deleteTemplate" title="Delete"> -->
+<!-- 														<i class="glyphicon glyphicon-off"></i> -->
+<!-- 													</button> -->
 												</div>
 											</div>
 		
@@ -334,12 +336,12 @@
 														title="Log">
 														<i class="glyphicon glyphicon-pushpin"></i>
 													</button>
-													<button title="Edit">
-														<i class="glyphicon glyphicon-edit"></i>
-													</button>
-													<button id="deleteEdit" title="Delete">
-														<i class="glyphicon glyphicon-off"></i>
-													</button>
+<!-- 													<button title="Edit"> -->
+<!-- 														<i class="glyphicon glyphicon-edit"></i> -->
+<!-- 													</button> -->
+<!-- 													<button id="deleteEdit" title="Delete"> -->
+<!-- 														<i class="glyphicon glyphicon-off"></i> -->
+<!-- 													</button> -->
 												</div>
 											</div>
 		
@@ -424,7 +426,7 @@
 
 											<div class="dropdown-menu" id="SelectOwnerEditForm">
 												<%
-													listPeople = new java.util.ArrayList<String>() ;
+													//listPeople = new java.util.ArrayList<String>() ;
 													//listPeople=myBeanPeople.GetPeople();
 													for (int i=0;i<listPeople.size();i++){
 														out.println(listPeople.get(i).toString());
@@ -450,7 +452,32 @@
 					<!--  /.modal -->
 					
 								
-				</div>
+	</div>
+	
+	<div id="containerInfo">
+			<%
+					String dueDate = myBeanProjects.GetProjectInfoFromField(request.getParameter("ProjectName"),"KPIGolive");
+				    String KPI = myBeanProjects.GetProjectInfoFromField(request.getParameter("ProjectName"),"KPI");	
+				    String Status = myBeanProjects.GetProjectInfoFromField(request.getParameter("ProjectName"),"KPIGlobal");	
+			%> 
+				<div>
+				<h3 style="color:darkblue;">DueDate is : 
+				<span class="trailerinfo" style="color:darkgrey;"><%out.println(dueDate); %></span></h3>
+			</div>
+			<div>
+				<h3 style="color:darkblue;">KPI is : 
+				<span style="color:darkgrey;"><%out.println(KPI);%></span></h3>
+			</div>
+			<div>
+				<h3 style="color:darkblue;">Project Status is : 
+				<span><%
+				String line ="<div style='vertical-align: text-bottom;' title='Global' class='%ClassGlobal%'></div>";
+				line=line.replaceAll("%ClassGlobal%",Status);
+				out.println(line);
+				%></span></h3>
+			</div>
+	 </div>		
+				
 			
 
 	<!-- Tab Navigation Contents ================================================== -->	
@@ -460,6 +487,40 @@
 				    var str = this;
 				    return str.replace(new RegExp(find, 'g'), replace);
 				};
+				
+				String.prototype.startsWith = function(needle)
+				{
+				    return(this.indexOf(needle) == 0);
+				};
+				
+				Date.prototype.getMonthName = function(lang) {
+					  // Default language is English
+					  lang = lang || 'en-GB';
+					  return this.toLocaleString(lang, {month:'long'});
+				}
+				
+				Date.prototype.getWeek = function() {
+				    var onejan = new Date(this.getFullYear(),0,1);
+				    var today = new Date(this.getFullYear(),this.getMonth(),this.getDate());
+				    var dayOfYear = ((today - onejan +1)/86400000);
+				    return Math.ceil(dayOfYear/7)
+				};
+				
+				
+				
+				Date.prototype.defaultView=function(){
+					var dd=this.getDate();
+					if(dd<10)dd='0'+dd;
+					var mm=this.getMonthName();
+					if(mm<10)mm='0'+mm;
+					var yyyy=this.getFullYear();
+					return String(mm+" "+dd+","+yyyy)
+					}
+				
+				function getDateOfWeek(weekNumber,year){
+				    //Create a date object starting january first of chosen year, plus the number of days in a week multiplied by the week number to get the right date.
+				    return new Date(year, 0, 3+((weekNumber-1)*7));
+				}
 	
 				function generateUUID() {
 				    var d = new Date().getTime();
@@ -481,6 +542,7 @@
 
 				function drag(ev) {
 				    ev.dataTransfer.setData("text", ev.target.id);
+				    
 				};
 
 				function drop(ev) {
@@ -488,10 +550,25 @@
 				    //
 				    var data = ev.dataTransfer.getData("text");
 				    ev.target.appendChild(document.getElementById(data));
-				    
-				    updateExistingCard(data,ev.target.id,"Move card in " + ev.target.id);
-				    //alert(ev.target.id);
-				    
+				    var card = document.getElementById(data);
+				    if ((ev.target.id).startsWith("Week")>0){
+				    	
+				    	 var weekNb = (ev.target.id).substring(4, 14);
+						 var today = new Date();
+						 var myYear = today.getFullYear();		 
+						 var myDate = getDateOfWeek(weekNb,myYear);
+					
+			    		 // Wipx vers Wipx : No change layer/ change due date
+			    		 updateExistingCard(data,ev.target.id,"Move card in " + ev.target.id);
+			    		 $(card).find("span[title='DueDateValue']").html(myDate.defaultView());
+				    	
+				    }else{
+				    	// Wipx vers Backlog : Change layer/ no change due date
+			    		 updateExistingCard(data,"backlogcolumn","Move card in " + ev.target.id);
+				    }
+				    	 
+				    	
+				   
 				};
 				
 				function deleteCard(pId){
@@ -552,10 +629,25 @@
 	 					}); 
 				};
 				
+				
+				
+				
 				function updateExistingCard(pId, Layer, UpdateDescription){
+					
+					 var card = $("#"+pId)
+                     var FormattedDate;
+					
+					 if (Layer.startsWith("Week")>0){
+				    	 var weekNb = Layer.substring(4, 14);
+						 Layer = "RolloutWip";
+// 						 var today = new Date();
+// 						 var myYear = today.getFullYear();		
+						 var myDate = getDateOfWeek(weekNb,2017);
+						 FormattedDate= (myDate).defaultView();
+					 }else{
+						 FormattedDate=$(card).find("span[title='DueDateValue']").html();
+					 }
 					 
-                     var card = $("#"+pId)
-                     
                      var Priority = $(card).find("button[title='Priority']").html();
                      var PriorityClass = $(card).find("button[title='Priority']").attr("class");
                      var Owner = $(card).find("button[title='Owner']").html();
@@ -564,7 +656,7 @@
                      
                      var ContentCard =      $(card).find("div[title='ContentCard']").html();
                      var ContentCardClass = $(card).find("div[title='ContentCard']").parent().parent().attr("class");
-                     var Date= $(card).find("span[title='DueDateValue']").html();
+                     var Date= FormattedDate;
                      var DateClass = $(card).find("span[title='DueDateValue']").parent().attr('class');
                      var Charge= $(card).find("span[title='Charge (d)']").html();
                      var Progress= $(card).find("span[title='Raf']").html();
@@ -650,6 +742,9 @@
 				$( "#OpenAddForm" ).click(function() {
 					 if($("#ProjectName").html()!="" && $("#ProjectName").html()!="0" && $("#ProjectName").html()!="null"){
 						 $("#FormAdd").modal();
+						 $("#FormAdd").find($("textarea[id='textareaEdit']")).val("");
+						 var bloker = $("#FormAdd").find("span.blocking-indicator__indicator");
+						 $(bloker).hide();
 					 }
 					 else{
 						 Lobibox.notify('error', {
@@ -669,6 +764,8 @@
 				
 				var card=null;
 				var carEdit=null;
+				
+				
 				
 				 //Update Card
 				$( "#SubmitEditCard" ).click(function() {
@@ -706,7 +803,7 @@
                                        
                      $(card).find("button[title='Priority']").attr('Style',$(carEdit).find("button[title='Priority']").attr('Style'));
                      var StyleBlocker = $(carEdit).find("span[title='BlockerValue']").css("display");
-                     $(card).find("span[title='BlockerValue']").css("display", StyleBlocker);
+                    $(card).find("span[title='BlockerValue']").css("display", StyleBlocker);
                     $(card).find("span[title='DueDateValue']").html(  $(carEdit).find("span[title='DueDateValue']").html());
                     $(card).find("span[title='DueDateValue']").parent().removeClass().addClass( $(carEdit).find("span[title='DueDateValue']").parent().attr('Class'));
                     $(card).find("span[title='Charge (d)']").html( $(carEdit).find("span[title='Charge (d)']").html());
@@ -714,12 +811,17 @@
                      
     				
 					$("#FormEdit .close").click()
-					
-					
-					 updateExistingCard($(card).attr("id"),"N/A", "Card has been updated !");
+					var WeekLayer = "#Week";
+					var ldate = $(carEdit).find("span[title='DueDateValue']").html();
+				    var myDate = new Date(ldate);
+					var lweek = myDate.getWeek();
+				    WeekLayer+=lweek;
+					updateExistingCard($(card).attr("id"),"N/A", "Card has been updated !");
+					$(WeekLayer).append($(card).clone());
+					$(card).remove();
 					carEdit=null;
-   				 IdCard=null;
-   				 card=null;
+   				    IdCard=null;
+   				    card=null;
 				});
 				
 				$( "#SubmitAddCard" ).click(function() {
@@ -866,6 +968,10 @@
 				
 				$(document).ready(function(){
 					
+					
+					var currentDate = new Date();
+					location.href ="#Week"+(currentDate.getWeek()+3);
+				 
 					 
 					$.urlParam = function(name){
 					    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -878,7 +984,8 @@
 					}
 					
 					$("#ProjectName").html(unescape($.urlParam('ProjectName')));
-					//alert($.urlParam('ProjectName'));
+
+					$("#containerInfo").addClass("load");
 					
 					//-- Manage New Card Blocker ================================================== -->	
 					$( "body" ).on( "click","button[title='Blocker']", function(e) {
@@ -899,7 +1006,8 @@
 					//-- Manage New Card Edition ================================================== -->	
 					$( "body" ).on( "click","button[title='Edit']", function(e) {
 
-					                
+						if($(card).attr("id")!="cardTemplate"){
+							if($(card).attr("id")!="cardEdit"){  
                        $("#FormEdit").modal();
                        card = $(this).parent().parent().parent();
                        var IdCard = card.attr("id");
@@ -957,7 +1065,7 @@
                         $(carEdit).find("span[title='Raf']").html(Progress);
                          
                          
-                        
+							}}
                         
 					});
 					
@@ -1037,7 +1145,7 @@
 								//var card = $(this).parent().parent().parent();
 								//alert($(card).attr("id"));
 								if($(card).attr("id")!="cardTemplate"){
-								  
+								if($(card).attr("id")!="cardEdit"){
 									
 			                        var RAF = $(card).find("span[title='Raf']").html();
 			                        //alert(RAF);
@@ -1088,7 +1196,7 @@
 				                      }
 				                      else{
 				                    	  Lobibox.alert('warning', {
-					                    	  msg: 'Some action are availble because the task is terminated !',
+					                    	  msg: 'Some action are available because the task is terminated !',
 					                    	  //buttons: ['ok', 'cancel', 'yes', 'no'],
 					                    	  //Or more powerfull way
 					                    	  buttons: {
@@ -1113,9 +1221,10 @@
 					                    	      
 					                    	      if (type === 'ok'){
 					                    	    	  updateExistingCard($(card).attr("id"),"RolloutDone", "Card Moving to RolloutDone Layer !");
-					                    	    	  $("#RolloutDone").append($(card).clone());
-					                    	    	  $(card).remove();
-					                    	    	  Lobibox.notify("warning", {
+					                    	    	  //$("#RolloutDone").append($(card).clone());
+					                    	    	  //$(card).remove();
+					                    	    	   $(card).css("opacity", 0.54);
+					                    	    	   Lobibox.notify("warning", {
 					                    	    	        size: 'mini',
 					                    	    	        msg: 'This card is moved in RolloutDone Layer ! '
 					                    	    	    });
@@ -1131,6 +1240,7 @@
 					                    	});
 				                      	}
 								}
+								}
 						  }
 	                     
 						 
@@ -1142,6 +1252,7 @@
 					$( "body" ).on( "click","button[title='Log']", function(e) {
 						var card = $(this).parent().parent().parent();
 						if($(card).attr("id")!="cardTemplate"){
+						if($(card).attr("id")!="cardEdit"){
 							$(this).attr("href","#FormLog");
 						
 							//var card = $(this).parent().parent().parent();
@@ -1165,6 +1276,7 @@
 						          $('#dynamic-content').html('<i class="glyphicon glyphicon-info-sign"></i> Something went wrong, Please try again...');
 						          $('#modal-loader').hide();
 						     });
+						}
 						}
 						 
 	                      
@@ -1191,9 +1303,12 @@
 								 $(this).html("M");
 							 }
 							 if($(card).attr("id")!="cardTemplate"){
+							 if($(card).attr("id")!="cardEdit"){
 							 	updateExistingCard($(card).attr("id"),"N/A", "Card priority updated ! ");
 							 
 							}
+							}
+						
 							
 						});
 					

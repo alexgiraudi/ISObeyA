@@ -26,14 +26,7 @@
 <script src="./Librairies/jquery/assets/js/docs.js"	type="text/javascript"></script>
 <script src="./Librairies/lobibox/js/lobibox.js"></script>
 <script src="./Librairies/lobibox/js/actions.js"></script>
-<!-- <script src="./Librairies/jqueryMonitor/jquery.observeWithCallbacks.js"></script> -->
-<!-- <script src="./Librairies/jqueryMonitor/jquery.observeWithEvents.js"></script> -->
-
-
-
-
-
-
+ 
 </head>
 
 
@@ -55,6 +48,7 @@
 	<div class="collapse navbar-toggleable-md" id="navbarResponsive">
 		<a class="navbar-brand" href="./IsObeya-MainPageContent.jsp">IsObeya</a>
 		<ul class="nav navbar-nav">
+				<li class="nav-item active "><a id="openProjectByUser" class="nav-link"  href="./IsObeya-SteercoSlideShow-steerco.jsp?ProjectName=<%=request.getParameter("ProjectName")%>">Dashboard</a></li>
 				<li class="nav-item active "><a id="openProjectByUser" class="nav-link"  href="./IsObeya-SteercoSlideShow-UserHumor.jsp?ProjectName=<%=request.getParameter("ProjectName")%>">Obeya [User]</a></li>
 				<li class="nav-item active "><a id="openProjectByUser" class="nav-link"  href="./IsObeya-SteercoSlideShow-Obeya.jsp?ProjectName=<%=request.getParameter("ProjectName")%>">Obeya [Kanban]</a></li>
 				<li class="nav-item active "><a id="openProjectByUser" class="nav-link"  href="./IsObeya-SteercoSlideShow-ObeyaWip.jsp?ProjectName=<%=request.getParameter("ProjectName")%>">Obeya [Plan]</a></li>
@@ -190,7 +184,31 @@
 						</div>
 
 					</div>
-
+				
+					<div id="containerInfo">
+						<%
+ 							String dueDate = myBeanProjects.GetProjectInfoFromField(request.getParameter("ProjectName"),"KPIGolive");
+ 						    String KPI = myBeanProjects.GetProjectInfoFromField(request.getParameter("ProjectName"),"KPI");	
+ 						    String Status = myBeanProjects.GetProjectInfoFromField(request.getParameter("ProjectName"),"KPIGlobal");	
+						%> 
+		 				<div>
+							<h3 style="color:darkblue;">DueDate is : 
+							<span class="trailerinfo" style="color:darkgrey;"><%out.println(dueDate); %></span></h3>
+						</div>
+						<div>
+							<h3 style="color:darkblue;">KPI is : 
+							<span style="color:darkgrey;"><%out.println(KPI);%></span></h3>
+						</div>
+						<div>
+							<h3 style="color:darkblue;">Project Status is : 
+							<span><%
+							String line ="<div style='vertical-align: text-bottom;' title='Global' class='%ClassGlobal%'></div>";
+							line=line.replaceAll("%ClassGlobal%",Status);
+							out.println(line);
+							%></span></h3>
+						</div>
+					 </div>
+					 
 					
 					<!-- Form Log Card -->
 					<div class="modal fade" id="FormLog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
@@ -263,19 +281,19 @@
 														title="Log">
 														<i class="glyphicon glyphicon-pushpin"></i>
 													</button>
-													<button title="Edit">
-														<i class="glyphicon glyphicon-edit"></i>
-													</button>
-													<button id="deleteTemplate" title="Delete">
-														<i class="glyphicon glyphicon-off"></i>
-													</button>
+<!-- 													<button title="Edit"> -->
+<!-- 														<i class="glyphicon glyphicon-edit"></i> -->
+<!-- 													</button> -->
+<!-- 													<button id="deleteTemplate" title="Delete"> -->
+<!-- 														<i class="glyphicon glyphicon-off"></i> -->
+<!-- 													</button> -->
 												</div>
 											</div>
 		
 											<div class="card__body story" id="CardBodyTemplateAddCard">
 												<div class="card__body-content">
 													<div class="card__body-title" title="ContentCard" id="CardBodyValueTemplate">
-														<textarea id="textareaEdit" class="form-control">Here is the description of the task !</textarea>
+														<textarea id="textareaEdit" class="form-control"></textarea>
 													</div>
 		
 													<div class="card__body-meta">
@@ -391,12 +409,12 @@
 														title="Log">
 														<i class="glyphicon glyphicon-pushpin"></i>
 													</button>
-													<button title="Edit">
-														<i class="glyphicon glyphicon-edit"></i>
-													</button>
-													<button id="deleteEdit" title="Delete">
-														<i class="glyphicon glyphicon-off"></i>
-													</button>
+<!-- 													<button title="Edit"> -->
+<!-- 														<i class="glyphicon glyphicon-edit"></i> -->
+<!-- 													</button> -->
+<!-- 													<button id="deleteEdit" title="Delete"> -->
+<!-- 														<i class="glyphicon glyphicon-off"></i> -->
+<!-- 													</button> -->
 												</div>
 											</div>
 		
@@ -507,7 +525,9 @@
 					<!--  /.modal -->
 					
 								
-				</div>
+	</div>
+	
+	
 			
 
 	<!-- Tab Navigation Contents ================================================== -->	
@@ -542,12 +562,14 @@
 
 				function drop(ev) {
 				    ev.preventDefault();
-				    //
-				    var data = ev.dataTransfer.getData("text");
-				    ev.target.appendChild(document.getElementById(data));
 				    
-				    updateExistingCard(data,ev.target.id,"Move card in " + ev.target.id);
-				    //alert(ev.target.id);
+				   
+					    var data = ev.dataTransfer.getData("text");
+					    ev.target.appendChild(document.getElementById(data));
+					    
+					    updateExistingCard(data,ev.target.id,"Move card in " + ev.target.id);
+					   
+				
 				    
 				};
 				
@@ -707,6 +729,9 @@
 				$( "#OpenAddForm" ).click(function() {
 					 if($("#ProjectName").html()!="" && $("#ProjectName").html()!="0" && $("#ProjectName").html()!="null"){
 						 $("#FormAdd").modal();
+						 $("#FormAdd").find($("textarea[id='textareaEdit']")).val("");
+						 var bloker = $("#FormAdd").find("span.blocking-indicator__indicator");
+						 $(bloker).hide();
 					 }
 					 else{
 						 Lobibox.notify('error', {
@@ -935,7 +960,8 @@
 					}
 					
 					$("#ProjectName").html(unescape($.urlParam('ProjectName')));
-					//alert($.urlParam('ProjectName'));
+
+					$("#containerInfo").addClass("load");
 					
 					//-- Manage New Card Blocker ================================================== -->	
 					$( "body" ).on( "click","button[title='Blocker']", function(e) {
@@ -956,7 +982,8 @@
 					//-- Manage New Card Edition ================================================== -->	
 					$( "body" ).on( "click","button[title='Edit']", function(e) {
 
-					                
+						if($(card).attr("id")!="cardTemplate"){
+							if($(card).attr("id")!="cardEdit"){
                        $("#FormEdit").modal();
                        card = $(this).parent().parent().parent();
                        var IdCard = card.attr("id");
@@ -1014,7 +1041,7 @@
                         $(carEdit).find("span[title='Raf']").html(Progress);
                          
                          
-                        
+							}}
                         
 					});
 					
@@ -1094,7 +1121,7 @@
 								//var card = $(this).parent().parent().parent();
 								//alert($(card).attr("id"));
 								if($(card).attr("id")!="cardTemplate"){
-								  
+								if($(card).attr("id")!="cardEdit"){
 									
 			                        var RAF = $(card).find("span[title='Raf']").html();
 			                        //alert(RAF);
@@ -1188,6 +1215,7 @@
 					                    	});
 				                      	}
 								}
+								}
 						  }
 	                     
 						 
@@ -1199,6 +1227,7 @@
 					$( "body" ).on( "click","button[title='Log']", function(e) {
 						var card = $(this).parent().parent().parent();
 						if($(card).attr("id")!="cardTemplate"){
+						if($(card).attr("id")!="cardEdit"){
 							$(this).attr("href","#FormLog");
 						
 							//var card = $(this).parent().parent().parent();
@@ -1222,6 +1251,7 @@
 						          $('#dynamic-content').html('<i class="glyphicon glyphicon-info-sign"></i> Something went wrong, Please try again...');
 						          $('#modal-loader').hide();
 						     });
+						}
 						}
 						 
 	                      
@@ -1248,9 +1278,12 @@
 								 $(this).html("M");
 							 }
 							 if($(card).attr("id")!="cardTemplate"){
+							 if($(card).attr("id")!="cardEdit"){
 							 	updateExistingCard($(card).attr("id"),"N/A", "Card priority updated ! ");
 							 
 							}
+							}
+						
 							
 						});
 					

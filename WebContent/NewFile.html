@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class='line top-to-bottom' id='IDProject'>
+		<div id='Line-IDProject' class='line__items-wrapper '>
+			<div class='cardProject' id='card-IDProject' tabindex='0'>
+				<div class='card__header'>
+					<div class='ProjectClasse' title='CardBodyTheme'>
+						<center>
+							<span>%ProjectName%</span>
+						</center>
+					</div>
+				</div>
+			</div>
+			%Cards%
+		</div>
+	</div>
+
+
+	<div class='line top-to-bottom' id='IDUser'>
+		<div id='Line-IDUser' class='line__items-wrapper '
+			ondrop='drop(event)' ondragover='allowDrop(event)'>
+			<div draggable='true' class='cardUser' id='card-IDUser'
+				draggable='false' tabindex='0'>
+				<div class='card__header'>
+					<img src='./Librairies/iobeya/none.png.jpg' class='avatar' />
+					<div class='assigner'>
+						<button class='assigner__assignee'>NewUser</button>
+					</div>
+					<img style='float: right; margin-right: 5px;'
+						src='./Librairies/iobeya/unknown.png' width='25px' height='25px' />
+					<button id='delete-IDUser' style='margin-left: 10px;'
+						title='Delete'>
+						<i class='glyphicon glyphicon-off BtcGrey'></i>
+					</button>
+				</div>
+				<div class='UserClasse' title='CardBodyTheme'>
+					<center>
+						<img src='OldHumor' width='40px' height='40px' /><img
+							src='./Librairies/images/kanban/arrow.png' width='40px'
+							height='40px'><img class='Humor' src='NewHumor'
+							width='40px' height='40px' />
+					</center>
+				</div>
+				<div class='userIndicator'>
+					<span class='badge badgebacklog' title='Backlog Items'
+						id='BacklogItem-IDUser'>CardOpenNB</span><span
+						class='badge badgeinprogress' title='Items in Progress'
+						id='InProgressItem-IDUser'>CardInProgressNB</span><span
+						class='badge badgedone' title='Close Items' id='CloseItem-IDUser'>CardCloseNB</span>
+				</div>
+			</div>
+			%Cards%
+		</div>
+	</div>
+	";;
+</body>
+</html>

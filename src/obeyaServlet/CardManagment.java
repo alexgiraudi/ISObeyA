@@ -67,6 +67,7 @@ public class CardManagment extends EncodingServlet {
 				
 				String parametre=(String)request.getParameter("NewCard");
 				String jsonInString=new String(parametre.getBytes(),"UTF-8");
+				jsonInString=jsonInString.replaceAll("'", "`");
 				String SqlMode= request.getParameter("SqlMode");
 				String EventId= request.getParameter("EventId");
 				String EventDescription= request.getParameter("EventDescription");

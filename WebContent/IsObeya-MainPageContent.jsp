@@ -31,6 +31,8 @@
 			<script src="./Librairies/lobibox/js/lobibox.js"></script>
         	<script src="./Librairies/lobibox/js/actions.js"></script> 
 	
+	
+	
  			<style>
 			 /* The Overlay (background) */
 			.overlay {
@@ -100,7 +102,7 @@
         <body data-spy="scroll" data-twttr-rendered="true" >
         		
          		<jsp:useBean id="myBeanProjects" class="database.MySqlStatmentProjects" scope="application"/> 
-        		
+        		<jsp:useBean id="myBeanPeople" class="database.MySqlStatmentPeople" scope="application"/>
 				<!-- Navbar ================================================== -->
 				<nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
 			          <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
@@ -177,6 +179,19 @@
 						    <li id="seeSteerco" tabindex="1">
 						      <span class="titlehigh">Steerco</span> 
 						    </li>
+						    <li id="seeUserActivities" tabindex="1">
+						      <span class="titlehigh">User's activities</span> 
+						    </li>
+						    <li id=" " tabindex="1">
+						      <span class="titlehigh">TBD</span> 
+						    </li>
+						    <li id=" " tabindex="1">
+						      <span class="titlehigh">TBD</span> 
+						    </li>
+						    <li id=" " tabindex="1">
+						      <span class="titlehigh">TBD</span> 
+						    </li>
+						   
 	      				</ul>
 	        		
 	
@@ -300,7 +315,22 @@
 		            <div class="page-trailer"/>  
 		          </fieldset>
 		          
+		           <!-- Steerco  ================================================== -->
+	             <fieldset id="ActivitiesUsers">
+	            
 		          
+		                <legend>User's activities</legend>
+		          
+		            <div class="alert alert-info">
+		                <span class="icon-info-sign"></span> Here is the user's activites : <b><font color="#C88172"> </font></b>
+		            </div>
+		            
+		            <a id="usractivities" style="display: inline; float: left; margin-right: 5px;" href="" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i></a>
+		            <br></br>
+		            <div class="page-trailer"/>  
+		          </fieldset>
+		          
+		         
 		          
 			</div>
 		         
@@ -312,7 +342,48 @@
 				</div>
 		</div>
 		 	
-				
+		<!-- Form Add User -->
+					<div class="modal fade" id="FormAddUser" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">Select User</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-group" id="CardContainerTemplate">
+										<div class="assigner">
+											<button class="assigner__assignee" data-toggle="dropdown" title="Owner"  id="OwnerLabel">AGI</button>
+										</div>
+									</div>
+					
+									<!-- Indicates a successful or positive action -->
+									<button id="SubmitAddUser" style="display: inline;" type="button" class="btn btn-sm btn-success">Select</button>
+									
+									<div style="margin: auto; width: 80%;" class="form-group">
+										<div class="input-group-btn ">
+											<div class="dropdown-menu" id="SelectOwnerLabel">
+												<%
+													java.util.List<String> listPeople = new java.util.ArrayList<String>() ;
+													listPeople=myBeanPeople.GetPeopleWithURL("./IsObeya-SteercoSlideShow-userActivities.jsp","?userName=");
+													for (int i=0;i<listPeople.size();i++){
+														
+														out.println(listPeople.get(i).toString());
+													}
+												%> 
+
+											</div>
+										</div>
+									</div>
+								</div> 
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!--  /.modal -->		
 		<script>
 				$( "#seeOverview" ).click(function( event ) {
 					location.href ="#Overview";
@@ -329,6 +400,22 @@
 				$( "#seeSteerco" ).click(function( event ) {
 					location.href ="#SteercoSlideshow";
 				});	
+				
+				$( "#seeUserActivities" ).click(function( event ) {
+					location.href ="#ActivitiesUsers";
+				});	
+				 
+				$( "#usractivities").click(function() {
+					
+						$("#FormAddUser").modal();
+				});
+				
+				$( document.body ).on( "click","button[id='OwnerLabel']", function(e) {			 
+					$("#SelectOwnerLabel").show();
+					
+				});
+				
+				
 				
 				/* Open when someone clicks on the span element */
 				function openNavSteerco() {

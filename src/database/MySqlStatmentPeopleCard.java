@@ -1,6 +1,7 @@
 package database;
 
 
+import java.rmi.server.UID;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -91,7 +92,31 @@ public class MySqlStatmentPeopleCard extends MySqlGenericStatment{
 		String SqlSelect ="SELECT * FROM ISObeyaDB.PeopleProject where  Project='%ProjectName%';";
 		SqlSelect=SqlSelect.replaceAll("%ProjectName%", pProject);
 		
-		String JspReferenceCardUser ="<div class='line top-to-bottom' id='IDUser'><div id='Line-IDUser' class='line__items-wrapper ' ondrop='drop(event)' ondragover='allowDrop(event)'><div draggable='true' class='cardUser' id='card-IDUser' draggable='false'  tabindex='0'><div class='card__header'><img src='./Librairies/iobeya/none.png.jpg' class='avatar' /><div class='assigner'><button class='assigner__assignee'>NewUser</button></div><img style='float:right;margin-right:5px; 'src='./Librairies/iobeya/unknown.png' width='25px' height='25px'/><button id='delete-IDUser' style='margin-left:10px;' title='Delete'><i class='glyphicon glyphicon-off BtcGrey'></i></button></div><div class='UserClasse' title='CardBodyTheme' ><center><img src='OldHumor' width='40px' height='40px'/><img src='./Librairies/images/kanban/arrow.png' width='40px' height='40px'><img class='Humor' src='NewHumor' width='40px' height='40px'/></center></div><div class='userIndicator'><span class='badge badgebacklog' title='Backlog Items' id='BacklogItem-IDUser'>CardOpenNB</span><span class='badge badgeinprogress' title='Items in Progress' id='InProgressItem-IDUser'>CardInProgressNB</span><span class='badge badgedone' title='Close Items' id='CloseItem-IDUser'>CardCloseNB</span></div></div>%Cards%</div></div>";;
+		String JspReferenceCardUser ="<div class='line top-to-bottom' id='IDUser'>"
+											+ "<div id='Line-IDUser' class='line__items-wrapper ' ondrop='drop(event)' ondragover='allowDrop(event)'>"
+												+ "<div draggable='true' class='cardUser' id='card-IDUser' draggable='false'  tabindex='0'>"
+													+ "<div class='card__header'><img src='./Librairies/iobeya/none.png.jpg' class='avatar' />"
+														+ "<div class='assigner'>"
+															+ "<button class='assigner__assignee'>NewUser</button>"
+														+ "</div>"
+														+ "<img style='float:right;margin-right:5px; 'src='./Librairies/iobeya/unknown.png' width='25px' height='25px'/>"
+														+ "<button id='delete-IDUser' style='margin-left:10px;' title='Delete'>"
+															+ "<i class='glyphicon glyphicon-off BtcGrey'></i>"
+														+ "</button>"
+													+ "</div>"
+													+ "<div class='UserClasse' title='CardBodyTheme' >"
+														+ "<center><img src='OldHumor' width='40px' height='40px'/>"
+															+ "<img src='./Librairies/images/kanban/arrow.png' width='40px' height='40px'>"
+															+ "<img class='Humor' src='NewHumor' width='40px' height='40px'/>"
+														+ "</center>"
+													+ "</div>"
+													+ "<div class='userIndicator'>"
+														+ "<span class='badge badgebacklog' title='Backlog Items' id='BacklogItem-IDUser'>CardOpenNB</span>"
+														+ "<span class='badge badgeinprogress' title='Items in Progress' id='InProgressItem-IDUser'>CardInProgressNB</span>"
+														+ "<span class='badge badgedone' title='Close Items' id='CloseItem-IDUser'>CardCloseNB</span>"
+													+ "</div>"
+													+ "</div>%Cards%</div>"
+										+ "</div>";
 		 
 		Statement stmtPeopleCard =GetStatement();	
 		ArrayList<String> tabResult = new ArrayList<String>();
@@ -175,6 +200,75 @@ public class MySqlStatmentPeopleCard extends MySqlGenericStatment{
 			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
 //			try { if (stmtPeopleCard != null) stmtPeopleCard.close(); } catch (SQLException e) { e.printStackTrace(); }
 //			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+		}
+		return tabResult;
+		
+		
+	}
+	
+public ArrayList<String> GetProjectCardByPeople(String pPeople) throws Exception {
+		
+		String SqlSelect ="SELECT DISTINCT Project, Owner FROM ISObeyaDB.Cards where  Owner='%pPeople%' order by Project;";
+		SqlSelect=SqlSelect.replaceAll("%pPeople%", pPeople);
+		
+		
+		
+		String JspReferenceCardProject ="<div class='line top-to-bottom' id='IDProject'>"
+				+ "<div id='Line-IDProject' class='line__items-wrapper '>"
+					+ "<div class='cardUser' id='card-IDProject' tabindex='0'>"
+						+ "<div class='card__header'><img src='./Librairies/iobeya/none.png.jpg' class='avatar' />"
+							+ "<div class='assigner'>"
+								+ "<button class='assigner__assignee'>Project</button>"
+							+ "</div>"
+							+ "<img style='float:right;margin-right:5px; 'src='./Librairies/perso/project.jpg' width='40px' height='25px'/>"
+						+ "</div>"
+						+ "<div class='ProjectClasse' title='CardBodyTheme' >"
+							+ "<center>"
+								+ "<h3 style='font: italic bold 12px/30px Calibri;'>%ProjectName%</h3>"
+							+ "</center>"
+						+ "</div>"
+						+ "<div class='userIndicator'>"
+							+ "<span class='badge badgebacklog' title='Backlog Items' id='BacklogItem-IDUser'></span>"
+							+ "<span class='badge badgeinprogress' title='Items in Progress' id='InProgressItem-IDUser'></span>"
+							+ "<span class='badge badgedone' title='Close Items' id='CloseItem-IDUser'></span>"
+						+ "</div>"
+						+ "</div>%Cards%</div>"
+			+ "</div>";
+				
+		Statement stmtPeopleCard =GetStatement();	
+		ArrayList<String> tabResult = new ArrayList<String>();
+		
+		ResultSet rs = null;
+		try {
+			rs = stmtPeopleCard.executeQuery(SqlSelect);
+			while (rs.next()) {
+								
+				String Project = rs.getString("Project");
+				 
+				String NewLine = JspReferenceCardProject;			
+				NewLine=NewLine.replaceAll("%ProjectName%", Project);
+				UID nUID= new UID();
+				NewLine=NewLine.replaceAll("IDProject", nUID.toString());
+				 				
+				MySqlStatmentCard ListOfCards = new MySqlStatmentCard();
+				String CardInfo="";
+				ArrayList<String> lCards = ListOfCards.GetCardByUser(Project,pPeople);
+				for (int i=0;i<lCards.size();i++){
+					CardInfo+=lCards.get(i).toString();
+				}
+				NewLine=NewLine.replaceAll("%Cards%", CardInfo);
+				
+				tabResult.add(NewLine);
+			}
+		} catch (SQLException e) {
+			 
+		        throw new Exception("Message: " + e.getMessage() + ". " +  e.getErrorCode(), e);
+			
+		} catch (Exception e) {
+			 throw new Exception("Message: " + e.getMessage() + ". "  , e); 
+		}finally {
+			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+
 		}
 		return tabResult;
 		

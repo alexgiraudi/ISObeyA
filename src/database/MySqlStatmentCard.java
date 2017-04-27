@@ -22,7 +22,7 @@ import beanjson.cardInformation;
 
 public class MySqlStatmentCard extends MySqlGenericStatment{
 	public static final int MYSQL_DUPLICATE_PK = 1062;
-	private String JspReferenceCard ="<div draggable='true' class='cardEdit' id='cardTemplate' tabindex='0' draggable='true' ondragstart='drag(event)'><div class='card__header'><div class='estimator'><button class='%Priority%' type='button' title='Priority'>ValPriority</button></div><img src='./Librairies/iobeya/none.png.jpg' class='avatar' /><div class='assigner'><button class='assigner__assignee' data-toggle='dropdown' title='Owner'  id='OwnerTemplate'>ValUser</button></div><span class='blocking-indicator__indicator blocker' style='%BlockedStyle%' id='blokerTemplate' title='BlockerValue'>Blocked</span><div class='card__actions'> <button title='Blocker'><i class='glyphicon glyphicon-thumbs-down'></i></button><button id='logTemplate' href='' data-toggle='modal' title='Log'> <i class='glyphicon glyphicon-pushpin'></i> </button> <button title='Edit'> <i class='glyphicon glyphicon-edit'></i> </button> <button id='deleteTemplate' title='Delete'><i class='glyphicon glyphicon-off'></i></button></div></div><div class='%ClassContent%' id='CardBodyTemplateAddCard'><div class='card__body-content'><div class='card__body-title' title='ContentCard' id='CardBodyValueTemplate'>ValAction</div> <div class='card__body-meta'><div class='%ClassTagDueDate%' id='DueDateDivTemplate'><span class='DueDateFieldValue' title='DueDateValue'>ValDate</span></div><div class='card__body-counts'><span style='color:grey;' id='ChargeTemplate' title='Charge (d)'>ValCharge</span><span style='color:grey;' id='ProgressTemplate' title='Raf'>ValRaf</span></div></div></div></div></div>";
+	private String JspReferenceCard ="<div draggable='true' Style='' class='cardEdit' id='cardTemplate' tabindex='0' draggable='true' ondragstart='drag(event)'><div class='card__header'><div class='estimator'><button class='%Priority%' type='button' title='Priority'>ValPriority</button></div><img src='./Librairies/iobeya/none.png.jpg' class='avatar' /><div class='assigner'><button class='assigner__assignee' data-toggle='dropdown' title='Owner'  id='OwnerTemplate'>ValUser</button></div><span class='blocking-indicator__indicator blocker' style='%BlockedStyle%' id='blokerTemplate' title='BlockerValue'>Blocked</span><div class='card__actions'> <button title='Blocker'><i class='glyphicon glyphicon-thumbs-down'></i></button><button id='logTemplate' href='' data-toggle='modal' title='Log'> <i class='glyphicon glyphicon-pushpin'></i> </button> <button title='Edit'> <i class='glyphicon glyphicon-edit'></i> </button> <button id='deleteTemplate' title='Delete'><i class='glyphicon glyphicon-off'></i></button></div></div><div class='%ClassContent%' id='CardBodyTemplateAddCard'><div class='card__body-content'><div class='card__body-title' title='ContentCard' id='CardBodyValueTemplate'>ValAction</div> <div class='card__body-meta'><div class='%ClassTagDueDate%' id='DueDateDivTemplate'><span class='DueDateFieldValue' title='DueDateValue'>ValDate</span></div><div class='card__body-counts'><span style='color:grey;' id='ChargeTemplate' title='Charge (d)'>ValCharge</span><span style='color:grey;' id='ProgressTemplate' title='Raf'>ValRaf</span></div></div></div></div></div>";
 	
 	public MySqlStatmentCard() throws Exception{
 		super();
@@ -150,7 +150,7 @@ public boolean updateCard(cardInformation pNewCard) throws Exception {
 				String Charge = rs.getString("Charge");
 				String Raf = rs.getString("Raf");
 				String OwnerClass = rs.getString("OwnerClass");
-				//String Layer = rs.getString("Layer");
+				String Layer = rs.getString("Layer");
 				String PriorityClass = rs.getString("PriorityClass");
 				String BlockedStyle = rs.getString("BlockedStyle");
 				
@@ -167,8 +167,11 @@ public boolean updateCard(cardInformation pNewCard) throws Exception {
 				NewLine=NewLine.replaceAll("ValDate", DueDate);
 				NewLine=NewLine.replaceAll("ValCharge", Charge);
 				NewLine=NewLine.replaceAll("ValRaf", Raf);
-				NewLine=NewLine.replaceAll("%ClassTagDueDate%", GetClasseForDueDate(DueDate));
 				
+				if (!(Layer.equalsIgnoreCase("RolloutDone") || Layer.equalsIgnoreCase("DescriptionDone"))){
+					NewLine=NewLine.replaceAll("%ClassTagDueDate%", GetClasseForDueDate(DueDate));
+				}
+				 
 				UID nUID= new UID();
 				NewLine=NewLine.replaceAll("Template", nUID.toString());
 				tabResult.add(NewLine);
@@ -193,17 +196,24 @@ public boolean updateCard(cardInformation pNewCard) throws Exception {
 	
 private ArrayList<String> GetCardBetweenDate(int pWeek,String pProject)throws Exception {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
-	
-		String SqlSelect ="SELECT * FROM ISObeyaDB.cards where STR_TO_DATE(DueDate, ‘%M %d,%Y') >=  %StartDate%  and STR_TO_DATE(DueDate, ‘%M %d,%Y') <=  %EndDate% and Layer='%ColumnLayer%' and Project='%ProjectName%';";
-		SqlSelect=SqlSelect.replaceAll("%ProjectName%", pProject);
-		
 		cal.set(Calendar.WEEK_OF_YEAR, pWeek);        
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		SqlSelect.replaceAll("%StartDate%", sdf.format(cal.getTime()));
+		String StartDate = sdf.format(cal.getTime());
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-		SqlSelect.replaceAll("%EndDate%", sdf.format(cal.getTime())); 
+		String EndDate = sdf.format(cal.getTime());
+		
+		String SqlSelect ="SELECT * FROM ISObeyaDB.cards where STR_TO_DATE(DueDate, '%M %d,%Y') >='"
+				+ StartDate
+				+ "' and STR_TO_DATE(DueDate, '%M %d,%Y') <='"
+				+ EndDate
+				+ "' and Project='%ProjectName%'"
+				+ " and Layer!='backlogcolumn';";
+		
+		SqlSelect=SqlSelect.replaceAll("%ProjectName%", pProject);
+		
+		
 		
 		ResultSet rs = null;
 					
@@ -212,7 +222,8 @@ private ArrayList<String> GetCardBetweenDate(int pWeek,String pProject)throws Ex
 		
 		try {
 			rs = stmtCard.executeQuery(SqlSelect);
-			System.out.println("********* " + SqlSelect);
+			System.out.println("Week : "+ pWeek+ "****** " + SqlSelect);
+			
 			while (rs.next()) {
 								
 				String CardId = rs.getString("CardId");
@@ -225,13 +236,19 @@ private ArrayList<String> GetCardBetweenDate(int pWeek,String pProject)throws Ex
 				String Charge = rs.getString("Charge");
 				String Raf = rs.getString("Raf");
 				String OwnerClass = rs.getString("OwnerClass");
-				//String Layer = rs.getString("Layer");
+				String Layer = rs.getString("Layer");
 				String PriorityClass = rs.getString("PriorityClass");
 				String BlockedStyle = rs.getString("BlockedStyle");
 				
 				
 
 				String NewLine = JspReferenceCard;
+				if (Layer.equalsIgnoreCase("RolloutDone") || Layer.equalsIgnoreCase("DescriptionDone")){
+					NewLine=NewLine.replaceAll("Style=''", "Style='opacity: 0.54;'");
+				}
+				else
+					NewLine=NewLine.replaceAll("%ClassTagDueDate%", GetClasseForDueDate(DueDate));
+				
 				NewLine=NewLine.replaceAll("cardTemplate", CardId);
 				NewLine=NewLine.replaceAll("%Priority%", PriorityClass);
 				NewLine=NewLine.replaceAll("ValPriority", Priority);
@@ -242,11 +259,12 @@ private ArrayList<String> GetCardBetweenDate(int pWeek,String pProject)throws Ex
 				NewLine=NewLine.replaceAll("ValDate", DueDate);
 				NewLine=NewLine.replaceAll("ValCharge", Charge);
 				NewLine=NewLine.replaceAll("ValRaf", Raf);
-				NewLine=NewLine.replaceAll("%ClassTagDueDate%", GetClasseForDueDate(DueDate));
+				
 				
 				UID nUID= new UID();
 				NewLine=NewLine.replaceAll("Template", nUID.toString());
 				tabResult.add(NewLine);
+				System.out.println("-------------- " + NewLine);
 			}
 		} catch (SQLException e) {
 			if(e.getErrorCode() == MYSQL_DUPLICATE_PK ){
@@ -280,9 +298,10 @@ private ArrayList<String> GetCardBetweenDate(int pWeek,String pProject)throws Ex
 			
 			/*  Get Card */
 			ArrayList<String> cards = GetCardBetweenDate(week,pProject);
-			for (int i=1; i<=cards.size();i++){
+			for (int i=0; i<cards.size();i++){
 				jspString+= cards.get(i);
 			}		
+			jspString+="</div>";
 			jspString+="</div>";
 			
 			layerAndCards.add(jspString);
@@ -297,7 +316,7 @@ private ArrayList<String> GetCardBetweenDate(int pWeek,String pProject)throws Ex
 	
 	public ArrayList<String> GetCardByUser(String pProject, String pOwner)throws Exception {
 		
-		String SqlSelect ="SELECT * FROM ISObeyaDB.cards where Owner='%Owner%' and Project='%ProjectName%' and Layer!='RolloutDone' and Layer!='backlogcolumn';";
+		String SqlSelect ="SELECT * FROM ISObeyaDB.cards where Owner='%Owner%' and Project='%ProjectName%' and Layer!='RolloutDone' and Layer!='backlogcolumn' and Layer!='DescriptionDone';";
 		SqlSelect=SqlSelect.replaceAll("%Owner%", pOwner);
 		SqlSelect=SqlSelect.replaceAll("%ProjectName%", pProject);
 		

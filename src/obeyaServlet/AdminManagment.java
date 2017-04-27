@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,18 +17,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beanjson.KPIInformation;
 import database.MySqlStatmentProjects;
+import database.MysqlAdmin;
 
 /**
  * Servlet implementation class KPIServlet
  */
-@WebServlet("/KPIManagment")
-public class KPIManagment extends EncodingServlet {
+@WebServlet("/AdminManagment")
+public class AdminManagment extends EncodingServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public KPIManagment() {
+    public AdminManagment() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -54,26 +56,20 @@ public class KPIManagment extends EncodingServlet {
 			ObjectMapper mapper = new ObjectMapper();
 		 
 			
-			String parametre=(String)request.getParameter("NewKPI");
-			String jsonInString=new String(parametre.getBytes(),"UTF-8");
-			String SqlMode= request.getParameter("SqlMode");
-			KPIInformation obj =  mapper.readValue(jsonInString, KPIInformation.class);
-			MySqlStatmentProjects sqlDatabase = new MySqlStatmentProjects();
-			//JSON from String to Object
-			//System.out.println("jsonString: " + jsonInString);
-			if (!SqlMode.equalsIgnoreCase("delete")){
-				if (SqlMode.equalsIgnoreCase("insert")){
-					sqlDatabase.AddKPIValue(obj.getKPI(), obj.getPojectName(), obj.getEvent());
-				}else if (SqlMode.equalsIgnoreCase("update")){
-					
-				}
-			}
-			else{
-				
-				
-			}
+			String Sqlline=(String)request.getParameter("SQLLINE");
+			String jsonInString=new String(Sqlline.getBytes(),"UTF-8");
+			 
+			 
+			MysqlAdmin sqlDatabase = new MysqlAdmin();
+			ArrayList<String> result = sqlDatabase.execQuery(jsonInString);
 			
-			response.getWriter().write("0");
+			for (int i=0;i<result.size();i++){
+				response.getWriter().write(result.get(i));
+			}
+		 
+			 
+			 
+			 
 		} catch (Exception e) {
 	
 			//e.printStackTrace();

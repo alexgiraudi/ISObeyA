@@ -21,6 +21,9 @@ public class MySqlGenericStatment {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 
+			String connectionUrl = "jdbc:mysql://localhost:3306/ISObeyaDB?useUnicode=true&characterEncoding=UTF-8";
+			String connectionUser = "root";
+			String connectionPassword = "heavydrinker";
 			conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
 			System.out.println("=====================================> Connexion creation !");
 			

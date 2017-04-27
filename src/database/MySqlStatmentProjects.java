@@ -391,6 +391,30 @@ public ArrayList<String> getSubKPI(String Project)throws Exception {
 		return obj;
 	}
 	
+	public String GetProjectInfoFromField(String pProjectName, String pField)throws Exception {
+		
+		Statement stmtProject =GetStatement();
+		ResultSet rs = null;
+		String lFieldValue=null;
+		String SqlQuery = "select * from ISObeyaDB.projects where Name='%pProjectName%';".replaceAll("%pProjectName%", pProjectName);
+		try {
+			rs = stmtProject.executeQuery(SqlQuery);
+			while (rs.next()) {
+				lFieldValue=rs.getString(pField);
+			}
+			
+		} catch (SQLException e) {
+			 
+	        throw new Exception("Message: " + e.getMessage() + ". " +  e.getErrorCode(), e);
+		
+		} catch (Exception e) {
+			 throw new Exception("Message: " + e.getMessage() + ". "  , e); 
+		}finally {
+			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+		}
+		return lFieldValue;
+	}
+	
 	private projectInformation SetBeanProject(ResultSet resultSet){
 		
 //		projectInformation theProject = new projectInformation();

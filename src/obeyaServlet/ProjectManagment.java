@@ -61,7 +61,7 @@ public class ProjectManagment extends EncodingServlet {
 				
 				String parametre=(String)request.getParameter("NewProject");
 				String jsonInString=new String(parametre.getBytes(),"UTF-8");
-				
+				jsonInString=jsonInString.replaceAll("'", "`");
 				String SqlMode= request.getParameter("SqlMode");
 				projectInformation obj =  mapper.readValue(jsonInString, projectInformation.class);
 				MySqlStatmentProjects sqlDatabase = new MySqlStatmentProjects();

@@ -1,4 +1,4 @@
-@CHARSET "US-ASCII";
+@CHARSET "US-ASCII";#containerInfo {  display: flex;                  /* establish flex container */  flex-direction: row;            /* default value; can be omitted */  flex-wrap: nowrap;              /* default value; can be omitted */  justify-content: space-between; /* switched from default (flex-start, see below) */  background-color: #FFFFF;  margin-top:30px;    opacity: 0;       -webkit-transition: opacity 3s ease-in;       -moz-transition: opacity 3s ease-in;        -ms-transition: opacity 3s ease-in;         -o-transition: opacity 3s ease-in;            transition: opacity 3s ease-in;  }#containerInfo > div {  width: 500px;  border-left: 2px solid darkred;  border-bottom : 0.5px solid darkblue;}#containerInfo > div h3 {		white-space: nowrap;	overflow: hidden;	font-size: 22px;	}#containerInfo > div span {font-size: 20px;}#containerInfo.load {    opacity: 1;}
 .alex-table {
  font-size:14px;
   font-family: Calibri;
@@ -716,7 +716,7 @@ table .TableSteercoGlobal, th .TableSteercoGlobal, td .TableSteercoGlobal, thead
      transform:scale(1.25);
 }
 
-#ProjectName{
+#ProjectName,#UserName{
 	margin:5px;
 	color: #d0ceff;
 	border-radius: 6px;
