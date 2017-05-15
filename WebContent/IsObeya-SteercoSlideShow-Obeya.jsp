@@ -277,9 +277,13 @@
 													<button title="Blocker">
 														<i class="glyphicon glyphicon-thumbs-down"></i>
 													</button>
-													<button id="logTemplate" href="" data-toggle="modal"
-														title="Log">
-														<i class="glyphicon glyphicon-pushpin"></i>
+													<button id="SelectAllAdd" href="" data-toggle="modal"
+														title="Select All">
+														<i class="glyphicon glyphicon-transfer"></i>
+													</button>
+													<button id="ClearAllAdd" href="" data-toggle="modal"
+														title="Clear">
+														<i class="glyphicon glyphicon-repeat"></i>
 													</button>
 <!-- 													<button title="Edit"> -->
 <!-- 														<i class="glyphicon glyphicon-edit"></i> -->
@@ -293,7 +297,7 @@
 											<div class="card__body story" id="CardBodyTemplateAddCard">
 												<div class="card__body-content">
 													<div class="card__body-title" title="ContentCard" id="CardBodyValueTemplate">
-														<textarea id="textareaEdit" class="form-control"></textarea>
+														<textarea id="textareaAddForm" class="form-control" placeholder="Enter description task here !"></textarea>
 													</div>
 		
 													<div class="card__body-meta">
@@ -405,9 +409,13 @@
 													<button title="Blocker">
 														<i class="glyphicon glyphicon-thumbs-down"></i>
 													</button>
-													<button id="logEdit" href="" data-toggle="modal"
-														title="Log">
-														<i class="glyphicon glyphicon-pushpin"></i>
+													<button id="SelectAllEdit" href="" data-toggle="modal"
+														title="Select All">
+														<i class="glyphicon glyphicon-transfer"></i>
+													</button>
+													<button id="ClearAllEdit" href="" data-toggle="modal"
+														title="Clear">
+														<i class="glyphicon glyphicon-repeat"></i>
 													</button>
 <!-- 													<button title="Edit"> -->
 <!-- 														<i class="glyphicon glyphicon-edit"></i> -->
@@ -421,7 +429,7 @@
 											<div class="card__body story" id="CardBodyEdit" title="CardBodyTheme">
 												<div class="card__body-content">
 													<div class="card__body-title" title="ContentCard" id="CardBodyValueEdit">
-														<textarea id="textareaEdit" class="form-control">Here is the description of the task !</textarea>
+														<textarea id="textareaEditForm" class="form-control"></textarea>
 													</div>
 		
 													<div class="card__body-meta">
@@ -729,7 +737,7 @@
 				$( "#OpenAddForm" ).click(function() {
 					 if($("#ProjectName").html()!="" && $("#ProjectName").html()!="0" && $("#ProjectName").html()!="null"){
 						 $("#FormAdd").modal();
-						 $("#FormAdd").find($("textarea[id='textareaEdit']")).val("");
+						 $("#FormAdd").find($("textarea[id='textareaAddForm']")).val("");
 						 var bloker = $("#FormAdd").find("span.blocking-indicator__indicator");
 						 $(bloker).hide();
 					 }
@@ -770,7 +778,7 @@
                     $(card).find("button[title='Priority']").removeClass().addClass($(carEdit).find("button[title='Priority']").attr('Class'));
                     $(card).find("button[title='Owner']").html( $(carEdit).find("button[title='Owner']").html());
                  
-                    $(card).find("[title='ContentCard']").html( $(carEdit).find($("textarea[id='textareaEdit']")).val());
+                    $(card).find("[title='ContentCard']").html( $(carEdit).find($("textarea[id='textareaEditForm']")).val());
                    
                    
                     myClassList =$(card).find("div[class='card__body-content']").parent().prop("classList");
@@ -832,7 +840,7 @@
 					
 						var NewCard = ReferenceCard;
 						
-						var actiontext =$("#cardTemplate").find($("textarea[id='textareaEdit']")).val();
+						var actiontext =$("#cardTemplate").find($("textarea[id='textareaAddForm']")).val();
 						NewCard=NewCard.replace("ValAction",actiontext);
 												
 						var UID = generateUUID();
@@ -979,6 +987,22 @@
 						}
 					});
 					
+					$( "body" ).on( "click","button[id='ClearAllEdit']", function(e) {
+					    $("#textareaEditForm").val("");
+					  });
+					
+					$( "body" ).on( "click","button[id='SelectAllEdit']", function(e) {
+					    $("#textareaEditForm").select();
+					  });
+					
+					$( "body" ).on( "click","button[id='ClearAllAdd']", function(e) {
+					    $("#textareaAddForm").val("");
+					  });
+					
+					$( "body" ).on( "click","button[id='SelectAllAdd']", function(e) {
+					    $("#textareaAddForm").select();
+					  });
+					
 					//-- Manage New Card Edition ================================================== -->	
 					$( "body" ).on( "click","button[title='Edit']", function(e) {
 
@@ -1025,7 +1049,7 @@
                         $(carEdit).find("button[title='Owner']").html(Owner);
                      
                        
-                        $(carEdit).find($("textarea[id='textareaEdit']")).val(ContentCard);
+                        $(carEdit).find($("textarea[id='textareaEditForm']")).val(ContentCard);
                         myClassList =$("#CardBodyEdit").prop("classList");
                         $.each( $(myClassList), function( key, element ) {
 					    		$("#CardBodyEdit").removeClass(element);
@@ -1361,6 +1385,7 @@
 					    $("#CardBodyEdit").addClass(myClassList[1]);
 					    
 					});
+					
 					
 											
 					$(document.body).on('click', "div[id='DueDateDivTemplate']", function(e) {
