@@ -31,7 +31,46 @@
 <script>
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
 	function openNav() {
-		 $("#EditProgress").val($("#today").progressbar("value"));
+		 $("#EditProgress").val($("#today").progressbar("value")*100);
+		 $("#EditProjectDescription").val($("#ProjectDescription").find("b").html());
+			$("#EditKeyPoint1").val($("#KeyPoint1").text().trim());
+			$("#EditKeyPoint2").val($("#KeyPoint2").text().trim());
+			$("#EditKeyPoint3").val($("#KeyPoint3").text().trim());
+			$("#EditNote1").val($("#Remark1").text().trim());
+			$("#EditNote2").val($("#Remark2").text().trim());
+			$("#EditNote3").val($("#Remark3").text().trim());
+			$("#EditStep1").val($("#NextStep1").text().trim());
+			$("#EditStep2").val($("#NextStep2").text().trim());
+			$("#EditKickoff").val($("#NextMilestoneDesign").text());
+			$("#EditDesign").val($("#NextMilestoneRFP").text());
+			$("#EditRFP").val($("#NextMilestonePurchasing").text());
+			$("#EditPurchasing").val($("#NextMilestoneProvisioning").text());
+			$("#EditProvisioning").val($("#NextMilestoneBuild").text());
+			$("#EditBuild").val($("#NextMilestoneRollout").text());
+			$("#EditRollout").val($("#NextMilestoneGoLive").text());
+			//$("#EditProgress").val($("#today").progressbar("value").text());
+			$("#EditTotalCapex").val($("#CapexBudget").text());
+			$("#EditOfficialCapex").val($("#CapexOfficial").text());
+			$("#EditOutlookCapex").val($("#CapexOutlook").text());
+			$("#EditOrderedCapex").val($("#CapexOrdered").text());
+			$("#EditTotalOpex").val($("#OpexBudget").text());
+			$("#EditOfficialOpex").val($("#OpexOfficial").text());
+			$("#EditOutlookOpex").val($("#OpexOutlook").text());
+			$("#EditOrderedOpex").val($("#OpexOrdered").text());
+			
+			$("#EditActor1").val($("#Actor1").text());
+			$("#EditActor2").val($("#Actor2").text());
+			$("#EditActor3").val($("#Actor3").text());
+			$("#EditActor4").val($("#Actor4").text());
+			$("#EditActor5").val($("#Actor5").text());
+			
+			$("#EditActorName1").val($("#ActorName1").text());
+			$("#EditActorName2").val($("#ActorName2").text());
+			$("#EditActorName3").val($("#ActorName3").text());
+			$("#EditActorName4").val($("#ActorName4").text());
+			$("#EditActorName5").val($("#ActorName5").text());
+			
+			
 		 if($("#ProjectName").html()!="" && $("#ProjectName").html()!="0" && $("#ProjectName").html()!="null"){
 			 document.getElementById("mySidenavLeft").style.width = "280px";
 			 document.getElementById("mySidenavRight").style.width = "280px";
@@ -60,6 +99,73 @@
 	    document.getElementById("mySidenavRight").style.width = "0";
 	    document.getElementById("TailSteerco").style.marginLeft = "0";
 	    document.getElementById("mySidenavRight").style.marginLeft = "0";
+	    var pValue = $("#EditProgress").val();
+	    $("#today").progressbar({value:pValue});
+	    $("#ProjectDescription").find("b").html($("#EditProjectDescription").val());
+	    $("#KeyPoint1").text($("#EditKeyPoint1").val());
+	    $("#KeyPoint2").text($("#EditKeyPoint2").val());
+	    $("#KeyPoint3").text($("#EditKeyPoint3").val());
+	    
+	    $("#Remark1").text($("#EditNote1").val());
+	    $("#Remark2").text($("#EditNote2").val());
+	    $("#Remark3").text($("#EditNote3").val());
+	    
+	    $("#NextStep1").text($("#EditStep1").val());
+	    $("#NextStep2").text($("#EditStep2").val());
+	    
+	    $("#NextMilestoneDesign").text($("#EditKickoff").val());
+	    $("#NextMilestoneRFP").text($("#EditDesign").val());
+	    $("#NextMilestonePurchasing").text($("#EditRFP").val());
+	    $("#NextMilestoneProvisioning").text($("#EditPurchasing").val());
+	    $("#NextMilestoneBuild").text($("#EditProvisioning").val());
+	    $("#NextMilestoneRollout").text($("#EditBuild").val());
+	    $("#NextMilestoneGoLive").text($("#EditRollout").val());
+	     
+		
+	    $("#CapexBudget").text($("#EditTotalCapex").val());
+	    $("#CapexOfficial").text($("#EditOfficialCapex").val());
+	    $("#CapexOutlook").text($("#EditOutlookCapex").val());
+	    $("#CapexOrdered").text($("#EditOrderedCapex").val());
+	    $("#OpexBudget").text($("#EditTotalOpex").val());
+	    $("#OpexOfficial").text($("#EditOfficialOpex").val());
+	    $("#OpexOutlook").text($("#EditOutlookOpex").val());	
+	    $("#OpexOrdered").text($("#EditOrderedOpex").val());	
+			
+		
+	    //Calculation
+	    var val1 = $("#EditTotalCapex").val()*1;
+	    var val2=$("#EditTotalOpex").val()*1;
+	    var result=(val1+val2)*1;
+	    $("#GlobalBudget").text(result);
+	    
+	    val1 = $("#EditOfficialCapex").val()*1;
+	    val2=$("#EditOfficialOpex").val()*1;
+	    result=(val1+val2)*1;
+	    $("#GlobalOfficial").text(result);
+	    
+	    val1 = $("#EditOutlookCapex").val()*1;
+	    val2=$("#EditOutlookOpex").val()*1;
+	    result=(val1+val2)*1;
+	    $("#GlobalOutlook").text(result);
+	    
+	    val1 = $("#EditOrderedCapex").val()*1;
+	    val2=$("#EditOrderedOpex").val()*1;
+	    result=(val1+val2)*1;
+	    $("#GlobalOrdered").text(result);
+	    
+	    
+	    $("#Actor1").text($("#EditActor1").val());
+	    $("#Actor2").text($("#EditActor2").val());
+	    $("#Actor3").text($("#EditActor3").val());
+	    $("#Actor4").text($("#EditActor4").val());
+	    $("#Actor5").text($("#EditActor5").val());
+	    $("#ActorName1").text($("#EditActorName1").val());
+	    $("#ActorName2").text($("#EditActorName2").val());	
+	    $("#ActorName3").text($("#EditActorName3").val());	
+	    $("#ActorName4").text($("#EditActorName4").val());	
+	    $("#ActorName5").text($("#EditActorName5").val());	
+			
+		
 	}
 </script>
 
@@ -172,7 +278,7 @@
 
 					<div id="ProjectName">
 					    <a onclick="openNav()" id="OpenNav" style="display: inline; float: left; margin-right: 5px;" href="" data-toggle="modal"><i class="glyphicon glyphicon-pencil"></i></a>
-						<h4>Security For Business<img align="right" src="./Librairies/images/TAS.png"></img></h4>
+						<h4 id="ProjectNameLabel" >Security For Business<img align="right" src="./Librairies/images/TAS.png"></img></h4>
 					</div>
 
 					<div class="Steerco">
@@ -188,13 +294,13 @@
 
 							<div id="KeyPoints">
 								<h4>Key Points</h4>
-								<p id="KeyPoint1" class="pMiddle">
+								<p id="KeyPoint1" class="pLeft">
 									<b>Key Point 1 - </b>JV architecture workshop in progress
 								</p>
-								<p id="KeyPoint2" class="pMiddle">
+								<p id="KeyPoint2" class="pLeft">
 									<b>Key Point 2 - </b>Building archtitecture from existing Italian secure functional blocks [Internet]
 								</p>
-								<p id="KeyPoint3" class="pMiddle">
+								<p id="KeyPoint3" class="pLeft">
 									<b>Key Point 3 - </b>Purchasing organization not defined, PVET 1 unplanned, TAS purchasing leader uniditentified
 								</p>
 							</div>
@@ -239,7 +345,7 @@
 												 
 											</td>
 											<td></td>
-											<td class="PhaseProject" target="blue">
+											<td class="PhaseProject" target="orange">
 												 
 											</td>
 											<td></td>
@@ -262,13 +368,13 @@
 									</table>
 
 								</div>
-								<p id="Remark1" class="pMiddle">
+								<p id="Remark1" class="pLeft">
 									<b>Note: </b>The Gate 2 will be postponed due to purchaising organization & PVET 1 planification
 								</p>
-								<p id="Remark2"class="pMiddle">
+								<p id="Remark2"class="pLeft">
 									<b>Note: </b>Awaiting PVET date.
 								</p>
-								<p  id="Remark3" class="pMiddle">
+								<p  id="Remark3" class="pLeft">
 									<b>Note: </b>Purchaising workpackages : 1 WP COTS Soft - 1 WP COTS hard - 1 WP Investigate Services - 1 WP Services
 									
 								</p>
@@ -278,10 +384,10 @@
 
 							<div id="NextStep">
 								<H4>Next Step</H4>
-								<p id="NextStep1" class="pMiddle">
+								<p id="NextStep1" class="pLeft">
 									<b>Step 1 : </b>PVET 1
 								</p>
-								<p id="NextStep2" class="pMiddle">
+								<p id="NextStep2" class="pLeft">
 									<b>Step 2: </b>Gate 2 with JV architecture validated
 								</p>
 
@@ -455,23 +561,23 @@
 									</tr>
 									<tr>
 										<td class="People">
-											<p id="TeamCDP">B.Wiart</p>
+											<p id="ActorName1">B.Wiart</p>
 										</td>
 										<td class="tdwhite">---</td>
 										<td class="People">
-											<p id="TeamDA">A.Giraudi</p>
+											<p id="ActorName2">A.Giraudi</p>
 										</td>
 										<td class="tdwhite">---</td>
 										<td class="People">
-											<p id="TeamArchi">JV D.A</p>
+											<p id="ActorName3">JV D.A</p>
 										</td>
 										<td class="tdwhite">---</td>
 										<td class="People">
-											<p id="TeamIntegrator">T.Lorenzi</p>
+											<p id="ActorName4">T.Lorenzi</p>
 										</td>
 										<td class="tdwhite">---</td>
 										<td class="People">
-											<p id="TeamRollout">S.Sereys</p>
+											<p id="ActorName5">S.Sereys</p>
 										</td>
 									</tr>
 								</table>
@@ -481,7 +587,7 @@
 							<div style="align: center;" id="KPI">
 								<h4>KPI</h4>
 									<p>The KPI will be defined when the orchestration at the JV Level will be identified.</p>
-<!-- 								<div style="display: middle;" id="chartContainer" /> -->
+								<div style="display: middle;" id="chartContainer" /> 
 
 
 							</div>
@@ -490,42 +596,19 @@
 				</div>
 	<!-- Tab Navigation Contents ================================================== -->	
 	<script type="text/javascript">
-// 	 dataPoints: [
-// 	              {  y: 27.3, indexLabel:"label1", exploded: true },
-// 	              {  y: 16.8, indexLabel:"label2" },
- 
-// 			window.onload = function () {
-// 						var dataPoints = [];
-// 					    $.getJSON("http://canvasjs.com/services/data/datapoints.php?xstart=1&ystart=10&length=100&type=json", function(data) {  
-// 						$.each(data, function(key, value){
-// 							dataPoints.push({x: value[0], y: parseInt(value[1])});
-// 						});
-// 						var chart = new CanvasJS.Chart("chartContainer",{
-// 							title: {
-// 									text: "KPI OBSO 2003",
-// 									fontSize: 14,
-// 									fontFamily: "Calibri",
-								
-// 								},
-// 								animationEnabled: true,
-// 								theme: "theme1",
-// 								data: [
-// 								{
-// 									type: "doughnut",
-// 									indexLabelFontFamily: "Calibri",
-// 									indexLabelFontSize: 14,
-// 									startAngle: 0,
-// 									indexLabelFontColor: "dimgrey",
-// 									indexLabelLineColor: "darkgrey",
-// 								dataPoints : dataPoints,
-// 							}]
-// 						});
-// 						chart.render();
-// 					});
-			
-// 					
-// 			}
+	
 			$(document).ready(function(){
+				$.urlParam = function(name){
+				    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+				    if (results==null){
+				       return null;
+				    }
+				    else{
+				       return results[1] || 0;
+				    }
+				}
+				$("#ProjectNameLabel").html(unescape($.urlParam('ProjectName')));
+				$("#ProjectName").html(unescape($.urlParam('ProjectName')));
 				$(function() {
 					$("#today").progressbar({
 						value: 0.1
@@ -535,37 +618,7 @@
 					}, 2000);
 				  });
 				
-				$("#EditProjectDescription").val($("#ProjectDescription").find("b").html());
-				$("#EditKeyPoint1").val($("#KeyPoint1").text().trim());
-				$("#EditKeyPoint2").val($("#KeyPoint2").text().trim());
-				$("#EditKeyPoint3").val($("#KeyPoint3").text().trim());
-				$("#EditNote1").val($("#Remark1").text().trim());
-				$("#EditNote2").val($("#Remark2").text().trim());
-				$("#EditNote3").val($("#Remark3").text().trim());
-				$("#EditStep1").val($("#NextStep1").text().trim());
-				$("#EditStep2").val($("#NextStep2").text().trim());
-				$("#EditKickoff").val($("#NextMilestoneDesign").text());
-				$("#EditDesign").val($("#NextMilestoneRFP").text());
-				$("#EditRFP").val($("#NextMilestonePurchasing").text());
-				$("#EditPurchasing").val($("#NextMilestoneProvisioning").text());
-				$("#EditProvisioning").val($("#NextMilestoneBuild").text());
-				$("#EditBuild").val($("#NextMilestoneRollout").text());
-				$("#EditRollout").val($("#NextMilestoneGoLive").text());
-				$("#EditProgress").val($("#today").progressbar("value").text());
-				$("#EditTotalCapex").val($("#CapexBudget").text());
-				$("#EditOfficialCapex").val($("#CapexOfficial").text());
-				$("#EditOutlookCapex").val($("#CapexOutlook").text());
-				$("#EditOrderedCapex").val($("#CapexOrdered").text());
-				$("#EditTotalOpex").val($("#OpexBudget").text());
-				$("#EditOfficialOpex").val($("#OpexOfficial").text());
-				$("#EditOutlookOpex").val($("#OpexOutlook").text());
-				$("#EditOrderedOpex").val($("#OpexOrdered").text());
 				
-				$("#EditActor1").val
-				$("#EditActor2").val
-				$("#EditActor1").val
-				$("#EditActor1").val
-				$("#EditActor1").val
 				
 				$( "body" ).on( "click","span[title='Tendance']", function(e) {
 					

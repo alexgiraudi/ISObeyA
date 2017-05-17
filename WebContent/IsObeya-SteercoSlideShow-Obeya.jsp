@@ -297,7 +297,7 @@
 											<div class="card__body story" id="CardBodyTemplateAddCard">
 												<div class="card__body-content">
 													<div class="card__body-title" title="ContentCard" id="CardBodyValueTemplate">
-														<textarea id="textareaAddForm" class="form-control" placeholder="Enter description task here !"></textarea>
+														<textarea  class="TextareaClass" id="textareaAddForm" class="form-control" placeholder="Enter description task here !"></textarea>
 													</div>
 		
 													<div class="card__body-meta">
@@ -429,7 +429,7 @@
 											<div class="card__body story" id="CardBodyEdit" title="CardBodyTheme">
 												<div class="card__body-content">
 													<div class="card__body-title" title="ContentCard" id="CardBodyValueEdit">
-														<textarea id="textareaEditForm" class="form-control"></textarea>
+														<textarea class="TextareaClass" id="textareaEditForm" class="form-control"></textarea>
 													</div>
 		
 													<div class="card__body-meta">
