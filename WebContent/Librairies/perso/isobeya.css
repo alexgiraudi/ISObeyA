@@ -84,7 +84,7 @@ margin-right:20px;
 
 
 }
-
+#HeaderProject{	margin-top:40px;	transition: margin-left .5s;	margin-bottom:40px;	max-height:100px;	}
 #TailSteerco{
 	margin-top:40px;
 	transition: margin-left .5s;	margin-bottom:40px;

@@ -81,12 +81,172 @@
 	<!-- End Sticky Bar ================================================== -->
 
 	<!-- Contents ================================================== -->
+	<div id="HeaderProject">
+		<div style="background: none;max-height:150px;" class="board__columns-scrollable-wrapper">
+			<div style="background: none;;max-height:150px;" class="column top-to-bottom" >
+				<div class="column__header" >
+					<h2 style="display: inline;" class="column__header-label">Project Info</h2>
+				</div>
+				<div id="InfoProject"  style="background: none;max-height:150px;" class="column__items-wrapper">
+					<table style="overflow-y: auto;" class="zebra"  >
+						<thead style="margin-bottom:10px;">
+							<tr>
+								<th style="width:20%;"></th>
+								<th style="width:70%;"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr style="margin-left:5px;">
+								<td valign='middle'>
+									<span  style='font-size: 12px;' class='glyphicon glyphicon-tag overRed'/>
+								</td>
+								<td  contenteditable='true' style='font-size: 14px'>infoproject</td>
+							</tr>
+							<tr style="margin-left:5px;">
+								<td valign='middle'>
+									<span  style='font-size: 12px;' class='glyphicon glyphicon-tag overRed'/>
+								</td>
+								<td  contenteditable='true' style='font-size: 14px'>infoproject</td>
+							</tr>
+							<tr style="margin-left:5px;">
+								<td valign='middle'>
+									<span  style='font-size: 12px;' class='glyphicon glyphicon-tag overRed'/>
+								</td>
+								<td  contenteditable='true' style='font-size: 14px'>infoproject</td>
+							</tr>
+							<tr style="margin-left:5px;">
+								<td valign='middle'>
+									<span  style='font-size: 12px;' class='glyphicon glyphicon-tag overRed'/>
+								</td>
+								<td  contenteditable='true' style='font-size: 14px'>infoproject</td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			
+			<div style="background: none;;max-height:150px;" class="column top-to-bottom" >
+				<div class="column__header" >
+					<h2 style="display: inline;max-height:150px;" class="column__header-label">Success</h2>
+				</div>
+				<div id="successProject"  style="background: none;max-height:150px;" class="column__items-wrapper">
+					<table  style="overflow-y: auto;" class="zebra"  >
+						<thead style="margin-bottom:10px;">
+							<tr>
+								<th style="width:20px;"></th>
+								<th style="width:80px;"></th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr style="margin-left:5px;">
+								<td valign='middle'>
+									<span  style='font-size: 12px;' class='glyphicon glyphicon-thumbs-up overRed'/>
+								</td>
+								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
+								
+							</tr>
+							<tr style="margin-left:5px;">
+								<td valign='middle'>
+									<span  style='font-size: 12px;' class='glyphicon glyphicon-thumbs-up overRed'/>
+								</td>
+								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
+								
+							</tr>
+							<tr style="margin-left:5px;">
+								<td valign='middle'>
+									<span  style='font-size: 12px;' class='glyphicon glyphicon-thumbs-up overRed'/>
+								</td>
+								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
+								
+							</tr>
+							
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<div style="background: none;;max-height:150px;" class="column top-to-bottom" >
+				<div class="column__header" >
+					<h2 style="display: inline;max-height:150px;" class="column__header-label">Decision</h2>
+				</div>
+				<div id="DecisionProject"  style="background: none;max-height:150px;" class="column__items-wrapper">
+					<table  style="overflow-y: auto;" class="zebra"  >
+						<thead style="margin-bottom:10px;">
+							<tr>
+								<th style="width:20px;"></th>
+								<th style="width:80px;"></th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr style="margin-left:5px;">
+								<td valign='middle'>
+									<span  style='font-size: 12px;' class='glyphicon glyphicon-king overRed'/>
+								</td>
+								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
+								
+							</tr>
+							<tr style="margin-left:5px;">
+								<td valign='middle'>
+									<span  style='font-size: 12px;' class='glyphicon glyphicon-king overRed'/>
+								</td>
+								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
+								
+							</tr>
+							<tr style="margin-left:5px;">
+								<td valign='middle'>
+									<span  style='font-size: 12px;' class='glyphicon glyphicon-king overRed'/>
+								</td>
+								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
+								
+							</tr>
+							
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<div style="background: none;;max-height:150px;" class="column top-to-bottom" >
+				<div class="column__header" >
+					<h2 style="display: inline;max-height:150px;" class="column__header-label">Project KPI</h2>
+				</div>
+				<div id="KPIProject"  style="background: none;max-height:150px;" class="column__items-wrapper">
+					<center>
+						<h2>245</h2><table><tr><td  contenteditable='true'><span>Number of W2003 Serveurs online</span></td></tr></table>
+					</center>
+				</div>
+			</div>
+			
+			<div style="background: none;;max-height:150px;" class="column top-to-bottom" >
+				<div class="column__header" >
+					<h2 style="display: inline;max-height:150px;" class="column__header-label">Due Date</h2>
+				</div>
+				<div id="DueDateProject"  style="background: none;max-height:150px;" class="column__items-wrapper">
+					<center>
+						<h2>23/12/2017</h2>
+					</center>
+				</div>
+			</div>
+	</div>
+		
+		
+		
+			
+	
+					
+								
 
 	<div id="TailSteerco" >
 		
 					<div class="board__columns-scrollable-wrapper">
 						<div class="column top-to-bottom" id="C1">
 							<div class="column__header" id="Hearder1">
+								
 								<h2 style="display: inline;" class="column__header-label">BACKLOG</h2>
 								<a id="OpenAddForm" style="display: inline; float: right; margin-right: 5px;"
 									href="" data-toggle="modal"><i class="glyphicon glyphicon-pencil"></i></a>
@@ -184,30 +344,12 @@
 						</div>
 
 					</div>
-				
-					<div id="containerInfo">
-						<%
- 							String dueDate = myBeanProjects.GetProjectInfoFromField(request.getParameter("ProjectName"),"KPIGolive");
- 						    String KPI = myBeanProjects.GetProjectInfoFromField(request.getParameter("ProjectName"),"KPI");	
- 						    String Status = myBeanProjects.GetProjectInfoFromField(request.getParameter("ProjectName"),"KPIGlobal");	
-						%> 
-		 				<div>
-							<h3 style="color:darkblue;">DueDate is : 
-							<span class="trailerinfo" style="color:darkgrey;"><%out.println(dueDate); %></span></h3>
-						</div>
-						<div>
-							<h3 style="color:darkblue;">KPI is : 
-							<span style="color:darkgrey;"><%out.println(KPI);%></span></h3>
-						</div>
-						<div>
-							<h3 style="color:darkblue;">Project Status is : 
-							<span><%
-							String line ="<div style='vertical-align: text-bottom;' title='Global' class='%ClassGlobal%'></div>";
-							line=line.replaceAll("%ClassGlobal%",Status);
-							out.println(line);
-							%></span></h3>
-						</div>
-					 </div>
+					
+					
+					    
+					
+				</div>
+					
 					 
 					
 					<!-- Form Log Card -->
@@ -261,7 +403,7 @@
 								</div>
 								<div class="modal-body">
 									<div class="form-group" id="CardContainerTemplate">
-										<div draggable="true" class="cardEdit" id="cardTemplate" tabindex="0" draggable="true" ondragstart="drag(event)">
+										<div class="cardEdit" id="cardTemplate" tabindex="0" >
 											<div class="card__header">
 												<div class="estimator">
 													<button class="estimator__estimate-button Medium"
@@ -393,7 +535,7 @@
 								</div>
 								<div class="modal-body">
 									<div class="form-group" id="CardContainerTemplate">
-										<div draggable="true" class="cardEdit" id="cardEdit" tabindex="0" draggable="true" ondragstart="drag(event)">
+										<div  class="cardEdit" id="cardEdit" tabindex="0">
 											<div class="card__header">
 												<div class="estimator">
 													<button class="estimator__estimate-button Medium"
