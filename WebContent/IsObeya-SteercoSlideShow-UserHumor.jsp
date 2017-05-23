@@ -416,7 +416,7 @@
 								</div>
 								<div class="modal-body">
 									<div class="form-group" id="CardContainerTemplate">
-										<div draggable="true" class="cardEdit" id="cardEdit" tabindex="0" draggable="true" ondragstart="drag(event)">
+										<div class="cardEdit" id="cardEdit" tabindex="0" >
 											<div class="card__header">
 												<div class="estimator">
 													<button class="estimator__estimate-button Medium"
@@ -432,9 +432,13 @@
 													<button title="Blocker">
 														<i class="glyphicon glyphicon-thumbs-down"></i>
 													</button>
-													<button id="logEdit" href="" data-toggle="modal"
-														title="Log">
-														<i class="glyphicon glyphicon-pushpin"></i>
+													<button id="SelectAllEdit" href="" data-toggle="modal"
+														title="Select All">
+														<i class="glyphicon glyphicon-transfer"></i>
+													</button>
+													<button id="ClearAllEdit" href="" data-toggle="modal"
+														title="Clear">
+														<i class="glyphicon glyphicon-repeat"></i>
 													</button>
 <!-- 													<button title="Edit"> -->
 <!-- 														<i class="glyphicon glyphicon-edit"></i> -->
@@ -448,7 +452,7 @@
 											<div class="card__body story" id="CardBodyEdit" title="CardBodyTheme">
 												<div class="card__body-content">
 													<div class="card__body-title" title="ContentCard" id="CardBodyValueEdit">
-														<textarea id="textareaEdit" class="form-control">Here is the description of the task !</textarea>
+														<textarea class = "textareaobeya" id="textareaEditForm" class="form-control">Here is the description of the task !</textarea>
 													</div>
 		
 													<div class="card__body-meta">
@@ -897,7 +901,7 @@
                     $(card).find("button[title='Priority']").removeClass().addClass($(carEdit).find("button[title='Priority']").attr('Class'));
                     $(card).find("button[title='Owner']").html( $(carEdit).find("button[title='Owner']").html());
                  
-                    $(card).find("[title='ContentCard']").html( $(carEdit).find($("textarea[id='textareaEdit']")).val());
+                    $(card).find("[title='ContentCard']").html( $(carEdit).find($("textarea[id='textareaEditForm']")).val());
                    
                    
                     myClassList =$(card).find("div[class='card__body-content']").parent().prop("classList");
@@ -1013,7 +1017,7 @@
                         $(carEdit).find("button[title='Owner']").html(Owner);
                      
                        
-                        $(carEdit).find($("textarea[id='textareaEdit']")).val(ContentCard);
+                        $(carEdit).find($("textarea[id='textareaEditForm']")).val(ContentCard);
                         myClassList =$("#CardBodyEdit").prop("classList");
                         $.each( $(myClassList), function( key, element ) {
 					    
