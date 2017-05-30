@@ -168,7 +168,7 @@ public boolean updateCard(cardInformation pNewCard) throws Exception {
 				NewLine=NewLine.replaceAll("ValCharge", Charge);
 				NewLine=NewLine.replaceAll("ValRaf", Raf);
 				
-				if (!(Layer.equalsIgnoreCase("RolloutDone") || Layer.equalsIgnoreCase("DescriptionDone"))){
+				if (!(Layer.equalsIgnoreCase("RolloutDone"))){
 					NewLine=NewLine.replaceAll("%ClassTagDueDate%", GetClasseForDueDate(DueDate));
 				}
 				 
@@ -243,7 +243,7 @@ private ArrayList<String> GetCardBetweenDate(int pWeek,String pProject)throws Ex
 				
 
 				String NewLine = JspReferenceCard;
-				if (Layer.equalsIgnoreCase("RolloutDone") || Layer.equalsIgnoreCase("DescriptionDone")){
+				if (Layer.equalsIgnoreCase("RolloutDone")){
 					NewLine=NewLine.replaceAll("Style=''", "Style='opacity: 0.54;'");
 				}
 				else
@@ -316,7 +316,7 @@ private ArrayList<String> GetCardBetweenDate(int pWeek,String pProject)throws Ex
 	
 	public ArrayList<String> GetCardByUser(String pProject, String pOwner)throws Exception {
 		
-		String SqlSelect ="SELECT * FROM ISObeyaDB.cards where Owner='%Owner%' and Project='%ProjectName%' and Layer!='RolloutDone' and Layer!='backlogcolumn' and Layer!='DescriptionDone';";
+		String SqlSelect ="SELECT * FROM ISObeyaDB.cards where Owner='%Owner%' and Project='%ProjectName%' and Layer!='RolloutDone' and Layer!='backlogcolumn';";
 		SqlSelect=SqlSelect.replaceAll("%Owner%", pOwner);
 		SqlSelect=SqlSelect.replaceAll("%ProjectName%", pProject);
 		

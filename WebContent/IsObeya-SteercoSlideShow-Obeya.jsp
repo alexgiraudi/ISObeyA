@@ -283,41 +283,45 @@
 
 						<div class="column top-to-bottom" id="C2">
 							<div class="column__header">
-								<h2 class="column__header-label">Description WIP</h2>
+								<h2 class="column__header-label">Incidents</h2>
+								<a id="OpenIncidentForm" style="display: inline; float: right; margin-right: 5px;"
+									href="" data-toggle="modal"><i class="glyphicon glyphicon-pencil"></i></a>
 							</div>
-							<div id="DescriptionWIP" class="column__items-wrapper " ondrop="drop(event)" ondragover="allowDrop(event)">
+							<div id="Incident" class="column__items-wrapper">
+							
 							<%
 							if (request.getParameter("ProjectName")!=null){
 								listCards = new java.util.ArrayList<String>() ;
-								listCards=myBeanCard.GetCard("DescriptionWIP",request.getParameter("ProjectName"));
+								listCards=myBeanCard.GetIncidents(request.getParameter("ProjectName"));
 								for (int i=0;i<listCards.size();i++){
 									out.println(listCards.get(i).toString());
 								}
 							}
 							%> 
 							
-
 							</div>
 						</div>
 
 						<div class="column top-to-bottom" id="C3">
 							<div class="column__header">
-								<h2 class="column__header-label">Description Done</h2>
+								<h2 class="column__header-label">Analyse WIP</h2>
 							</div>
-							<div id="DescriptionDone" class="column__items-wrapper" ondrop="drop(event)" ondragover="allowDrop(event)">
-							
+							<div id="AnalyseWIP" class="column__items-wrapper " ondrop="drop(event)" ondragover="allowDrop(event)">
 							<%
 							if (request.getParameter("ProjectName")!=null){
 								listCards = new java.util.ArrayList<String>() ;
-								listCards=myBeanCard.GetCard("DescriptionDone",request.getParameter("ProjectName"));
+								listCards=myBeanCard.GetCard("AnalyseWIP",request.getParameter("ProjectName"));
 								for (int i=0;i<listCards.size();i++){
 									out.println(listCards.get(i).toString());
 								}
 							}
 							%> 
 							
+
 							</div>
 						</div>
+
+						
 
 						<div class="column top-to-bottom" id="C4">
 							<div class="column__header">
@@ -654,6 +658,224 @@
 									</div>
 									<!-- Indicates a successful or positive action -->
 									<button id="SubmitEditCard" style="display: inline;" type="button" class="btn btn-sm btn-success">Update Card</button>
+									
+									
+									<div style="margin: auto; width: 80%;" class="form-group">
+										<div class="input-group-btn ">
+											
+										
+
+											<div class="dropdown-menu" id="SelectOwnerEditForm">
+												<%
+													//listPeople = new java.util.ArrayList<String>() ;
+													//listPeople=myBeanPeople.GetPeople();
+													for (int i=0;i<listPeople.size();i++){
+														out.println(listPeople.get(i).toString());
+													}
+												%> 
+
+											</div>
+										</div>
+
+									</div>
+									
+									
+									
+									
+
+
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!--  /.modal -->
+					
+					<!-- Form Add Incident -->
+					<div class="modal fade" id="FormAddIncident" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">Create Task</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-group" id="CardContainerTemplate">
+										<div class="cardEdit" id="cardTemplate" tabindex="0" >
+											<div class="card__header">
+												<div class="estimator">
+													<button class="estimator__estimate-button Medium"
+														type="button" title="Priority">M</button>
+												</div>
+												<img src="./Librairies/iobeya/none.png.jpg" class="avatar" />
+												<div class="assigner">
+													<button class="assigner__assignee" data-toggle="dropdown" title="Owner"  id="OwnerTemplate">AGI</button>
+												</div>
+												
+												<div class="card__actions">
+													
+													<button id="SelectAllAdd" href="" data-toggle="modal"
+														title="Select All">
+														<i class="glyphicon glyphicon-transfer"></i>
+													</button>
+													<button id="ClearAllAdd" href="" data-toggle="modal"
+														title="Clear">
+														<i class="glyphicon glyphicon-repeat"></i>
+													</button>
+<!-- 													<button title="Edit"> -->
+<!-- 														<i class="glyphicon glyphicon-edit"></i> -->
+<!-- 													</button> -->
+<!-- 													<button id="deleteTemplate" title="Delete"> -->
+<!-- 														<i class="glyphicon glyphicon-off"></i> -->
+<!-- 													</button> -->
+												</div>
+											</div>
+		
+											<div class="card__body story" id="CardBodyTemplateAddCard">
+												<div class="card__body-content">
+													<div class="card__body-title" title="ContentCard" id="CardBodyValueTemplate">
+														<textarea class = "textareaobeya" id="textareaAddForm" class="form-control" placeholder="Enter description task here !"></textarea>
+													</div>
+		
+													<div class="card__body-meta">
+														
+														<div class="card__body-counts">
+															<span style="color:grey;" id="ProgressTemplate" title="Raf">0</span>
+														</div>
+													</div>
+												</div>
+											</div>
+		
+										</div>
+									</div>
+									
+									
+									<!-- Indicates a successful or positive action -->
+									<button id="SubmitAddIncident" style="display: inline;" type="button" class="btn btn-sm btn-success">Add Incident</button>
+									
+									
+									<div style="margin: auto; width: 80%;" class="form-group">
+										<div class="input-group-btn ">
+											
+										
+
+											<div class="dropdown-menu" id="SelectOwnerAddForm">
+												<%
+													listPeople = new java.util.ArrayList<String>() ;
+													listPeople=myBeanPeople.GetPeople();
+													for (int i=0;i<listPeople.size();i++){
+														out.println(listPeople.get(i).toString());
+													}
+												%> 
+
+											</div>
+										</div>
+
+									</div>
+									
+									
+									
+									
+
+
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!--  /.modal -->
+					
+					<!-- Form Edit Card -->
+					<div class="modal fade" id="FormEditIncident" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabelEdit">Modify Task</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-group" id="CardContainerTemplate">
+										<div  class="cardEdit" id="cardEdit" tabindex="0">
+											<div class="card__header">
+												<div class="estimator">
+													<button class="estimator__estimate-button Medium"
+														type="button"   title="Priority">M</button>
+												</div>
+												<img src="./Librairies/iobeya/none.png.jpg" class="avatar" />
+												<div class="assigner">
+													<button class="assigner__assignee" data-toggle="dropdown" title="Owner"  id="OwnerEdit">AGI</button>
+												</div>
+												
+												<div class="card__actions">
+													
+													<button id="SelectAllEdit" href="" data-toggle="modal"
+														title="Select All">
+														<i class="glyphicon glyphicon-transfer"></i>
+													</button>
+													<button id="ClearAllEdit" href="" data-toggle="modal"
+														title="Clear">
+														<i class="glyphicon glyphicon-repeat"></i>
+													</button>
+<!-- 													<button title="Edit"> -->
+<!-- 														<i class="glyphicon glyphicon-edit"></i> -->
+<!-- 													</button> -->
+<!-- 													<button id="deleteEdit" title="Delete"> -->
+<!-- 														<i class="glyphicon glyphicon-off"></i> -->
+<!-- 													</button> -->
+												</div>
+											</div>
+		
+											<div class="card__body story" id="CardBodyEdit" title="CardBodyTheme">
+												<div class="card__body-content">
+													<div class="card__body-title" title="ContentCard" id="CardBodyValueEdit">
+														<textarea class = "textareaobeya" id="textareaEditForm" class="form-control"></textarea>
+													</div>
+		
+													<div class="card__body-meta">
+														
+														
+														<div class="card__body-counts">
+															
+															<span style="color:grey;" id="ProgressEdit" title="Raf">0</span>
+														</div>
+													</div>
+												</div>
+											</div>
+		
+										</div>
+									</div>
+									
+									
+									
+									<div class="form-group">
+									  <label for="example-number-input" >Raf</label>
+									  <div id="slider3">
+										  <div id="custom-handleRaf" class="ui-slider-handle"></div>
+										    <script>
+											  $( function() {
+											    var handleRaf = $( "#custom-handleRaf" );
+											    
+											    $( "#slider3" ).slider({
+											      create: function() {
+											    	  handleRaf.text( $( this ).slider( "value" ) );
+											      },
+											      slide: function( event, ui ) {
+											    	  handleRaf.text( ui.value );
+											        $( "#ProgressEdit" ).html(ui.value)
+											      }
+											    });
+											  } );
+											  </script>
+									  </div>
+									</div>
+									<!-- Indicates a successful or positive action -->
+									<button id="SubmitEditIncident" style="display: inline;" type="button" class="btn btn-sm btn-success">Update Incident</button>
 									
 									
 									<div style="margin: auto; width: 80%;" class="form-group">
