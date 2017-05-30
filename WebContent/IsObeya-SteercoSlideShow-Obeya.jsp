@@ -85,7 +85,7 @@
 		<div style="background: none;max-height:150px;" class="board__columns-scrollable-wrapper">
 			<div style="background: none;;max-height:150px;" class="column top-to-bottom" >
 				<div class="column__header" >
-					<h2 style="display: inline;" class="column__header-label">Project Info</h2>
+					<h2 style="display: inline;color:#0000FF;" class="column__header-label">Project Info</h2>
 				</div>
 				<div id="InfoProject"  style="background: none;max-height:150px;" class="column__items-wrapper">
 					<table style="overflow-y: auto;" class="zebra"  >
@@ -127,51 +127,11 @@
 			</div>
 			
 			
-			<div style="background: none;;max-height:150px;" class="column top-to-bottom" >
-				<div class="column__header" >
-					<h2 style="display: inline;max-height:150px;" class="column__header-label">Success</h2>
-				</div>
-				<div id="successProject"  style="background: none;max-height:150px;" class="column__items-wrapper">
-					<table  style="overflow-y: auto;" class="zebra"  >
-						<thead style="margin-bottom:10px;">
-							<tr>
-								<th style="width:20px;"></th>
-								<th style="width:80px;"></th>
-								
-							</tr>
-						</thead>
-						<tbody>
-							<tr style="margin-left:5px;">
-								<td valign='middle'>
-									<span  style='font-size: 12px;' class='glyphicon glyphicon-thumbs-up overRed'/>
-								</td>
-								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
-								
-							</tr>
-							<tr style="margin-left:5px;">
-								<td valign='middle'>
-									<span  style='font-size: 12px;' class='glyphicon glyphicon-thumbs-up overRed'/>
-								</td>
-								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
-								
-							</tr>
-							<tr style="margin-left:5px;">
-								<td valign='middle'>
-									<span  style='font-size: 12px;' class='glyphicon glyphicon-thumbs-up overRed'/>
-								</td>
-								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
-								
-							</tr>
-							
-							
-						</tbody>
-					</table>
-				</div>
-			</div>
+			
 			
 			<div style="background: none;;max-height:150px;" class="column top-to-bottom" >
 				<div class="column__header" >
-					<h2 style="display: inline;max-height:150px;" class="column__header-label">Decision</h2>
+					<h2 style="display: inline;max-height:150px;color:#0000FF;" class="column__header-label">Decision</h2>
 				</div>
 				<div id="DecisionProject"  style="background: none;max-height:150px;" class="column__items-wrapper">
 					<table  style="overflow-y: auto;" class="zebra"  >
@@ -213,9 +173,59 @@
 			
 			<div style="background: none;;max-height:150px;" class="column top-to-bottom" >
 				<div class="column__header" >
-					<h2 style="display: inline;max-height:150px;" class="column__header-label">Project KPI</h2>
+					<h2 style="display: inline;max-height:150px;color:#0000FF;" class="column__header-label">Short KPI</h2>
 				</div>
-				<div id="KPIProject"  style="background: none;max-height:150px;" class="column__items-wrapper">
+				<div id="subKPIProject"  style="background: none;max-height:150px;" class="column__items-wrapper">
+					<table  cellspacing="20" style="overflow-y: auto;" class="zebra"  >
+						<thead style="margin-bottom:10px;">
+							<tr>
+								<th style="width:20px;"></th>
+								<th style="width:50px;"></th>
+								<th style="width:20px;"></th>
+								<th style="width:30px;"></th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr style="margin-left:5px;">
+								<td valign='middle'>
+									<span  style='font-size: 12px;' class='glyphicon glyphicon-thumbs-up overRed'/>
+								</td>
+								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
+								<td  style='font-size: 14px;text-align: left;'> -> </td>
+								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>4567</td>
+								
+							</tr>
+							<tr style="margin-left:5px;">
+								<td valign='middle'>
+									<span  style='font-size: 12px;' class='glyphicon glyphicon-thumbs-up overRed'/>
+								</td>
+								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
+								<td  style='font-size: 14px;text-align: left;'> -> </td>
+								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>4567</td>
+								
+							</tr>
+							<tr style="margin-left:5px;">
+								<td valign='middle'>
+									<span  style='font-size: 12px;' class='glyphicon glyphicon-thumbs-up overRed'/>
+								</td>
+								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
+								<td  style='font-size: 14px;text-align: left;'> -> </td>
+								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>4567</td>
+								
+							</tr>
+							
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<div style="background: none;;max-height:150px;" class="column top-to-bottom" >
+				<div class="column__header" >
+					<h2 style="display: inline;max-height:150px;color:#0000FF;" class="column__header-label">Project KPI</h2>
+				</div>
+				<div  id="KPIProject" style="background: none;max-height:150px;" class="column__items-wrapper">
 					<center>
 						<h2>245</h2><table><tr><td  contenteditable='true'><span>Number of W2003 Serveurs online</span></td></tr></table>
 					</center>
@@ -224,11 +234,15 @@
 			
 			<div style="background: none;;max-height:150px;" class="column top-to-bottom" >
 				<div class="column__header" >
-					<h2 style="display: inline;max-height:150px;" class="column__header-label">Due Date</h2>
+					
+					<h2 style="display: inline;max-height:150px;color:#0000FF;" class="column__header-label">Due Date</h2>
+					
 				</div>
 				<div id="DueDateProject"  style="background: none;max-height:150px;" class="column__items-wrapper">
 					<center>
 						<h2>23/12/2017</h2>
+						
+						<span Title='SaveTagInfoProject' style='font-size: 12px;' class='glyphicon glyphicon-save overRed'/>
 					</center>
 				</div>
 			</div>
@@ -687,6 +701,8 @@
 				    var str = this;
 				    return str.replace(new RegExp(find, 'g'), replace);
 				};
+				
+				
 	
 				function generateUUID() {
 				    var d = new Date().getTime();
@@ -871,6 +887,41 @@
  					    }
  					}); 
  				 
+					
+				};
+				
+				function GetHeaderInfo(TagName, element){
+				  
+
+				  $.ajax({
+					    type: 'get', // it's easier to read GET request parameters
+					    url: 'ProjectKanbanInfoManagement',
+					    dataType: 'TEXT',
+					    data: { 
+					      NewProject: unescape($.urlParam('ProjectName')),
+					      SqlMode:"Get",
+					      TagName: TagName
+					    },
+					    success: function(data) {
+					    	 $(element).html(data);
+					    },
+					    error: function(jqXHR, textStatus, errorThrown){ 
+					    	
+					    	Lobibox.notify('error', {
+			                	icon: false,
+			                	size: 'mini',
+			                    rounded: false,
+			                    delayIndicator: true,
+			                    position: 'right bottom',
+			                    title: 'Error...',
+			                    pauseDelayOnHover: true,
+			                    continueDelayOnInactiveTab: false,
+			                    msg: jqXHR.responseText
+			                });
+					    	
+					    }
+					}); 
+				 
 					
 				};
 				
@@ -1096,6 +1147,8 @@
 				
 				
 				
+				
+				
 				$(document).ready(function(){
 					
 					 
@@ -1108,6 +1161,9 @@
 					       return results[1] || 0;
 					    }
 					}
+					
+					GetHeaderInfo("KPI",$("#KPIProject").find("h2"));
+					GetHeaderInfo("KPIGolive",$("#DueDateProject").find("h2"));
 					
 					$("#ProjectName").html(unescape($.urlParam('ProjectName')));
 
