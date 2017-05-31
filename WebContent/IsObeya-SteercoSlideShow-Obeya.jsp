@@ -37,6 +37,7 @@
 	<jsp:useBean id="myBeanPeople" class="database.MySqlStatmentPeople" scope="application"/>
 	<jsp:useBean id="myBeanCardLog" class="database.MySqlStatmentCardLog" scope="application"/>
 	<jsp:useBean id="myBeanCard" class="database.MySqlStatmentCard" scope="application"/>
+	<jsp:useBean id="myBeanIncident" class="database.MySqlStatmentIncident" scope="application"/>
 	
 
 	<!-- Navbar ================================================== -->
@@ -100,26 +101,21 @@
 								<td valign='middle'>
 									<span  style='font-size: 12px;' class='glyphicon glyphicon-tag overRed'/>
 								</td>
-								<td  contenteditable='true' style='font-size: 14px'>infoproject</td>
+								<td id="InfoProject1" contenteditable='true' style='font-size: 14px'>infoproject</td>
 							</tr>
 							<tr style="margin-left:5px;">
 								<td valign='middle'>
 									<span  style='font-size: 12px;' class='glyphicon glyphicon-tag overRed'/>
 								</td>
-								<td  contenteditable='true' style='font-size: 14px'>infoproject</td>
+								<td  id="InfoProject2" contenteditable='true' style='font-size: 14px'>infoproject</td>
 							</tr>
 							<tr style="margin-left:5px;">
 								<td valign='middle'>
 									<span  style='font-size: 12px;' class='glyphicon glyphicon-tag overRed'/>
 								</td>
-								<td  contenteditable='true' style='font-size: 14px'>infoproject</td>
+								<td id="InfoProject3" contenteditable='true' style='font-size: 14px'>infoproject</td>
 							</tr>
-							<tr style="margin-left:5px;">
-								<td valign='middle'>
-									<span  style='font-size: 12px;' class='glyphicon glyphicon-tag overRed'/>
-								</td>
-								<td  contenteditable='true' style='font-size: 14px'>infoproject</td>
-							</tr>
+							
 							
 						</tbody>
 					</table>
@@ -147,21 +143,21 @@
 								<td valign='middle'>
 									<span  style='font-size: 12px;' class='glyphicon glyphicon-king overRed'/>
 								</td>
-								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
+								<td  id="DecisionProject1" contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
 								
 							</tr>
 							<tr style="margin-left:5px;">
 								<td valign='middle'>
 									<span  style='font-size: 12px;' class='glyphicon glyphicon-king overRed'/>
 								</td>
-								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
+								<td  id="DecisionProject2" contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
 								
 							</tr>
 							<tr style="margin-left:5px;">
 								<td valign='middle'>
 									<span  style='font-size: 12px;' class='glyphicon glyphicon-king overRed'/>
 								</td>
-								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
+								<td  id="DecisionProject3" contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
 								
 							</tr>
 							
@@ -191,27 +187,27 @@
 								<td valign='middle'>
 									<span  style='font-size: 12px;' class='glyphicon glyphicon-thumbs-up overRed'/>
 								</td>
-								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
+								<td  id="mShortLabelKPI1" contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
 								<td  style='font-size: 14px;text-align: left;'> -> </td>
-								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>4567</td>
+								<td id="mShortKPI1" contenteditable='true' style='font-size: 14px;text-align: left;'>4567</td>
 								
 							</tr>
 							<tr style="margin-left:5px;">
 								<td valign='middle'>
 									<span  style='font-size: 12px;' class='glyphicon glyphicon-thumbs-up overRed'/>
 								</td>
-								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
+								<td  id="mShortLabelKPI2" contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
 								<td  style='font-size: 14px;text-align: left;'> -> </td>
-								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>4567</td>
+								<td id="mShortKPI2" contenteditable='true' style='font-size: 14px;text-align: left;'>4567</td>
 								
 							</tr>
 							<tr style="margin-left:5px;">
 								<td valign='middle'>
 									<span  style='font-size: 12px;' class='glyphicon glyphicon-thumbs-up overRed'/>
 								</td>
-								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
+								<td  id="mShortLabelKPI3" contenteditable='true' style='font-size: 14px;text-align: left;'>infoproject</td>
 								<td  style='font-size: 14px;text-align: left;'> -> </td>
-								<td  contenteditable='true' style='font-size: 14px;text-align: left;'>4567</td>
+								<td  id="mShortKPI3" contenteditable='true' style='font-size: 14px;text-align: left;'>4567</td>
 								
 							</tr>
 							
@@ -227,7 +223,7 @@
 				</div>
 				<div  id="KPIProject" style="background: none;max-height:150px;" class="column__items-wrapper">
 					<center>
-						<h2>245</h2><table><tr><td  contenteditable='true'><span>Number of W2003 Serveurs online</span></td></tr></table>
+						<h2>245</h2><table><tr><td  contenteditable='true'><span id="mMainLabelKPI">Number of W2003 Serveurs online</span></td></tr></table>
 					</center>
 				</div>
 			</div>
@@ -246,6 +242,7 @@
 					</center>
 				</div>
 			</div>
+		</div>
 	</div>
 		
 		
@@ -260,7 +257,6 @@
 					<div class="board__columns-scrollable-wrapper">
 						<div class="column top-to-bottom" id="C1">
 							<div class="column__header" id="Hearder1">
-								
 								<h2 style="display: inline;" class="column__header-label">BACKLOG</h2>
 								<a id="OpenAddForm" style="display: inline; float: right; margin-right: 5px;"
 									href="" data-toggle="modal"><i class="glyphicon glyphicon-pencil"></i></a>
@@ -283,7 +279,7 @@
 
 						<div class="column top-to-bottom" id="C2">
 							<div class="column__header">
-								<h2 class="column__header-label">Incidents</h2>
+								<h2 style="display: inline;" class="column__header-label">Incidents</h2>
 								<a id="OpenIncidentForm" style="display: inline; float: right; margin-right: 5px;"
 									href="" data-toggle="modal"><i class="glyphicon glyphicon-pencil"></i></a>
 							</div>
@@ -292,7 +288,7 @@
 							<%
 							if (request.getParameter("ProjectName")!=null){
 								listCards = new java.util.ArrayList<String>() ;
-								listCards=myBeanCard.GetIncidents(request.getParameter("ProjectName"));
+								listCards=myBeanIncident.GetIncidents(request.getParameter("ProjectName"));
 								for (int i=0;i<listCards.size();i++){
 									out.println(listCards.get(i).toString());
 								}
@@ -700,7 +696,7 @@
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">&times;</button>
-									<h4 class="modal-title" id="myModalLabel">Create Task</h4>
+									<h4 class="modal-title" id="myModalLabel">Create Incident</h4>
 								</div>
 								<div class="modal-body">
 									<div class="form-group" id="CardContainerTemplate">
@@ -712,7 +708,7 @@
 												</div>
 												<img src="./Librairies/iobeya/none.png.jpg" class="avatar" />
 												<div class="assigner">
-													<button class="assigner__assignee" data-toggle="dropdown" title="Owner"  id="OwnerTemplate">AGI</button>
+													<button class="assigner__assignee" data-toggle="dropdown" title="Owner"  id="OwnerAddIncident">AGI</button>
 												</div>
 												
 												<div class="card__actions">
@@ -734,7 +730,7 @@
 												</div>
 											</div>
 		
-											<div class="card__body story" id="CardBodyTemplateAddCard">
+											<div class="card__body story" id="CardBodyTemplateAddIncident">
 												<div class="card__body-content">
 													<div class="card__body-title" title="ContentCard" id="CardBodyValueTemplate">
 														<textarea class = "textareaobeya" id="textareaAddForm" class="form-control" placeholder="Enter description task here !"></textarea>
@@ -762,7 +758,7 @@
 											
 										
 
-											<div class="dropdown-menu" id="SelectOwnerAddForm">
+											<div class="dropdown-menu" id="SelectOwnerAddIncidentForm">
 												<%
 													listPeople = new java.util.ArrayList<String>() ;
 													listPeople=myBeanPeople.GetPeople();
@@ -797,7 +793,7 @@
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">&times;</button>
-									<h4 class="modal-title" id="myModalLabelEdit">Modify Task</h4>
+									<h4 class="modal-title" id="myModalLabelEdit">Modify Incident</h4>
 								</div>
 								<div class="modal-body">
 									<div class="form-group" id="CardContainerTemplate">
@@ -809,7 +805,7 @@
 												</div>
 												<img src="./Librairies/iobeya/none.png.jpg" class="avatar" />
 												<div class="assigner">
-													<button class="assigner__assignee" data-toggle="dropdown" title="Owner"  id="OwnerEdit">AGI</button>
+													<button class="assigner__assignee" data-toggle="dropdown" title="Owner"  id="OwnerEditIncident">AGI</button>
 												</div>
 												
 												<div class="card__actions">
@@ -831,7 +827,7 @@
 												</div>
 											</div>
 		
-											<div class="card__body story" id="CardBodyEdit" title="CardBodyTheme">
+											<div class="card__body story" id="CardBodyEditIncident" title="CardBodyTheme">
 												<div class="card__body-content">
 													<div class="card__body-title" title="ContentCard" id="CardBodyValueEdit">
 														<textarea class = "textareaobeya" id="textareaEditForm" class="form-control"></textarea>
@@ -883,7 +879,7 @@
 											
 										
 
-											<div class="dropdown-menu" id="SelectOwnerEditForm">
+											<div class="dropdown-menu" id="SelectOwnerEditIncidentForm">
 												<%
 													//listPeople = new java.util.ArrayList<String>() ;
 													//listPeople=myBeanPeople.GetPeople();
@@ -960,6 +956,82 @@
 				
 				    
 				};
+				
+				function UpdateInfoTagPoject(){
+					
+					
+					 var DataInfoTag={
+	 				    		"ProjectName":unescape($.urlParam('ProjectName')),
+		 				    	"mDecision1": $("#DecisionProject1").val(),
+							    "mDecision2":$("#DecisionProject2").val(),
+							    "mDecision3":$("#DecisionProject3").val(),
+							    "mInfo1":$("#InfoProject1").val(),
+							    "mInfo2":$("#InfoProject2").val(),
+							    "mInfo3":$("#InfoProject3").val(),
+							    "mMainLabelKPI": $("#InfoProject3").text(),
+							    "mShortLabelKPI1": $("#mShortLabelKPI1").val(),
+							    "mShortKPI1":$("#mShortKPI1").val(),
+							    "mShortLabelKPI2": $("#mShortLabelKPI2").val(),
+							    "mShortKPI2":$("#mShortKPI2").val(),
+							    "mShortLabelKPI3": $("#mShortLabelKPI3").val(),
+							    "mShortKPI3":$("#mShortKPI3").val()
+							   
+						  };
+	 				    
+	 				   seen = []
+
+	 				  var serializedCard  = JSON.stringify(DataInfoTag, function(key, val) {
+	 				     if (typeof val == "object") {
+	 				          if (seen.indexOf(val) >= 0)
+	 				              return
+	 				          seen.push(val)
+	 				      }
+	 				      return val
+	 				  })
+
+	 				  //////alert(serializedCard);
+
+	 				  $.ajax({
+	 					    type: 'get', // it's easier to read GET request parameters
+	 					    url: 'ProjectKanbanInfoManagement',
+	 					    dataType: 'JSON',
+	 					    data: { 
+	 					      SqlMode:"Update",
+	 					      InfoTag: serializedCard
+	 					    },
+	 					    success: function(data) {
+	 					    	 Lobibox.notify('success', {
+	 			                	icon: false,
+	 			                	size: 'mini',
+	 			                    rounded: false,
+	 			                    delayIndicator: true,
+	 			                    position: 'right bottom',
+	 			                    title: 'Success...',
+	 			                    pauseDelayOnHover: true,
+	 			                    continueDelayOnInactiveTab: false,
+	 			                    msg: 'New Info tags updated...'
+	 			                });
+	 					    },
+	 					    error: function(jqXHR, textStatus, errorThrown){ 
+	 					    	Lobibox.notify('error', {
+	 			                	icon: false,
+	 			                	size: 'mini',
+	 			                    rounded: false,
+	 			                    delayIndicator: true,
+	 			                    position: 'right bottom',
+	 			                    title: 'Error...',
+	 			                    pauseDelayOnHover: true,
+	 			                    continueDelayOnInactiveTab: false,
+	 			                    msg: jqXHR.responseText
+	 			                });
+	 					    	
+	 					    }
+	 					}); 
+	 				 
+						
+					};
+					
+				
 				
 				function deleteCard(pId){
 					var DataCard={
@@ -1112,7 +1184,7 @@
 					
 				};
 				
-				function GetHeaderInfo(TagName, element){
+				function GetHeaderInfo(Sql,TagName, element){
 				  
 
 				  $.ajax({
@@ -1121,7 +1193,7 @@
 					    dataType: 'TEXT',
 					    data: { 
 					      NewProject: unescape($.urlParam('ProjectName')),
-					      SqlMode:"Get",
+					      SqlMode:Sql,
 					      TagName: TagName
 					    },
 					    success: function(data) {
@@ -1171,6 +1243,30 @@
 					 }
 					
 				});
+				
+				$( "#OpenIncidentForm" ).click(function() {
+					 if($("#ProjectName").html()!="" && $("#ProjectName").html()!="0" && $("#ProjectName").html()!="null"){
+						 $("#FormAddIncident").modal();
+						 $("#FormAddIncident").find($("textarea[id='textareaAddForm']")).val("");
+						 
+					 }
+					 else{
+						 Lobibox.notify('error', {
+			                	icon: false,
+			                	size: 'mini',
+			                    rounded: false,
+			                    delayIndicator: true,
+			                    position: 'right bottom',
+			                    title: 'Error...',
+			                    pauseDelayOnHover: true,
+			                    continueDelayOnInactiveTab: false,
+			                    msg: 'Please Select project before...'
+			                });
+					 }
+					
+				});
+				
+				
 				
 				var card=null;
 				var carEdit=null;
@@ -1384,8 +1480,26 @@
 					    }
 					}
 					
-					GetHeaderInfo("KPI",$("#KPIProject").find("h2"));
-					GetHeaderInfo("KPIGolive",$("#DueDateProject").find("h2"));
+					GetHeaderInfo("GetFromProject","KPI",$("#KPIProject").find("h2"));
+					GetHeaderInfo("GetFromProject","KPIGolive",$("#DueDateProject").find("h2"));
+					
+					GetHeaderInfo("GetFromTag","mDecision1",$("#DecisionProject1"));
+					GetHeaderInfo("GetFromTag","mDecision2",$("#DecisionProject2"));
+					GetHeaderInfo("GetFromTag","mDecision3",$("#DecisionProject3"));
+					GetHeaderInfo("GetFromTag","mInfo1",$("#InfoProject1"));
+					GetHeaderInfo("GetFromTag","mInfo2",$("#InfoProject2"));
+					GetHeaderInfo("GetFromTag","mInfo3",$("#InfoProject3"));
+					GetHeaderInfo("GetFromTag","mMainLabelKPI", $("#InfoProject3"));
+					GetHeaderInfo("GetFromTag","mShortLabelKPI1", $("#mShortLabelKPI1"));
+					GetHeaderInfo("GetFromTag","mShortKPI1",$("#mShortKPI1"));
+					GetHeaderInfo("GetFromTag","mShortLabelKPI2", $("#mShortLabelKPI2"));
+					GetHeaderInfo("GetFromTag","mShortKPI2",$("#mShortKPI2"));
+					GetHeaderInfo("GetFromTag","mShortLabelKPI3", $("#mShortLabelKPI3"));
+					GetHeaderInfo("GetFromTag","mShortKPI3",$("#mShortKPI3"));
+
+					
+					
+					
 					
 					$("#ProjectName").html(unescape($.urlParam('ProjectName')));
 
@@ -1424,6 +1538,62 @@
 					  });
 					
 					//-- Manage New Card Edition ================================================== -->	
+					$( "body" ).on( "click","button[title='EditIncident']", function(e) {
+
+						if($(card).attr("id")!="cardTemplate"){
+							if($(card).attr("id")!="cardEdit"){
+                       $("#FormEditIncident").modal();
+                       card = $(this).parent().parent().parent();
+                       var IdCard = card.attr("id");
+                       var Priority = $(card).find("button[title='Priority']").html();
+                       var PriorityClass = $(card).find("button[title='Priority']").prop("classList");
+                       var Owner = $(card).find("button[title='Owner']").html();
+                        
+                       var ContentCard =      $(card).find("div[title='ContentCard']").html();
+                       var ContentCardClass = $(card).find("div[class='card__body-content']").parent().prop("classList");
+                       var Progress= $(card).find("span[title='Raf']").html();
+                        
+                        //Set Card Edit
+                         carEdit = $("#FormEditIncident").find("div[id='cardEdit']");	
+                         
+                        
+                         
+                        $(carEdit).find("button[title='Priority']").html(Priority);
+                        $(carEdit).find("button[title='Priority']").removeClass("High");
+                        $(carEdit).find("button[title='Priority']").removeClass("Low");
+                        $(carEdit).find("button[title='Priority']").removeClass("Medium");
+                        $(carEdit).find("button[title='Priority']").removeClass("estimator__estimate-button");
+                       
+                        $.each( $(PriorityClass), function( key, element ) {
+                        	$(carEdit).find("button[title='Priority']").addClass(element);
+				    	});
+                       	
+					    
+                       
+                        $(carEdit).find("button[title='Priority']").removeClass().addClass(PriorityClass);
+                        
+                        
+                        
+                        $(carEdit).find("button[title='Owner']").html(Owner);
+                     
+                       
+                        $(carEdit).find($("textarea[id='textareaEditForm']")).val(ContentCard);
+                        myClassList =$("#CardBodyEdit").prop("classList");
+                        $.each( $(myClassList), function( key, element ) {
+					    		$("#CardBodyEdit").removeClass(element);
+					    });
+                        
+                        $.each( $(ContentCardClass), function( key, element ) {
+					    		$("#CardBodyEdit").addClass(element);
+					    });
+                        
+                          $(carEdit).find("span[title='Raf']").html(Progress);
+                         
+                         
+							}}
+                        
+					});
+					
 					$( "body" ).on( "click","button[title='Edit']", function(e) {
 
 						if($(card).attr("id")!="cardTemplate"){
@@ -1488,8 +1658,6 @@
 							}}
                         
 					});
-					
-					
 					
 					//-- Manage New Card Delete ================================================== -->	
 					$( "body" ).on( "click","button[title='Delete']", function(e) {
@@ -1665,7 +1833,7 @@
 						 
 					});
 				
-							  
+					 
 							  
 							  
 					$( "body" ).on( "click","button[title='Log']", function(e) {
@@ -1736,8 +1904,13 @@
 						
 					});
 					
-					$( document.body ).on( "click","button[id='OwnerLabel']", function(e) {			 
-						$("#SelectOwnerLabel").show();
+					$( document.body ).on( "click","button[id='OwnerEditIncident']", function(e) {			 
+						$("#SelectOwnerEditIncidentForm").show();
+						
+					});
+					
+					$( document.body ).on( "click","button[id='OwnerAddIncident']", function(e) {			 
+						$("#SelectOwnerAddIncidentForm").show();
 						
 					});
 					 
@@ -1806,6 +1979,45 @@
 					    
 					});
 					
+					$(document.body).on('click', '#SelectOwnerAddIncidentForm a', function (e) {
+					    var selText = $(this).text(); 
+					    var myClass = $("#CardBodyTemplateAddIncident").prop("classList");
+					    var myClassList = $(this).prop("classList");
+					    //////alert(myClassList);
+					    //////alert(myClass);
+					    $("button[id='OwnerAddIncident']").html(selText);
+					    $("#SelectOwnerAddincidentForm").hide();
+					    
+					    $.each( $(myClass), function( key, element ) {
+					    	if(element!="card__body"){
+					    		$("#CardBodyTemplateAddIncident").removeClass(element);
+					    	}
+					    });
+					   
+					    $("#CardBodyTemplateAddIncident").addClass(myClassList[1]);
+					    
+					});
+					
+					$(document.body).on('click', '#SelectOwnerEditIncidentForm a', function (e) {
+					    var selText = $(this).text(); 
+					    var myClass = $("#CardBodyEditIncident").prop("classList");
+					    var myClassList = $(this).prop("classList");
+					    //////alert(myClassList);
+					    //////alert(myClass);
+					    $("button[id='OwnerEditIncident']").html(selText);
+					    $("#SelectOwnerEditIncidentForm").hide();
+					    
+					    $.each( $(myClass), function( key, element ) {
+					    	if(element!="card__body"){
+					    		$("#CardBodyEditIncident").removeClass(element);
+					    	}
+					    });
+					   
+					    $("#CardBodyEditIncident").addClass(myClassList[1]);
+					    
+					});
+					
+					
 					
 											
 					$(document.body).on('click', "div[id='DueDateDivTemplate']", function(e) {
@@ -1815,6 +2027,13 @@
 					$(document.body).on('click', "div[id='DueDateDivEdit']", function(e) {
 						$("#FormEdit").find("#DueDateObjEdit").datepicker('show');
 					
+					});
+					
+					$(document.body).on( "click","span[title='SaveInfoTagProject']", function(e) {
+						
+						 
+						UpdateInfoTagPoject();
+	
 					});
 
 					

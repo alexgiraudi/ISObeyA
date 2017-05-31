@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import beanjson.ProjectTagInfo;
+import beanjson.cardInformation;
 import beanjson.projectInformation;
+import database.MySqlStatmentCard;
 import database.MySqlStatmentProjects;
 
 /**
@@ -47,12 +50,28 @@ public class ProjectKanbanInfoManagement extends HttpServlet {
     		String SQL=(String)request.getParameter("SqlMode");
 			String pProject=(String)request.getParameter("NewProject");
 			String pTagName=(String)request.getParameter("TagName");
-			String pTagValue=(String)request.getParameter("TagValue");
 			
-			if (SQL.equalsIgnoreCase("Get")){
-				MySqlStatmentProjects sqlDatabase = new MySqlStatmentProjects();
+			MySqlStatmentProjects sqlDatabase = new MySqlStatmentProjects();
+			if (SQL.equalsIgnoreCase("GetFromProject")){
 				Result = sqlDatabase.GetProjectInfoFromField(pProject, pTagName);
 				Result=Result.replaceAll("/", "-");
+			}else if (SQL.equalsIgnoreCase("GetFromTag")){
+				
+				Result = sqlDatabase.GetTagInfoFromField(pProject, pTagName);
+				Result=Result.replaceAll("/", "-");
+			}
+			
+			else{
+				//update
+				//System.out.println(request.getParameter("NewCard"));
+				ObjectMapper mapper = new ObjectMapper();
+				String InfoTag=(String)request.getParameter("InfoTag");
+				
+				String jsonInString=new String(InfoTag.getBytes(),"UTF-8");
+				jsonInString=jsonInString.replaceAll("'", "`");
+				ProjectTagInfo obj =  mapper.readValue(jsonInString, ProjectTagInfo.class);
+				sqlDatabase.updateInfoTagProject(obj);
+				
 			}
 			
 			

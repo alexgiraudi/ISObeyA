@@ -18,6 +18,8 @@ import net.sf.json.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.jdbc.ResultSetMetaData;
 
+
+import beanjson.ProjectTagInfo;
 import beanjson.cardInformation;
 import beanjson.projectInformation;
 
@@ -415,6 +417,32 @@ public ArrayList<String> getSubKPI(String Project)throws Exception {
 		return lFieldValue;
 	}
 	
+	
+	
+	
+	public String GetTagInfoFromField(String pProjectName, String pField)throws Exception {
+		
+		Statement stmtProject =GetStatement();
+		ResultSet rs = null;
+		String lFieldValue=null;
+		String SqlQuery = "select * from ISObeyaDB.TagInfosProject where ProjectName='%pProjectName%';".replaceAll("%pProjectName%", pProjectName);
+		try {
+			rs = stmtProject.executeQuery(SqlQuery);
+			while (rs.next()) {
+				lFieldValue=rs.getString(pField);
+			}
+			
+		} catch (SQLException e) {
+			 
+	        throw new Exception("Message: " + e.getMessage() + ". " +  e.getErrorCode(), e);
+		
+		} catch (Exception e) {
+			 throw new Exception("Message: " + e.getMessage() + ". "  , e); 
+		}finally {
+			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+		}
+		return lFieldValue;
+	}
 	private projectInformation SetBeanProject(ResultSet resultSet){
 		
 //		projectInformation theProject = new projectInformation();
@@ -440,4 +468,98 @@ public ArrayList<String> getSubKPI(String Project)throws Exception {
 	        }
 	        return jsonArray;
 	 }
+	 
+	 public boolean updateInfoTagProject(ProjectTagInfo pProject) throws Exception {
+			
+		 	String sqlUpdateRef = "INSERT INTO ISObeyaDB.projectsTagInfo (Project,TagName, TagValue) VALUES ('%ProjetName%','%TagName%','%TagValue%')  ON DUPLICATE KEY UPDATE TagValue='%TagValue%';";
+		 	sqlUpdateRef=sqlUpdateRef.replaceAll("%ProjetName%", pProject.getProjectName());
+			boolean success= true;	
+			
+			Statement stmtProject =GetStatement();
+			int rs ;
+			try {
+				
+			 
+				    String sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mDecision1");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmDecision1());
+					rs = stmtProject.executeUpdate(sqlUpdate); 
+				        
+					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mDecision2");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmDecision2());
+					rs = stmtProject.executeUpdate(sqlUpdate); 
+				   
+					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mDecision3");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmDecision3());
+					rs = stmtProject.executeUpdate(sqlUpdate); 
+				
+					
+					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mInfo1");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmInfo1());
+					rs = stmtProject.executeUpdate(sqlUpdate); 
+					
+					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mInfo2");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmInfo2());
+					rs = stmtProject.executeUpdate(sqlUpdate); 
+					
+					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mInfo3");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmInfo3());
+					rs = stmtProject.executeUpdate(sqlUpdate); 
+					
+					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mInfo4");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmInfo4());
+					rs = stmtProject.executeUpdate(sqlUpdate); 
+					
+					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mMainLabelKPI");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmMainLabelKPI());
+					rs = stmtProject.executeUpdate(sqlUpdate); 
+					
+					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mShortLabelKPI1");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmShortLabelKPI1());
+					rs = stmtProject.executeUpdate(sqlUpdate); 
+				
+					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mShortLabelKPI2");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmShortLabelKPI2());
+					rs = stmtProject.executeUpdate(sqlUpdate);
+					
+					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mShortLabelKPI3");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmShortLabelKPI3());
+					rs = stmtProject.executeUpdate(sqlUpdate);
+					
+					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mShortLabelKPI4");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmShortLabelKPI4());
+					rs = stmtProject.executeUpdate(sqlUpdate);
+					
+					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mShortKPI1");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmShortKPI1());
+					rs = stmtProject.executeUpdate(sqlUpdate); 
+				
+					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mShortKPI2");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmShortKPI2());
+					rs = stmtProject.executeUpdate(sqlUpdate);
+					
+					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mShortKPI3");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmShortKPI3());
+					rs = stmtProject.executeUpdate(sqlUpdate);
+					
+					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mShortKPI4");
+					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmShortKPI4());
+					rs = stmtProject.executeUpdate(sqlUpdate);
+				 
+				
+			} catch (SQLException e) {
+					throw new Exception("Message: " + e.getMessage() + ". " +  e.getErrorCode(), e);
+			} catch (Exception e) {
+				e.printStackTrace();
+				 throw new Exception("Message: " + e.getMessage() + ". "  , e);
+
+			
+			} finally {
+				
+//				try { if (stmtCard != null) stmtCard.close(); } catch (SQLException e) { e.printStackTrace(); }
+//				try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+			}
+			return success;
+		}
+	 
+	 
 }
