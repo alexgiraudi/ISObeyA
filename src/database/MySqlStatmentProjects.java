@@ -425,11 +425,12 @@ public ArrayList<String> getSubKPI(String Project)throws Exception {
 		Statement stmtProject =GetStatement();
 		ResultSet rs = null;
 		String lFieldValue=null;
-		String SqlQuery = "select * from ISObeyaDB.TagInfosProject where ProjectName='%pProjectName%';".replaceAll("%pProjectName%", pProjectName);
+		String SqlQuery = "select * from ISObeyaDB.TagInfosProject where ProjectName='%pProjectName%' and TagName='%TagName%';".replaceAll("%pProjectName%", pProjectName);
+		SqlQuery=SqlQuery.replaceAll("%TagName%", pField);
 		try {
 			rs = stmtProject.executeQuery(SqlQuery);
 			while (rs.next()) {
-				lFieldValue=rs.getString(pField);
+				lFieldValue=rs.getString("TagValue");
 			}
 			
 		} catch (SQLException e) {
@@ -470,8 +471,9 @@ public ArrayList<String> getSubKPI(String Project)throws Exception {
 	 }
 	 
 	 public boolean updateInfoTagProject(ProjectTagInfo pProject) throws Exception {
-			
-		 	String sqlUpdateRef = "INSERT INTO ISObeyaDB.projectsTagInfo (Project,TagName, TagValue) VALUES ('%ProjetName%','%TagName%','%TagValue%')  ON DUPLICATE KEY UPDATE TagValue='%TagValue%';";
+		 
+
+		 	String sqlUpdateRef = "INSERT INTO ISObeyaDB.TagInfosProject (ProjectName,TagName, TagValue) VALUES ('%ProjetName%','%TagName%','%TagValue%')  ON DUPLICATE KEY UPDATE TagValue='%TagValue%';";
 		 	sqlUpdateRef=sqlUpdateRef.replaceAll("%ProjetName%", pProject.getProjectName());
 			boolean success= true;	
 			
@@ -505,9 +507,7 @@ public ArrayList<String> getSubKPI(String Project)throws Exception {
 					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmInfo3());
 					rs = stmtProject.executeUpdate(sqlUpdate); 
 					
-					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mInfo4");
-					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmInfo4());
-					rs = stmtProject.executeUpdate(sqlUpdate); 
+					 
 					
 					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mMainLabelKPI");
 					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmMainLabelKPI());
@@ -525,9 +525,7 @@ public ArrayList<String> getSubKPI(String Project)throws Exception {
 					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmShortLabelKPI3());
 					rs = stmtProject.executeUpdate(sqlUpdate);
 					
-					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mShortLabelKPI4");
-					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmShortLabelKPI4());
-					rs = stmtProject.executeUpdate(sqlUpdate);
+					
 					
 					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mShortKPI1");
 					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmShortKPI1());
@@ -541,9 +539,7 @@ public ArrayList<String> getSubKPI(String Project)throws Exception {
 					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmShortKPI3());
 					rs = stmtProject.executeUpdate(sqlUpdate);
 					
-					sqlUpdate = sqlUpdateRef.replaceAll("%TagName%", "mShortKPI4");
-					sqlUpdate = sqlUpdate.replaceAll("%TagValue%", pProject.getmShortKPI4());
-					rs = stmtProject.executeUpdate(sqlUpdate);
+					
 				 
 				
 			} catch (SQLException e) {

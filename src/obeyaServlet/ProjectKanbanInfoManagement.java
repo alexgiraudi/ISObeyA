@@ -58,7 +58,7 @@ public class ProjectKanbanInfoManagement extends HttpServlet {
 			}else if (SQL.equalsIgnoreCase("GetFromTag")){
 				
 				Result = sqlDatabase.GetTagInfoFromField(pProject, pTagName);
-				Result=Result.replaceAll("/", "-");
+				
 			}
 			
 			else{
@@ -70,13 +70,20 @@ public class ProjectKanbanInfoManagement extends HttpServlet {
 				String jsonInString=new String(InfoTag.getBytes(),"UTF-8");
 				jsonInString=jsonInString.replaceAll("'", "`");
 				ProjectTagInfo obj =  mapper.readValue(jsonInString, ProjectTagInfo.class);
-				sqlDatabase.updateInfoTagProject(obj);
+				if (sqlDatabase.updateInfoTagProject(obj))
+					Result="0";
+				else
+					Result="1";
 				
 			}
 			
 			
-			
-			response.getWriter().write(Result);
+			if (Result!=null){
+					Result=Result.replaceAll("/", "-");
+					response.getWriter().write(Result);
+			}
+			else
+					response.getWriter().write("");
 		} catch (Exception e) {
 	
 			 response.getWriter().write(e.getMessage());

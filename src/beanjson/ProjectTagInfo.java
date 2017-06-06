@@ -53,21 +53,7 @@ public class ProjectTagInfo {
 		this.mInfo3 = mInfo3;
 	}
 
-	/**
-	 * @return the mInfo4
-	 */
-	@JsonProperty("mInfo4")
-	public String getmInfo4() {
-		return mInfo4;
-	}
-
-	/**
-	 * @param mInfo4 the mInfo4 to set
-	 */
-	@JsonProperty("mInfo4")
-	public void setmInfo4(String mInfo4) {
-		this.mInfo4 = mInfo4;
-	}
+	
 
 	/**
 	 * @return the mDecision1
@@ -224,7 +210,7 @@ public class ProjectTagInfo {
 	/**
 	 * @param mShortKPI3 the mShortKPI3 to set
 	 */
-	@JsonProperty("OwnerClass")
+	@JsonProperty("mShortKPI3")
 	public void setmShortKPI3(String mShortKPI3) {
 		this.mShortKPI3 = mShortKPI3;
 	}
@@ -279,7 +265,7 @@ public class ProjectTagInfo {
 
 	private String mInfo2;
 	private String mInfo3;
-	private String mInfo4;
+	
 	private String mDecision1;
 	private String mDecision2;
 	private String mDecision3;

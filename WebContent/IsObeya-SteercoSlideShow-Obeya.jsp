@@ -238,7 +238,7 @@
 					<center>
 						<h2>23/12/2017</h2>
 						
-						<span Title='SaveTagInfoProject' style='font-size: 12px;' class='glyphicon glyphicon-save overRed'/>
+						<span id='SaveTagInfoProject' style='font-size: 12px;' class='glyphicon glyphicon-save overRed'/>
 					</center>
 				</div>
 			</div>
@@ -965,7 +965,7 @@
 		 				    	"mDecision1": $("#DecisionProject1").val(),
 							    "mDecision2":$("#DecisionProject2").val(),
 							    "mDecision3":$("#DecisionProject3").val(),
-							    "mInfo1":$("#InfoProject1").val(),
+							    "mInfo1":$("#InfoProject1").text(),
 							    "mInfo2":$("#InfoProject2").val(),
 							    "mInfo3":$("#InfoProject3").val(),
 							    "mMainLabelKPI": $("#InfoProject3").text(),
@@ -1219,7 +1219,9 @@
 					
 				};
 				
-				 
+				 $("#SaveTagInfoProject").click(function(){
+					 UpdateInfoTagPoject();
+				 });
 				
 				$( "#OpenAddForm" ).click(function() {
 					 if($("#ProjectName").html()!="" && $("#ProjectName").html()!="0" && $("#ProjectName").html()!="null"){
