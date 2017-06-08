@@ -223,7 +223,7 @@
 				</div>
 				<div  id="KPIProject" style="background: none;max-height:150px;" class="column__items-wrapper">
 					<center>
-						<h2>245</h2><table><tr><td  contenteditable='true'><span id="mMainLabelKPI">Number of W2003 Serveurs online</span></td></tr></table>
+						<h2>245</h2><table><tr><td id="mMainLabelKPI" contenteditable='true'>Number of W2003 Serveurs online</td></tr></table>
 					</center>
 				</div>
 			</div>
@@ -706,10 +706,7 @@
 													<button class="estimator__estimate-button Medium"
 														type="button" title="Priority">M</button>
 												</div>
-												<img src="./Librairies/iobeya/none.png.jpg" class="avatar" />
-												<div class="assigner">
-													<button class="assigner__assignee" data-toggle="dropdown" title="Owner"  id="OwnerAddIncident">AGI</button>
-												</div>
+												
 												
 												<div class="card__actions">
 													
@@ -736,12 +733,7 @@
 														<textarea class = "textareaobeya" id="textareaAddForm" class="form-control" placeholder="Enter description task here !"></textarea>
 													</div>
 		
-													<div class="card__body-meta">
-														
-														<div class="card__body-counts">
-															<span style="color:grey;" id="ProgressTemplate" title="Raf">0</span>
-														</div>
-													</div>
+													
 												</div>
 											</div>
 		
@@ -752,31 +744,6 @@
 									<!-- Indicates a successful or positive action -->
 									<button id="SubmitAddIncident" style="display: inline;" type="button" class="btn btn-sm btn-success">Add Incident</button>
 									
-									
-									<div style="margin: auto; width: 80%;" class="form-group">
-										<div class="input-group-btn ">
-											
-										
-
-											<div class="dropdown-menu" id="SelectOwnerAddIncidentForm">
-												<%
-													listPeople = new java.util.ArrayList<String>() ;
-													listPeople=myBeanPeople.GetPeople();
-													for (int i=0;i<listPeople.size();i++){
-														out.println(listPeople.get(i).toString());
-													}
-												%> 
-
-											</div>
-										</div>
-
-									</div>
-									
-									
-									
-									
-
-
 								</div>
 							</div>
 							<!-- /.modal-content -->
@@ -803,10 +770,7 @@
 													<button class="estimator__estimate-button Medium"
 														type="button"   title="Priority">M</button>
 												</div>
-												<img src="./Librairies/iobeya/none.png.jpg" class="avatar" />
-												<div class="assigner">
-													<button class="assigner__assignee" data-toggle="dropdown" title="Owner"  id="OwnerEditIncident">AGI</button>
-												</div>
+												
 												
 												<div class="card__actions">
 													
@@ -833,14 +797,7 @@
 														<textarea class = "textareaobeya" id="textareaEditForm" class="form-control"></textarea>
 													</div>
 		
-													<div class="card__body-meta">
-														
-														
-														<div class="card__body-counts">
-															
-															<span style="color:grey;" id="ProgressEdit" title="Raf">0</span>
-														</div>
-													</div>
+													
 												</div>
 											</div>
 		
@@ -848,50 +805,11 @@
 									</div>
 									
 									
-									
-									<div class="form-group">
-									  <label for="example-number-input" >Raf</label>
-									  <div id="slider3">
-										  <div id="custom-handleRaf" class="ui-slider-handle"></div>
-										    <script>
-											  $( function() {
-											    var handleRaf = $( "#custom-handleRaf" );
-											    
-											    $( "#slider3" ).slider({
-											      create: function() {
-											    	  handleRaf.text( $( this ).slider( "value" ) );
-											      },
-											      slide: function( event, ui ) {
-											    	  handleRaf.text( ui.value );
-											        $( "#ProgressEdit" ).html(ui.value)
-											      }
-											    });
-											  } );
-											  </script>
-									  </div>
-									</div>
 									<!-- Indicates a successful or positive action -->
 									<button id="SubmitEditIncident" style="display: inline;" type="button" class="btn btn-sm btn-success">Update Incident</button>
 									
 									
-									<div style="margin: auto; width: 80%;" class="form-group">
-										<div class="input-group-btn ">
-											
-										
-
-											<div class="dropdown-menu" id="SelectOwnerEditIncidentForm">
-												<%
-													//listPeople = new java.util.ArrayList<String>() ;
-													//listPeople=myBeanPeople.GetPeople();
-													for (int i=0;i<listPeople.size();i++){
-														out.println(listPeople.get(i).toString());
-													}
-												%> 
-
-											</div>
-										</div>
-
-									</div>
+									
 									
 									
 									
@@ -958,23 +876,23 @@
 				};
 				
 				function UpdateInfoTagPoject(){
-					
+					alert($("#mMainLabelKPI").text());
 					
 					 var DataInfoTag={
 	 				    		"ProjectName":unescape($.urlParam('ProjectName')),
-		 				    	"mDecision1": $("#DecisionProject1").val(),
-							    "mDecision2":$("#DecisionProject2").val(),
-							    "mDecision3":$("#DecisionProject3").val(),
+		 				    	"mDecision1": $("#DecisionProject1").text(),
+							    "mDecision2":$("#DecisionProject2").text(),
+							    "mDecision3":$("#DecisionProject3").text(),
 							    "mInfo1":$("#InfoProject1").text(),
-							    "mInfo2":$("#InfoProject2").val(),
-							    "mInfo3":$("#InfoProject3").val(),
-							    "mMainLabelKPI": $("#InfoProject3").text(),
-							    "mShortLabelKPI1": $("#mShortLabelKPI1").val(),
-							    "mShortKPI1":$("#mShortKPI1").val(),
-							    "mShortLabelKPI2": $("#mShortLabelKPI2").val(),
-							    "mShortKPI2":$("#mShortKPI2").val(),
-							    "mShortLabelKPI3": $("#mShortLabelKPI3").val(),
-							    "mShortKPI3":$("#mShortKPI3").val()
+							    "mInfo2":$("#InfoProject2").text(),
+							    "mInfo3":$("#InfoProject3").text(),
+							    "mMainLabelKPI": $("#mMainLabelKPI").text(),
+							    "mShortLabelKPI1": $("#mShortLabelKPI1").text(),
+							    "mShortKPI1":$("#mShortKPI1").text(),
+							    "mShortLabelKPI2": $("#mShortLabelKPI2").text(),
+							    "mShortKPI2":$("#mShortKPI2").text(),
+							    "mShortLabelKPI3": $("#mShortLabelKPI3").text(),
+							    "mShortKPI3":$("#mShortKPI3").text()
 							   
 						  };
 	 				    
@@ -1491,7 +1409,7 @@
 					GetHeaderInfo("GetFromTag","mInfo1",$("#InfoProject1"));
 					GetHeaderInfo("GetFromTag","mInfo2",$("#InfoProject2"));
 					GetHeaderInfo("GetFromTag","mInfo3",$("#InfoProject3"));
-					GetHeaderInfo("GetFromTag","mMainLabelKPI", $("#InfoProject3"));
+					GetHeaderInfo("GetFromTag","mMainLabelKPI", $("#mMainLabelKPI"));
 					GetHeaderInfo("GetFromTag","mShortLabelKPI1", $("#mShortLabelKPI1"));
 					GetHeaderInfo("GetFromTag","mShortKPI1",$("#mShortKPI1"));
 					GetHeaderInfo("GetFromTag","mShortLabelKPI2", $("#mShortLabelKPI2"));
@@ -1988,7 +1906,7 @@
 					    //////alert(myClassList);
 					    //////alert(myClass);
 					    $("button[id='OwnerAddIncident']").html(selText);
-					    $("#SelectOwnerAddincidentForm").hide();
+					  
 					    
 					    $.each( $(myClass), function( key, element ) {
 					    	if(element!="card__body"){
@@ -1997,7 +1915,7 @@
 					    });
 					   
 					    $("#CardBodyTemplateAddIncident").addClass(myClassList[1]);
-					    
+					    $("#SelectOwnerAddincidentForm").hide();
 					});
 					
 					$(document.body).on('click', '#SelectOwnerEditIncidentForm a', function (e) {
@@ -2007,7 +1925,7 @@
 					    //////alert(myClassList);
 					    //////alert(myClass);
 					    $("button[id='OwnerEditIncident']").html(selText);
-					    $("#SelectOwnerEditIncidentForm").hide();
+					    
 					    
 					    $.each( $(myClass), function( key, element ) {
 					    	if(element!="card__body"){
@@ -2016,7 +1934,7 @@
 					    });
 					   
 					    $("#CardBodyEditIncident").addClass(myClassList[1]);
-					    
+					    $("#SelectOwnerEditIncidentForm").hide();
 					});
 					
 					

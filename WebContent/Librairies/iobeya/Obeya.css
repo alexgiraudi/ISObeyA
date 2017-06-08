@@ -7729,8 +7729,7 @@ div.awesome-bar__input {
   min-height: 60px;
   border-radius: 4px;     }
   .card__body.story {
-    background-color: #bea994;
-    border: 1px solid #D2DBBF;  }.card__body-title{		word-wrap: break-word;} 
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffc578+0,fb9d23+100;Orange+3D+%233 */background: rgb(255,197,120); /* Old browsers */background: -moz-linear-gradient(left,  rgba(255,197,120,1) 0%, rgba(251,157,35,1) 100%); /* FF3.6-15 */background: -webkit-linear-gradient(left,  rgba(255,197,120,1) 0%,rgba(251,157,35,1) 100%); /* Chrome10-25,Safari5.1-6 */background: linear-gradient(to right,  rgba(255,197,120,1) 0%,rgba(251,157,35,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc578', endColorstr='#fb9d23',GradientType=1 ); /* IE6-9 */  }.card__body-title{		word-wrap: break-word;} 
     .card__body.story .card__body-title button {
       background-color: rgba(255, 255, 255, 0.5); }
   .card__body.task {

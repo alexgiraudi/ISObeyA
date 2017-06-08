@@ -551,7 +551,7 @@ public ArrayList<String> getSubKPI(String Project)throws Exception {
 			
 			} finally {
 				
-//				try { if (stmtCard != null) stmtCard.close(); } catch (SQLException e) { e.printStackTrace(); }
+				//MySqlStatmentProjects.try { if (stmtProject != null) stmtProject.close(); } catch (SQLException e) { e.printStackTrace(); }
 //				try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
 			}
 			return success;
